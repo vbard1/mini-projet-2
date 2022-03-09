@@ -1,5 +1,8 @@
 public class fleche {
     double masse;
-    int test;
+    int m=2;
+    
+
+    
 
 }
