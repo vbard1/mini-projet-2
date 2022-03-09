@@ -1,4 +1,5 @@
-public class arrow {
+public class Arrow {
+
     double weight;
     int length;
     int posX; // position en pixels axe x DU CENTRE DE GRAVITE
@@ -25,9 +26,9 @@ public class arrow {
 
     }
 
-    public boolean collision(Cible cible) {
+    public boolean collision(Target target) {
         boolean collision = false;
-        if (this.posX + length / 2 == cible.posX && (this.posY >= cible.posLowY && this.posY <= cible.posHighY)) {
+        if (this.posX + length / 2 == target.posX && (this.posY >= target.posLowY && this.posY <= target.posHighY)) {
             collision = true;
             speed = 0;
         }

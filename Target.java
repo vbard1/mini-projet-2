@@ -1,8 +1,8 @@
-public class Cible {
+public class Target {
 
-    public int posX;
-    public int posLowY;
-    public int posHighY;
+    public int posX; // position sur x
+    public int posLowY; // bas de la cible
+    public int posHighY; // haut de la cible
 
     public void cible(int posX, int height) { // placer une cible sur le sol
         this.posX = posX;
