@@ -10,15 +10,9 @@ public class Target {
         this.posHighY = height;
     }
 
-    public void cible(int posX, int posLowY, int posHighY) { // placer une cible en hauteur
+    public void cible(int posX, int posLowY, int height) { // placer une cible en hauteur
         this.posX = posX;
         this.posLowY = posLowY;
-        this.posHighY = posHighY;
-    }
-
-    public void cible(int posX, int posLowY, double height) { // placer une cible en hauteur
-        this.posX = posX;
-        this.posLowY = posLowY;
-        this.posHighY = posLowY + (int) height;
+        this.posHighY = posLowY + height;
     }
 }
