@@ -1,0 +1,14 @@
+agenda :
+
+    séance 1 :
+        A faire :
+
+        trouver une solution pour coder ensemble - fait : liveShare
+        diagramme UML
+        creation des objets et attributs
+        signatures des méthodes
+
+        répartition du travail pour les prochaines séances
+        trouver l'équation de mouvement adaptee a l'echelle de mouvement
+
+        
