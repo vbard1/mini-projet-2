@@ -1,4 +1,6 @@
-public class mainGame {
+import javax.swing.JFrame;
+
+public class mainGame extends JFrame  {
     // TODO ici on met les TODO (bugs, trucs à faire encore)
     //
     public static void main(String[] args) {
