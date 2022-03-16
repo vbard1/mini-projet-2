@@ -4,14 +4,14 @@ public class player {
     public String name;
     public int score;
 
-    public void player(String nm) {
+    public player(String nm) {
         name = nm;
         score = 0;
     }
     // possible amelioration : reprendre la derniere partie : fichier sauvegarde +
     // score = prevScore (pas forcément dur)
 
-    public void player() {
+    public player() {
         name = "Anonymous unicorn";
         score = 0;
     }
