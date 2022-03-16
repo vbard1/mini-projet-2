@@ -3,11 +3,14 @@ import java.util.ArrayList;
 public class trajectoire {
     int arrowType;
     int windSpeed;
-    int angle;
-    int speed;
+    double angle;
+    double speed;
+    double gravity;
+    int yInit;
+    int maxX;
     ArrayList[] paramTraj;
 
-    public trajectoire(int arrowType, int angleInit, int speedInit, int windSpeed) {
+    public trajectoire(int arrowType, double angleInit, double speedInit, int windSpeed) {
         this.arrowType = arrowType;
         this.angle = angleInit;
         this.speed = speedInit;
@@ -17,10 +20,14 @@ public class trajectoire {
         paramTraj[1] = new ArrayList<Integer>(); // param y
         paramTraj[2] = new ArrayList<Double>(); // angle de la flèche avec l'horizontale
 
-        for (int i = 0; paramTraj.length < 3; i++) {
-            //taille de tableaux = distance horizontale max
+        maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInit) * (speedInit * Math.sin(angleInit)
+                + (Math.sqrt(Math.pow(speedInit * Math.sin(angleInit), 2) + 2 * gravity * yInit))));
+        for (int i = 0; i < paramTraj.length; i++) {
+            // taille de tableaux = distance horizontale max
             if (i == 0) {
-                paramTraj[0].add()
+                for (Integer absciss = 0; absciss < maxX; absciss++) {
+                    paramTraj[0].add(absciss, absciss);
+                }
             } else if (i == 1) {
 
             } else if (i == 2) {
