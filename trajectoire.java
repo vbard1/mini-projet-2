@@ -13,10 +13,19 @@ public class trajectoire {
         this.speed = speedInit;
         this.windSpeed = windSpeed;
         paramTraj = new ArrayList[3];
-        paramTraj[1] = new ArrayList<Integer>(); // param x
-        paramTraj[2] = new ArrayList<Integer>(); // param y
-        paramTraj[3] = new ArrayList<Double>(); // angle de la flèche avec l'horizontale
+        paramTraj[0] = new ArrayList<Integer>(); // param x
+        paramTraj[1] = new ArrayList<Integer>(); // param y
+        paramTraj[2] = new ArrayList<Double>(); // angle de la flèche avec l'horizontale
 
-        // taille
+        for (int i = 0; paramTraj.length < 3; i++) {
+            //taille de tableaux = distance horizontale max
+            if (i == 0) {
+                paramTraj[0].add()
+            } else if (i == 1) {
+
+            } else if (i == 2) {
+
+            }
+        }
     }
 }
