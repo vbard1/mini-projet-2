@@ -16,10 +16,11 @@ public class Arrow {
         this.speed = speedInit;
     }
 
-    public void arrow(int weight, int posX, int posY) {
+    public void arrow(int weight, int posX, int posY, double angle) {
         this.posX = posX;
         this.posY = posY;
         this.weight = weight;
+        this.angle = angle;
     }
 
     public void move() {
