@@ -38,8 +38,9 @@ public class UI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         /*
-         * game.player.name=game.masse=;
-         * game.difficulty
+         * game.player.name=JTextField de nom;
+         * game.masse=; //...
+         * game.difficulty=;
          */
     }
 
