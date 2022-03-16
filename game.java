@@ -8,6 +8,6 @@ public class game {
 
     public game() {
         player = new player();
-        
+
     }
 }

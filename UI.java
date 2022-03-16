@@ -1,9 +1,18 @@
-public class UI {
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Scrollbar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class UI extends JFrame implements ActionListener {
     // on peut tricher et rajouter une barre de défillement et la méthode get qui va
     // bien avec : )
     // http://web.mit.edu/java_v1.0.2/www/javadoc/java.awt.Scrollbar.html
+    char type;
 
     public UI(char type) {
+        this.type = type;
         if (type == 'm') {
             //// de quoi récupérer :
             // un nom
@@ -19,6 +28,13 @@ public class UI {
             // jlabel score
             // jpanel pour le jeu
         }
+
+    }
+
+    // TODO inclure le type d
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
 
     }
 
