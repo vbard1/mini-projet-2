@@ -6,7 +6,8 @@ public class game {
     double masse;
     int difficulty; // distance de la cible et et force du vent // de 1 à 3
 
-    public game(String name) {
-        player = new player(name);
+    public game() {
+        player = new player();
+        
     }
 }
