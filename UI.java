@@ -5,17 +5,21 @@ public class UI {
 
     public UI(char type) {
         if (type == 'm') {
-
+            //// de quoi récupérer :
+            // un nom
+            // une difficulté
+            // un type de flèche
+            // bouton lancer la partie
+            // (éventuellement animation du joueur en attente)
         } else if (type == 'g') {
-
+            // scrollbar angle
+            // scrollbar vitesse
+            // JButton tirer
+            // JButton menu (fait quitter la partie -> action event)
+            // jlabel score
+            // jpanel pour le jeu
         }
-        //// de quoi récupérer :
-        // un nom
-        // une difficulté
-        // un type de flèche
 
-        // bouton lancer la partie
-        // (éventuellement animation du joueur en attente)
     }
 
 }
