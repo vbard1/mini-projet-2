@@ -17,8 +17,6 @@ public class trajectoire {
         this.windSpeed = windSpeed;
         paramTraj = new ArrayList[3];
         paramTraj[0] = new ArrayList<Integer>(); // param x
-        paramTraj[1] = new ArrayList<Integer>(); // param y
-        paramTraj[2] = new ArrayList<Double>(); // angle de la flèche avec l'horizontale
 
         maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInit) * (speedInit * Math.sin(angleInit)
                 + (Math.sqrt(Math.pow(speedInit * Math.sin(angleInit), 2) + 2 * gravity * yInit))));
@@ -29,9 +27,10 @@ public class trajectoire {
                     paramTraj[0].add(absciss, absciss);
                 }
             } else if (i == 1) {
-
+                paramTraj[1] = new ArrayList<Integer>(maxX);
+                
             } else if (i == 2) {
-
+                paramTraj[2] = new ArrayList<Double>(maxX);
             }
         }
     }
