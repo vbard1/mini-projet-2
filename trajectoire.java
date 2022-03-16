@@ -34,7 +34,21 @@ public class trajectoire {
                     paramTraj[1].add(y);
                 }
             } else if (i == 2) {
-
+                double tan = 0;
+                double X1 = 0;
+                double X2 = 0;
+                double Y1 = 0;
+                double Y2 = 0;
+                paramTraj[2].add(0);
+                for (int x = 1; x < maxX - 2; x++) {
+                    X1 = (double) (paramTraj[0].get(x));
+                    X2 = (double) (paramTraj[0].get(x + 1));
+                    Y1 = (double) (paramTraj[1].get(x));
+                    Y2 = (double) (paramTraj[1].get(x + 1));
+                    angle = Math.acos((X2 - X1) / (Y2 - Y1));
+                    paramTraj[2].add(angle);
+                }
+                paramTraj[2].add(0);
             }
         }
     }
