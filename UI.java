@@ -29,9 +29,7 @@ public class UI extends JFrame implements ActionListener {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         this.setLocation(0,0);
-        this.setSize(800,800);
-        screenSize.setSize(800, 800);
-        //this.setExtendedState (JFrame.MAXIMIZED_BOTH);  //Défini la taille de la fenêtre à celle de l'écran
+        this.setExtendedState (JFrame.MAXIMIZED_BOTH);  //Défini la taille de la fenêtre à celle de l'écran
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Définition du fond du menu 
