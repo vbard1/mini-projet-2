@@ -15,4 +15,5 @@ public class Target {
         this.posLowY = posLowY;
         this.posHighY = posLowY + height;
     }
+
 }

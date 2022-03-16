@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class Arrow {
 
     double weight;
@@ -7,24 +9,45 @@ public class Arrow {
     double angle; // Angle du vecteur vitesse avec l'axe x
     double windX; // force du vent en N
     double speed; // vitesse
+    Color arrowColor;
 
-    public void arrow(int weight, int posX, int posY, double angle, double speedInit) {
+    /*
+     * constructeur pour la flèche
+     * 
+     * @param weight poids de la flèche
+     * 
+     * @param posX position du centre de gravité en X
+     * 
+     * @param posY position du centre de gravité en Y
+     * 
+     * @param angleInit angle initial de lancer
+     * 
+     * @param speedInit vitesse de lancer
+     * 
+     * @param c couleur de la flèche en fonction du type de flèche
+     */
+    public Arrow(int weight, int posX, int posY, double angleInit, double speedInit, Color c) {
         this.posX = posX;
         this.posY = posY;
-        this.angle = angle;
+        this.angle = angleInit;
         this.weight = weight;
         this.speed = speedInit;
+        this.arrowColor = Color.BLACK;
     }
 
-    public void arrow(int weight, int posX, int posY, double angle) {
+    public Arrow(int weight, int posX, int posY, double angle) {
         this.posX = posX;
         this.posY = posY;
         this.weight = weight;
         this.angle = angle;
     }
 
-    public void move() {
+    public void move(Target target) {
+        if (!collision(target)) {
 
+        } else {
+            speed = 0;
+        }
     }
 
     public boolean collision(Target target) {
