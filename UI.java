@@ -11,6 +11,8 @@ public class UI extends JFrame implements ActionListener {
     // http://web.mit.edu/java_v1.0.2/www/javadoc/java.awt.Scrollbar.html
     char type;
 
+    // attributs-parametres du menu
+
     public UI(char type) {
         this.type = type;
         if (type == 'm') {
@@ -35,7 +37,10 @@ public class UI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-
+        /*
+         * game.player.name=game.masse=;
+         * game.difficulty
+         */
     }
 
 }

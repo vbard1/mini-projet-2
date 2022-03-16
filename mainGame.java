@@ -8,7 +8,6 @@ public class mainGame extends JFrame {
     }
 
     public static void launch(/* param? */) {
-        game newGame = new game();
-        UI menu = new UI('m');
+        game newGame = new game(new UI('m'));
     }
 }
