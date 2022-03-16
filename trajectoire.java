@@ -4,7 +4,7 @@ public class trajectoire {
     int angle;
     int speed;
 
-    public Trajectoire(){
-        
+    public Trajectoire(int arrowType, int angleInit, int speedInit){
+
     }
 }
