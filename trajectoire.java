@@ -40,7 +40,7 @@ public class trajectoire {
                 double Y1 = 0;
                 double Y2 = 0;
                 paramTraj[2].add(0);
-                for (int x = 1; x < maxX - 2; x++) {
+                for (int x = 0; x < maxX - 1; x++) {
                     X1 = (double) (paramTraj[0].get(x));
                     X2 = (double) (paramTraj[0].get(x + 1));
                     Y1 = (double) (paramTraj[1].get(x));
