@@ -227,8 +227,6 @@ public class UI extends JFrame implements ActionListener {
 
 
         }
-        public void adjustementValueChanged(AdjustmentEvent e){
 
-        }
 }
 
