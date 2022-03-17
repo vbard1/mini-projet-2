@@ -6,8 +6,8 @@ public class testTrajectoire {
     public static void main(String[] args) {
         ArrayList[] paramTraj = new ArrayList[3];
         paramTraj[0] = new ArrayList<Integer>(); // param x
-        double angleInit = 45 * 3.1415 / 180;
-        double speedInit = 100;
+        double angleInit = 80 * 3.1415 / 180;
+        double speedInit = 62;
         double gravity = 9.81;
         double yInit = 0;
 
@@ -22,7 +22,7 @@ public class testTrajectoire {
             // taille de tableaux = distance horizontale max
             if (i == 0) {
                 for (Integer absciss = 0; absciss < maxX; absciss++) {
-                    paramTraj[0].add(absciss, absciss);
+                    paramTraj[0].add((int) absciss, (int) absciss);
                     y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss
                             * (1 + Math.pow(Math.tan(angleInit), 2)) + absciss * Math.tan(angleInit));
                     paramTraj[1].add(y);
@@ -48,8 +48,8 @@ public class testTrajectoire {
 
         }
         for (int i = 0; i < maxX; i++) {
-            System.out.print("/");
-            System.out.print(paramTraj[0].get(i) + "," + paramTraj[1].get(i) + "/");
+
+            System.out.print(paramTraj[0].get(i) + "," + paramTraj[1].get(i) + "%");
         }
 
     }
