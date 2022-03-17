@@ -1,6 +1,7 @@
 import java.util.jar.Attributes.Name;
+import java.awt.event.*;
 
-public class game {
+public class game implements ActionListener {
 
     player player;
     double masse;
@@ -10,7 +11,28 @@ public class game {
     public game(UI menu) {
         window = menu;
         player = new player();
+        window.startGame.addActionListener(this);
+        
         
     }
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource()==window.startGame){
+            //Affecte à player le nom mis dans la case username du menu
+            player=new player(window.username.getText()) ;
+            //Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus compliqué)
+            difficulty=window.difficulty.getSelectedIndex();   
+            window.setVisible(false);
+            window.dispose();
+            window=new UI('g');
+            window.menu.addActionListener(this);
+        }else if(e.getSource()==window.menu){
+            window.setVisible(false);
+            window.dispose();
+            window =new UI('m');
+            window.startGame.addActionListener(this);
+        }
+    }
+    
 
 }
