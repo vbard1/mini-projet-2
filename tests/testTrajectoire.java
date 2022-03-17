@@ -35,6 +35,7 @@ public class testTrajectoire {
                 double Y2 = 0;
                 paramTraj[2].add(0);
                 for (int x = 1; x < maxX - 2; x++) {
+                    // double cast Integer => double passage par int obligatoire
                     X1 = (double) (int) (paramTraj[0].get(x));
                     X2 = (double) (int) (paramTraj[0].get(x + 1));
                     Y1 = (double) (int) (paramTraj[1].get(x));
@@ -47,6 +48,7 @@ public class testTrajectoire {
 
         }
         for (int i = 0; i < maxX; i++) {
+            System.out.print("/");
             System.out.print(paramTraj[0].get(i) + "," + paramTraj[1].get(i) + "/");
         }
 
