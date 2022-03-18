@@ -16,12 +16,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.*;
 
 //TODO mettre en relatif aux dimensions de la fenetre
-//TODO MERCI ABDEL ELLE EST TCHOUKAR TON INTERFACE
+//TODO un Jlabel "piou!" quand on tire?
 
 public class UI extends JFrame implements ActionListener {
-        // on peut tricher et rajouter une barre de défillement et la méthode get qui va
-        // bien avec : )
-        // http://web.mit.edu/java_v1.0.2/www/javadoc/java.awt.Scrollbar.html
+
         char type;
         JPanel background;
         JLabel title;

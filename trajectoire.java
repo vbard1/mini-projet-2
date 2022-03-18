@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * @author Victor BARDIN
+ */
 public class trajectoire {
+
     int arrowType;
     int windSpeed;
     double angle;
@@ -10,6 +14,16 @@ public class trajectoire {
     int maxX;
     ArrayList[] paramTraj;
 
+    /**
+     * constructeur de l'objet trajectoire, permet de tracer les
+     * trajectoires pour les prévisualiser, ou de faire decrire a la fleche
+     * sa trajectoire.
+     * 
+     * @param arrowType le type de fleche utilisee (aluminium, bois ou carbone)
+     * @param angleInit angle de tir initial
+     * @param speedInit vitesse de tir initiale
+     * @param windSpeed vitesse du vent
+     */
     public trajectoire(int arrowType, double angleInit, double speedInit, int windSpeed) {
         this.arrowType = arrowType;
         this.angle = angleInit;
