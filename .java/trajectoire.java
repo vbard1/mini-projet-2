@@ -35,7 +35,12 @@ public class trajectoire {
         this.speed = speedInit;
         this.windSpeed = windSpeed; // ?
         paramTraj = new ArrayList[3];
+        recalculate(angleInitDeg, speedInit);
 
+    }
+
+    public void recalculate(double angleInitDeg, double speedInit) {
+        long executionTime = System.currentTimeMillis();
         System.out.println("\narray of ArrayList DONE\n");
 
         maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInitDeg * degToRad) * (speedInit
@@ -50,12 +55,7 @@ public class trajectoire {
         System.out.println("\ny DONE");
         paramTraj[2] = new ArrayList<Double>(maxX); // param angle pour chaque x
         System.out.println("\nangle DONE");
-        recalculate(angleInitDeg, speedInit);
 
-    }
-
-    public void recalculate(double angleInitDeg, double speedInit) {
-        long avant = System.currentTimeMillis();
         for (int absciss = 0; absciss < maxX; absciss++) {
             paramTraj[0].add(absciss);
             // remplissage de y en fonction de x
@@ -80,9 +80,9 @@ public class trajectoire {
             angleRad = Math.acos((X2 - X1) / (Y2 - Y1));
             paramTraj[2].add(angleRad);
         }
-
+        executionTime = System.currentTimeMillis() - executionTime;
         System.out.println("\nall DONE \n[recalculation complete] : execution time = "
-                + (System.currentTimeMillis() - avant) + " ms");
+                + (executionTime) + " ms");
 
     }
 

@@ -6,7 +6,8 @@ public class mainGame extends JFrame {
     public static void main(String[] args) {
         // launch(/* param? */);
         trajectoire e = new trajectoire(45, 100, 0, 0);
-
+        e.recalculate(45, 10);
+        e.recalculate(45,50);
         System.out.println(e.toString());
     }
 
