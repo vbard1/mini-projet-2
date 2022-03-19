@@ -11,20 +11,16 @@ public class Arrow {
     double speed; // vitesse
     Color arrowColor;
 
-    /*
+    /**
      * constructeur pour la flèche
      * 
-     * @param weight poids de la flèche
-     * 
-     * @param posX position du centre de gravité en X
-     * 
-     * @param posY position du centre de gravité en Y
-     * 
+     * @param weight    poids de la flèche
+     * @param posX      position du centre de gravité en X
+     * @param posY      position du centre de gravité en Y
      * @param angleInit angle initial de lancer
-     * 
      * @param speedInit vitesse de lancer
+     * @param c         couleur de la flèche en fonction du type de flèche
      * 
-     * @param c couleur de la flèche en fonction du type de flèche
      */
     public Arrow(int weight, int posX, int posY, double angleInit, double speedInit, Color c) {
         this.posX = posX;

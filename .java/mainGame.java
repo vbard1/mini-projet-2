@@ -4,7 +4,10 @@ public class mainGame extends JFrame {
     // TODO ici on met les TODO (bugs, trucs à faire encore)
 
     public static void main(String[] args) {
-        launch(/* param */);
+        // launch(/* param? */);
+        trajectoire e = new trajectoire(45, 100, 0, 0);
+
+        System.out.println(e.toString());
     }
 
     public static void launch(/* param? */) {

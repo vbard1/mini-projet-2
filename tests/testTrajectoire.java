@@ -13,6 +13,7 @@ public class testTrajectoire {
 
         int maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInit) * (speedInit * Math.sin(angleInit)
                 + (Math.sqrt(Math.pow(speedInit * Math.sin(angleInit), 2) + 2 * gravity * yInit))));
+        System.out.println("maxX= " + maxX);
         paramTraj[1] = new ArrayList<Integer>(maxX); // param y
         paramTraj[2] = new ArrayList<Double>(maxX);
         int y;
@@ -49,7 +50,7 @@ public class testTrajectoire {
         }
         for (int i = 0; i < maxX; i++) {
 
-            System.out.print(paramTraj[0].get(i) + "," + paramTraj[1].get(i) + "%");
+            System.out.print(paramTraj[0].get(i) + "/" + paramTraj[1].get(i) + "%");
         }
 
     }
