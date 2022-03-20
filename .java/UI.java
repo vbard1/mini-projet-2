@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.*;
 
 //TODO mettre en relatif aux dimensions de la fenetre
-//TODO un Jlabel "piou!" quand on tire?
+//TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
 
 public class UI extends JFrame implements ActionListener {
 
@@ -148,7 +148,8 @@ public class UI extends JFrame implements ActionListener {
                         angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 0, 91);
                         angle.setPreferredSize(new Dimension(200, 40));
                         // angle.setLocation(10, 10);
-                        angle.setLayout(null);
+                        // angle.setLayout(null); //non sinon ça empêche l'affichage automatique géré
+                        // par le layout
 
                         // Affichage angle
                         angleText = new JLabel("Angle : " + angle.getValue() + "°");
@@ -164,7 +165,8 @@ public class UI extends JFrame implements ActionListener {
                         speed = new JScrollBar(JScrollBar.HORIZONTAL, 50, 1, 0, 101);
                         speed.setPreferredSize(new Dimension(200, 40));
                         // speed.setLocation(angle.getLocation().x + angle.getWidth() + 10, 10);
-                        speed.setLayout(null);
+                        // speed.setLayout(null); ////non sinon ça empêche l'affichage automatique géré
+                        // par le layout
 
                         // Affichage speed
                         speedText = new JLabel("Speed : " + speed.getValue() + "%");
