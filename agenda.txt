@@ -10,6 +10,13 @@ agenda :
 
         répartition du travail pour les prochaines séances
         trouver l'équation de mouvement adaptee a l'echelle de mouvement
-        
+       
+	
+	séance 2 :
+		ABDEL => fait l'UI en définissant composants et leur composition
+		CLARA => architecture du programme et création de mainGame, game
+		VICTOR => architecture du programme et création de arrow et trajectoire
+		
+		objectifs : améliorer la trajectoire en ajoutant le vent et écrire les actionperformed, écrire la méthode paint
 
         
