@@ -24,7 +24,11 @@ public class trajectoire {
      * @param speedInit    vitesse de tir initiale
      * @param windSpeed    vitesse du vent
      */
-    // TODO prender en compte le vent
+    // TODO prender en compte le vent :
+    // https://media.eduscol.education.fr/file/Formation_continue_enseignants/15/8/StFlour2007_Etienne_110158.pdf
+    // page 27
+    // https://www.solumaths.com/en/calculator/calculate/solve_equations pour la
+    // spatialiser
     // TODO trajectoires interdites
     double degToRad = Math.PI / 180.0;
 
