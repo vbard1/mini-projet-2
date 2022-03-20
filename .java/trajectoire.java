@@ -34,12 +34,13 @@ public class trajectoire {
         this.angleRad = angleInitDeg * degToRad;
         this.speed = speedInit;
         this.windSpeed = windSpeed; // ?
+        this.yInit = yInit;
         paramTraj = new ArrayList[3];
-        recalculate(angleInitDeg, speedInit);
+        recalculate(angleInitDeg, speedInit, windSpeed, yInit);
 
     }
 
-    public void recalculate(double angleInitDeg, double speedInit) {
+    public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
         long executionTime = System.currentTimeMillis();
         System.out.println("\narray of ArrayList DONE\n");
 
@@ -56,13 +57,16 @@ public class trajectoire {
         paramTraj[2] = new ArrayList<Double>(maxX); // param angle pour chaque x
         System.out.println("\nangle DONE");
 
+        int y = 0;
         for (int absciss = 0; absciss < maxX; absciss++) {
-            paramTraj[0].add(absciss);
-            // remplissage de y en fonction de x
-            paramTraj[1].add(
-                    (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss
-                            * (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                            + absciss * Math.tan(angleInitDeg * degToRad)));
+            y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss
+                    * (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            if (y > -1) {
+                paramTraj[0].add(absciss);
+                // remplissage de y en fonction de x
+                paramTraj[1].add(y);
+            }
         }
 
         System.out.println("\nx and y DONE");
@@ -71,7 +75,7 @@ public class trajectoire {
         double Y1 = 0;
         double Y2 = 0;
 
-        for (int x = 0; x < maxX - 1; x++) {
+        for (int x = 0; x < paramTraj[0].size() - 1; x++) {
             paramTraj[2].add(angleInitDeg * degToRad);
             X1 = (double) (int) (paramTraj[0].get(x));
             X2 = (double) (int) (paramTraj[0].get(x + 1));
@@ -89,7 +93,7 @@ public class trajectoire {
     public String toString() {
         System.out.println("EXCEL VERSION :");
         String Stringed = "";
-        for (int i = 0; i < maxX; i++) {
+        for (int i = 0; i < paramTraj[0].size() - 1; i++) {
 
             Stringed += (paramTraj[1].get(i) + " ");
         }
