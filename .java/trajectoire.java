@@ -61,32 +61,38 @@ public class Trajectoire {
         // il va falloir le timer en fonction de t pour avoir une vitesse
         // réelle
         paramTraj[0] = new ArrayList<Integer>(maxX); // param x // on a x(t)=v°*cos(angleInit)*t dans le vide
-        System.out.println("\nx DONE");
         paramTraj[1] = new ArrayList<Integer>(maxX); // param y pour chaque x
-        System.out.println("\ny DONE");
         paramTraj[2] = new ArrayList<Double>(maxX); // param angle pour chaque x
-        System.out.println("\nangle DONE");
+
         // paramTraj[3] = new ArrayList<Double>(maxX); // vitesse pour chaque x
 
         // base de temps de 0.1 sec?
         int y = 0;
         double vitesse;
-        for (int absciss = 0; absciss < maxX; absciss++) {
+        int absciss = 0;
+        while (absciss < maxX && y > -1) {
             // Trajectoire de y en fonction de x dans le vide
-
             vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
                     + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
 
             y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                     (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit) - (int) (windSpeed * vitesse);
+                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit)
+            /*
+             * - (int) (windSpeed *
+             * vitesse / 100)
+             */;
 
-            if (y > -1) {
-                paramTraj[0].add(absciss);
-                // remplissage de y en fonction de x
-                paramTraj[1].add(y);
-            }
+            // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
+            // (int) (windSpeed * vitesse)+ " px");
+
+            // System.out.print(" => added the valid point");
+            paramTraj[0].add(absciss);
+            // remplissage de y en fonction de x
+            paramTraj[1].add(y);
+            absciss++;
         }
+        maxX = absciss; // réafectation à maxX de la distance max horizontale réelle
         System.out.println("\nx and y DONE");
         double X1 = 0;
         double X2 = 0;
@@ -109,7 +115,7 @@ public class Trajectoire {
     }
 
     public String toString() {
-        System.out.println("EXCEL VERSION :");
+        System.out.println("EXCEL VERSION : nValues = " + paramTraj[0].size());
         String Stringed = "";
         for (int i = 0; i < paramTraj[0].size() - 1; i++) {
 
