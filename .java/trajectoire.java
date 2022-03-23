@@ -28,7 +28,7 @@ public class trajectoire {
     // https://media.eduscol.education.fr/file/Formation_continue_enseignants/15/8/StFlour2007_Etienne_110158.pdf
     // page 27
     // https://www.solumaths.com/en/calculator/calculate/solve_equations pour la
-    // spatialiser
+    // spatialiser'
     // TODO trajectoires interdites
     double degToRad = Math.PI / 180.0;
 
@@ -39,6 +39,7 @@ public class trajectoire {
         this.speed = speedInit;
         this.windSpeed = windSpeed; // ?
         this.yInit = yInit;
+
         paramTraj = new ArrayList[3];
         recalculate(angleInitDeg, speedInit, windSpeed, yInit);
 
@@ -46,26 +47,37 @@ public class trajectoire {
 
     public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
         long executionTime = System.currentTimeMillis();
-        System.out.println("\narray of ArrayList DONE\n");
+        // System.out.println("\narray of ArrayList DONE\n");
 
-        maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInitDeg * degToRad) * (speedInit
-                * Math.sin(angleInitDeg * degToRad)
-                + (Math.sqrt(Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2) + 2 * gravity * yInit)))) + 1;
+        maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInitDeg * degToRad) *
+                (speedInit
+                        * Math.sin(angleInitDeg * degToRad)
+                        * +(Math.sqrt(Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2) + 2 *
+                                gravity * yInit))))
+                + 1;
         System.out.println("max X = " + maxX);
 
-        // taille de tableaux = distance horizontale max
-        paramTraj[0] = new ArrayList<Integer>(maxX); // param x
+        // taille de tableaux = distance horizontale max DANS LE VIDE
+        // il va falloir le timer en fonction de t pour avoir une vitesse
+        // réelle
+        paramTraj[0] = new ArrayList<Integer>(maxX); // param x // on a x(t)=v°*cos(angleInit)*t dans le vide
         System.out.println("\nx DONE");
         paramTraj[1] = new ArrayList<Integer>(maxX); // param y pour chaque x
         System.out.println("\ny DONE");
         paramTraj[2] = new ArrayList<Double>(maxX); // param angle pour chaque x
         System.out.println("\nangle DONE");
+        //paramTraj[3] = new ArrayList<Double>(maxX); // vitesse pour chaque x
 
+        // base de temps de 0.1 sec?
         int y = 0;
         for (int absciss = 0; absciss < maxX; absciss++) {
-            y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss
-                    * (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            // trajectoire de y en fonction de x dans le vide
+            
+              y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss*
+              (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+              + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+             
+            
             if (y > -1) {
                 paramTraj[0].add(absciss);
                 // remplissage de y en fonction de x

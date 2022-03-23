@@ -48,6 +48,7 @@ public class UI extends JFrame implements ActionListener {
 
                 // Définition de la fenêtre du menu
                 this.setLocation(0, 0);
+                this.setSize(1910, 1070);
                 this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Défini la taille de la fenêtre à celle de l'écran
                 this.setResizable(true);
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,7 +146,7 @@ public class UI extends JFrame implements ActionListener {
                         settings.setLayout(new FlowLayout()); // Layout qui permet de mettre les éléments à la suite
 
                         // scrollbar angle
-                        angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 0, 91);
+                        angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 0, 90);
                         angle.setPreferredSize(new Dimension(200, 40));
                         // angle.setLocation(10, 10);
                         // angle.setLayout(null); //non sinon ça empêche l'affichage automatique géré
@@ -157,6 +158,8 @@ public class UI extends JFrame implements ActionListener {
                                 @Override
                                 public void adjustmentValueChanged(AdjustmentEvent e) {
                                         angleText.setText("Angle : " + e.getValue() + "°");
+                                        
+                                        // TODO repaint!
                                 }
                         });
                         // addAdjustmentListener(new AdjustmentListener())
