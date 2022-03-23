@@ -33,6 +33,10 @@ public class game implements ActionListener {
             window.startGame.addActionListener(this);
         }
     }
-    
+    //TODO décompte score ?
+    //TODO gestion tours du jeu
+        // récupérer infos et créer trajectoire quand "launch" cliqué
+        //Ajouter au score du joueur si la cible est touchée
+        //remettre la fenètre à zéro à chaque tour
 
 }
