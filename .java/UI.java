@@ -14,12 +14,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
+import javax.swing.*;
 
 //TODO mettre en relatif aux dimensions de la fenetre
 //TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
 
 public class UI extends JFrame implements ActionListener {
 
+		private Timer resizeTimer;
         char type;
         JPanel background;
         JLabel title;
@@ -42,6 +44,8 @@ public class UI extends JFrame implements ActionListener {
         // attributs-parametres du menu
         //
         public UI(char type) {
+			//super();//nom
+				//resizeTimer.start();
                 this.type = type;
                 // Acquisition de la taille de l'écran
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -58,6 +62,14 @@ public class UI extends JFrame implements ActionListener {
                 background.setSize(this.getWidth(), this.getHeight());
                 background.setLocation(0, 0);
                 background.setLayout(null);
+                
+                //initialisation du timer
+                //resizeTimer = new Timer(100, this);
+                
+                		
+				
+				
+				
 
                 if (type == 'm') {// Affichage du menu
 
@@ -67,6 +79,7 @@ public class UI extends JFrame implements ActionListener {
                         title.setFont(new Font("Times New Roman", Font.BOLD, 50));
                         title.setSize((int) screenSize.getWidth(), 40);
                         title.setLocation(0, 50);
+
                         title.setLayout(null);
 
                         // Définition texte "Nom de l'utilisateur"
@@ -217,6 +230,11 @@ public class UI extends JFrame implements ActionListener {
         // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
+			
+			//background.setSize(this.getWidth()-this.getInsets().right-this.getInsets().left,this.getHeight()-this.getInsets().top-this.getInsets().bottom);
+			//repaint();
+			
+			
 
                 // TODO Auto-generated method stub
                 /*
