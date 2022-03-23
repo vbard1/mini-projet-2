@@ -158,7 +158,7 @@ public class UI extends JFrame implements ActionListener {
                                 @Override
                                 public void adjustmentValueChanged(AdjustmentEvent e) {
                                         angleText.setText("Angle : " + e.getValue() + "°");
-                                        
+
                                         // TODO repaint!
                                 }
                         });
@@ -217,7 +217,7 @@ public class UI extends JFrame implements ActionListener {
         // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
-
+                
                 // TODO Auto-generated method stub
                 /*
                  * game.player.name=JTextField de nom;

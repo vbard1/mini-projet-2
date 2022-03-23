@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * @author Victor BARDIN
  */
-public class trajectoire {
+public class Trajectoire {
 
     int arrowType;
     int windSpeed;
@@ -15,9 +15,9 @@ public class trajectoire {
     ArrayList[] paramTraj;
 
     /**
-     * constructeur de l'objet trajectoire, permet de tracer les
+     * constructeur de l'objet Trajectoire, permet de tracer les
      * trajectoires pour les prévisualiser, ou de faire decrire a la fleche
-     * sa trajectoire.
+     * sa Trajectoire.
      * 
      * @param arrowType    le type de fleche utilisee (aluminium, bois ou carbone)
      * @param angleInitDeg angle de tir initial en degres
@@ -32,7 +32,7 @@ public class trajectoire {
     // TODO trajectoires interdites
     double degToRad = Math.PI / 180.0;
 
-    public trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
+    public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
         gravity = 9.81;
 
         this.angleRad = angleInitDeg * degToRad;
@@ -66,25 +66,27 @@ public class trajectoire {
         System.out.println("\ny DONE");
         paramTraj[2] = new ArrayList<Double>(maxX); // param angle pour chaque x
         System.out.println("\nangle DONE");
-        //paramTraj[3] = new ArrayList<Double>(maxX); // vitesse pour chaque x
+        // paramTraj[3] = new ArrayList<Double>(maxX); // vitesse pour chaque x
 
         // base de temps de 0.1 sec?
         int y = 0;
+        double vitesse;
         for (int absciss = 0; absciss < maxX; absciss++) {
-            // trajectoire de y en fonction de x dans le vide
-            
-              y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss*
-              (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-              + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-             
-            
+            // Trajectoire de y en fonction de x dans le vide
+
+            vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
+                    + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
+
+            y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+                    (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit) - (int) (windSpeed * vitesse);
+
             if (y > -1) {
                 paramTraj[0].add(absciss);
                 // remplissage de y en fonction de x
                 paramTraj[1].add(y);
             }
         }
-
         System.out.println("\nx and y DONE");
         double X1 = 0;
         double X2 = 0;
