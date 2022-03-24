@@ -50,12 +50,10 @@ public class Trajectoire {
         // System.out.println("\narray of ArrayList DONE\n");
 
         maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInitDeg * degToRad) *
-                (speedInit
-                        * Math.sin(angleInitDeg * degToRad)
-                        * +(Math.sqrt(Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2) + 2 *
-                                gravity * yInit))))
-                + 1;
-        System.out.println("max X = " + maxX);
+                (speedInit * Math.sin(angleInitDeg * degToRad)
+                        * +(Math.sqrt(
+                                Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2) + 2 * gravity * yInit))));
+        System.out.print(" [max X = " + maxX + "]");
 
         // taille de tableaux = distance horizontale max DANS LE VIDE
         // il va falloir le timer en fonction de t pour avoir une vitesse
@@ -93,7 +91,7 @@ public class Trajectoire {
             absciss++;
         }
         maxX = absciss; // réafectation à maxX de la distance max horizontale réelle
-        System.out.println("\nx and y DONE");
+        System.out.println("\nx and y DONE : maxX -absciss=" + (maxX - absciss));
         double X1 = 0;
         double X2 = 0;
         double Y1 = 0;
