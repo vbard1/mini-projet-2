@@ -15,9 +15,9 @@ public class Trajectoire {
     ArrayList[] paramTraj;
 
     /**
-     * constructeur de l'objet Trajectoire, permet de tracer les
-     * trajectoires pour les prévisualiser, ou de faire decrire a la fleche
-     * sa Trajectoire.
+     * @method Trajectoire constructeur de l'objet Trajectoire, permet de tracer les
+     *         trajectoires pour les prévisualiser, ou de faire decrire a la fleche
+     *         sa Trajectoire.
      * 
      * @param arrowType    le type de fleche utilisee (aluminium, bois ou carbone)
      * @param angleInitDeg angle de tir initial en degres
@@ -70,7 +70,7 @@ public class Trajectoire {
         int y = 0;
         double vitesse;
         int absciss = 0;
-        while (absciss < maxX && y > -1) {
+        while (absciss < maxX) {
             // Trajectoire de y en fonction de x dans le vide
             vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
                     + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
@@ -78,18 +78,18 @@ public class Trajectoire {
             y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                     (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
                     + absciss * Math.tan(angleInitDeg * degToRad) + yInit)
-            /*
-             * - (int) (windSpeed *
-             * vitesse / 100)
-             */;
+                    - (int) (windSpeed * vitesse * 0.1); // coefficient d'aténuation 0.1, frottements dépendent de
+                                                         // vitesse relative au vent
+            if (y > -1) {
+                // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
+                // (int) (windSpeed * vitesse)+ " px");
 
-            // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
-            // (int) (windSpeed * vitesse)+ " px");
+                // System.out.print(" => added the valid point");
+                paramTraj[0].add(absciss);
+                // remplissage de y en fonction de x
+                paramTraj[1].add(y);
 
-            // System.out.print(" => added the valid point");
-            paramTraj[0].add(absciss);
-            // remplissage de y en fonction de x
-            paramTraj[1].add(y);
+            }
             absciss++;
         }
         maxX = absciss; // réafectation à maxX de la distance max horizontale réelle
