@@ -44,7 +44,7 @@ public class game implements ActionListener {
                 roundNb --;
                 double angleInit = window.angle.getValue() ;
                 double speedInit = window.speed.getValue() ;
-                Arrow arrow = new Arrow(masse, x, y, angleInit, speedInit);
+                //Arrow arrow = new Arrow(masse, x, y, angleInit, speedInit);
             }
         }
             
