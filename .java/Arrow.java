@@ -30,7 +30,7 @@ public class Arrow {
         this.weight = weight;
         this.speed = speedInit;
         this.arrowColor = Color.BLACK;
-        this.trajectoire = new Trajectoire(angleInit, speedInit, windSpeed, posY);
+        this.trajectoire = new Trajectoire(angleInit, speedInit, windSpeed, posY, posX);
     }
 
     /*

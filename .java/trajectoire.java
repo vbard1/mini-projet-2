@@ -32,7 +32,7 @@ public class Trajectoire {
     // TODO trajectoires interdites
     double degToRad = Math.PI / 180.0;
 
-    public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
+    public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
         gravity = 9.81;
 
         this.angleRad = angleInitDeg * degToRad;
@@ -41,11 +41,11 @@ public class Trajectoire {
         this.yInit = yInit;
 
         paramTraj = new ArrayList[3];
-        recalculate(angleInitDeg, speedInit, windSpeed, yInit);
+        recalculate(angleInitDeg, speedInit, windSpeed, yInit, xInit);
 
     }
 
-    public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
+    public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
         long executionTime = System.currentTimeMillis();
         // System.out.println("\narray of ArrayList DONE\n");
 
@@ -84,7 +84,7 @@ public class Trajectoire {
                 // (int) (windSpeed * vitesse)+ " px");
 
                 // System.out.print(" => added the valid point");
-                paramTraj[0].add(absciss);
+                paramTraj[0].add(absciss + xInit);
                 // remplissage de y en fonction de x
                 paramTraj[1].add(y);
 
