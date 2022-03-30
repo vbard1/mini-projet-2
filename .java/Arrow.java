@@ -23,13 +23,14 @@ public class Arrow {
      * @param c         couleur de la flèche en fonction du type de flèche
      * 
      */
-    public Arrow(int weight, int posX, int posY, double angleInit, double speedInit, Color c) {
+    public Arrow(int weight, int posX, int posY, double angleInit, double speedInit, int windSpeed, Color c) {
         this.posX = posX;
         this.posY = posY;
         this.angle = angleInit;
         this.weight = weight;
         this.speed = speedInit;
         this.arrowColor = Color.BLACK;
+        this.trajectoire = new Trajectoire(angleInit, speedInit, windSpeed, posY);
     }
 
     /*
