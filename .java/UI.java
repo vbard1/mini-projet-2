@@ -127,7 +127,7 @@ public class UI extends JFrame implements ActionListener {
                         startGame.setSize(100, 40);
                         startGame.setLocation((int) ((screenSize.getWidth() / 2) - (startGame.getWidth() / 2)),
                                         arrowType.getLocation().y + arrowType.getHeight() + 100);
-                        //startGame.setLayout();
+                        // startGame.setLayout();
 
                         // Ajout à background
                         background.add(username);
@@ -143,10 +143,10 @@ public class UI extends JFrame implements ActionListener {
                 } else if (type == 'g') {
 
                         // Panel contenant l'affichage du jeu
-
-                        gameZone=new gameZone(1920,930);
-                        gameZone.setSize(gameZone.width,gameZone.height);
-                        gameZone.setLocation(0,0);
+                        this.setResizable(false);
+                        gameZone = new gameZone(1920, 930);
+                        gameZone.setSize(gameZone.width, gameZone.height);
+                        gameZone.setLocation(0, 0);
 
                         gameZone.repaint();
                         // Panel contenant les réglages pour la flèche
@@ -224,13 +224,13 @@ public class UI extends JFrame implements ActionListener {
                 this.add(background);
 
                 setVisible(true);
-                
+
         }
 
         // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
-                
+
                 // TODO Auto-generated method stub
                 /*
                  * game.player.name=JTextField de nom;
@@ -238,7 +238,5 @@ public class UI extends JFrame implements ActionListener {
                  * game.difficulty=;
                  */
         }
-
-
 
 }

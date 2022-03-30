@@ -9,6 +9,7 @@ public class Arrow {
     double angle; // Angle du vecteur vitesse avec l'axe x
     double windX; // force du vent en N
     double speed; // vitesse
+    Trajectoire trajectoire;
     Color arrowColor;
 
     /**
@@ -31,12 +32,14 @@ public class Arrow {
         this.arrowColor = Color.BLACK;
     }
 
-    public Arrow(int weight, int posX, int posY, double angle) {
-        this.posX = posX;
-        this.posY = posY;
-        this.weight = weight;
-        this.angle = angle;
-    }
+    /*
+     * public Arrow(int weight, int posX, int posY, double angle) {
+     * this.posX = posX;
+     * this.posY = posY;
+     * this.weight = weight;
+     * this.angle = angle;
+     * }
+     */
 
     public void move(Target target) {
         if (!collision(target)) {
