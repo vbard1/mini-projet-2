@@ -74,7 +74,7 @@ public class UI extends JFrame implements ActionListener {
                 if (type == 'm') {// Affichage du menu
 
                         // Définition titre
-                        title = new JLabel("Tir à l'arc (nom à voir)");
+                        title = new JLabel("Tir à l'arc");
                         title.setHorizontalAlignment(SwingConstants.CENTER);
                         title.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/30));
                         title.setSize((int) screenSize.getWidth(), (int)background.getHeight()/16);
@@ -127,7 +127,7 @@ public class UI extends JFrame implements ActionListener {
                         // Définition type de flèche
                         String[] arrowType1 = { "Aluminium", "Bois", "Carbone" }; // Tableau contenant les différents
                                                                                   // type de flèche
-                        JComboBox<String> arrowType = new JComboBox<String>(arrowType1);
+                        arrowType = new JComboBox<String>(arrowType1);
                         arrowType.setSelectedIndex(0);
                         arrowType.setLayout(null);
                         arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
@@ -136,10 +136,10 @@ public class UI extends JFrame implements ActionListener {
 
                         // Bouton pour lancer la partie
                         startGame = new JButton("Start Game");
-                        startGame.setSize(100, 40);
+                        startGame.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
                         startGame.setLocation((int) ((screenSize.getWidth() / 2) - (startGame.getWidth() / 2)),
                                         arrowType.getLocation().y + arrowType.getHeight() + 100);
-                        // startGame.setLayout();
+                        //startGame.setLayout();
 
                         // Ajout à background
                         background.add(username);
@@ -155,10 +155,10 @@ public class UI extends JFrame implements ActionListener {
                 } else if (type == 'g') {
 
                         // Panel contenant l'affichage du jeu
-                        this.setResizable(false);
-                        gameZone = new gameZone(1920, 930);
-                        gameZone.setSize(gameZone.width, gameZone.height);
-                        gameZone.setLocation(0, 0);
+
+                        gameZone=new gameZone(1920,930);
+                        gameZone.setSize(gameZone.width,gameZone.height);
+                        gameZone.setLocation(0,0);
 
                         gameZone.repaint();
                         // Panel contenant les réglages pour la flèche
@@ -236,24 +236,14 @@ public class UI extends JFrame implements ActionListener {
                 this.add(background);
 
                 setVisible(true);
-
+                
         }
 
         // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
-<<<<<<< Updated upstream
-
-                // TODO Auto-generated method stub
-                /*
-                 * game.player.name=JTextField de nom;
-                 * game.masse=; //...
-                 * game.difficulty=;
-                 */
-=======
                 resize();
                 //repaint();
->>>>>>> Stashed changes
         }
         
         public void resize(){
@@ -289,7 +279,13 @@ public class UI extends JFrame implements ActionListener {
             textType.getLocation().y + textType.getHeight() + 10);
             arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
             
+            startGame.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
+            startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
+                                        arrowType.getLocation().y + arrowType.getHeight() + 100);
+            
             
 		}
+
+
 
 }
