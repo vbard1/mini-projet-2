@@ -16,12 +16,16 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
+import javax.swing.*;
+
 
 //TODO mettre en relatif aux dimensions de la fenetre
 //TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
 
 public class UI extends JFrame implements ActionListener {
 
+		public Timer resizeTimer;
+		JComboBox<String> arrowType;
         char type;
         JPanel background;
         JLabel title;
@@ -45,6 +49,9 @@ public class UI extends JFrame implements ActionListener {
         // attributs-parametres du menu
         //
         public UI(char type) {
+				//initialisation du timer
+                resizeTimer = new Timer(100, this);
+				resizeTimer.start();
                 this.type = type;
                 // Acquisition de la taille de l'écran
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -61,37 +68,41 @@ public class UI extends JFrame implements ActionListener {
                 background.setSize(this.getWidth(), this.getHeight());
                 background.setLocation(this.getInsets().left, this.getInsets().top);
                 background.setLayout(null);
+                
+                
 
                 if (type == 'm') {// Affichage du menu
 
                         // Définition titre
                         title = new JLabel("Tir à l'arc (nom à voir)");
                         title.setHorizontalAlignment(SwingConstants.CENTER);
-                        title.setFont(new Font("Times New Roman", Font.BOLD, 50));
-                        title.setSize((int) screenSize.getWidth(), 40);
-                        title.setLocation(0, 50);
+                        title.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/30));
+                        title.setSize((int) screenSize.getWidth(), (int)background.getHeight()/16);
+                        title.setLocation(0, (int) background.getHeight()/10);
                         title.setLayout(null);
 
                         // Définition texte "Nom de l'utilisateur"
                         textUser = new JLabel("Nom de l'utilisateur");
                         textUser.setHorizontalAlignment(SwingConstants.CENTER);
-                        textUser.setSize((int) screenSize.getWidth(), 20);
-                        textUser.setLocation(0, 300);
+                        textUser.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+                        textUser.setSize((int) background.getWidth(), (int)background.getHeight()/16);
+                        textUser.setLocation(0, (int) background.getHeight()/3);
                         textUser.setLayout(null);
 
                         // Définition du nom de l'utilisateur
                         username = new JTextField();
-                        username.setSize(150, 40);
-                        username.setLocation((int) ((screenSize.getWidth() / 2) - (username.getWidth() / 2)),
+                        username.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
+                        username.setLocation((int) ((background.getWidth() / 2) - (username.getWidth() / 2)),
                                         textUser.getLocation().y + textUser.getHeight() + 10);
                         username.setLayout(null);
 
                         // Définition texte "difficulté"
                         textDifficulty = new JLabel("Difficulté");
                         textDifficulty.setHorizontalAlignment(SwingConstants.CENTER);
-                        textDifficulty.setSize(50, 50);
+                        textDifficulty.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+                        textDifficulty.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
                         textDifficulty.setLocation(
-                                        (int) ((screenSize.getWidth() / 2) - (textDifficulty.getWidth() / 2)),
+                                        (int) ((background.getWidth() / 2) - (textDifficulty.getWidth() / 2)),
                                         username.getLocation().y + username.getHeight() + 50);
                         textDifficulty.setLayout(null);
 
@@ -100,14 +111,15 @@ public class UI extends JFrame implements ActionListener {
                         difficulty = new JComboBox<String>(level);
                         difficulty.setSelectedIndex(0);
                         difficulty.setLayout(null);
-                        difficulty.setLocation((int) ((screenSize.getWidth() / 2) - (difficulty.getWidth() / 2) - 75),
+                        difficulty.setLocation((int) ((background.getWidth() / 2) - (difficulty.getWidth() / 2)),
                                         textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
-                        difficulty.setSize(150, 40);
+                        difficulty.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
 
                         // Définition texte "Type de flèche"
                         textType = new JLabel("Type de flèche");
                         textType.setHorizontalAlignment(SwingConstants.CENTER);
-                        textType.setSize(100, 20);
+                        textType.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+                        textType.setSize((int) background.getWidth()/5, (int)background.getHeight()/25);
                         textType.setLocation((int) ((screenSize.getWidth() / 2) - (textType.getWidth() / 2)),
                                         difficulty.getLocation().y + difficulty.getHeight() + 50);
                         textType.setLayout(null);
@@ -118,9 +130,9 @@ public class UI extends JFrame implements ActionListener {
                         JComboBox<String> arrowType = new JComboBox<String>(arrowType1);
                         arrowType.setSelectedIndex(0);
                         arrowType.setLayout(null);
-                        arrowType.setLocation((int) ((screenSize.getWidth() / 2) - (arrowType.getWidth() / 2) - 75),
+                        arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
                                         textType.getLocation().y + textType.getHeight() + 10);
-                        arrowType.setSize(150, 40);
+                        arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
 
                         // Bouton pour lancer la partie
                         startGame = new JButton("Start Game");
@@ -230,6 +242,7 @@ public class UI extends JFrame implements ActionListener {
         // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
+<<<<<<< Updated upstream
 
                 // TODO Auto-generated method stub
                 /*
@@ -237,6 +250,46 @@ public class UI extends JFrame implements ActionListener {
                  * game.masse=; //...
                  * game.difficulty=;
                  */
+=======
+                resize();
+                //repaint();
+>>>>>>> Stashed changes
         }
+        
+        public void resize(){
+			background.setSize(this.getWidth()-this.getInsets().right-this.getInsets().left,this.getHeight()-this.getInsets().top-this.getInsets().bottom);
+			
+			title.setFont(new Font("Times New Roman", Font.BOLD,(int)((background.getHeight()+background.getWidth())/50)));
+            title.setSize((int) background.getWidth(), (int)background.getHeight()/8);
+            title.setLocation(0, (int) background.getHeight()/10);
+            
+            textUser.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/50));
+            textUser.setSize((int) background.getWidth(), (int)background.getHeight()/16);
+            textUser.setLocation(0, (int) background.getHeight()/3);           
+            
+            username.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
+            username.setLocation((int) ((background.getWidth() / 2) - (username.getWidth() / 2)),
+                                        textUser.getLocation().y + textUser.getHeight() + 10);
+                                        
+            textDifficulty.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+            textDifficulty.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
+            textDifficulty.setLocation((int) ((background.getWidth() / 2) - (textDifficulty.getWidth() / 2)),
+                                        username.getLocation().y + username.getHeight() + 50);
+                                        
+            difficulty.setLocation((int) ((background.getWidth() / 2) - (difficulty.getWidth() / 2)),
+            textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
+            difficulty.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
+            
+            textType.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+            textType.setSize((int) background.getWidth()/5, (int)background.getHeight()/25);
+            textType.setLocation((int) ((background.getWidth() / 2) - (textType.getWidth() / 2)),
+										difficulty.getLocation().y + difficulty.getHeight() + 50);
+		    
+		    arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
+            textType.getLocation().y + textType.getHeight() + 10);
+            arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
+            
+            
+		}
 
 }
