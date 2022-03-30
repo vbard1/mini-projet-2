@@ -32,7 +32,7 @@ public class Trajectoire {
     // TODO trajectoires interdites
     double degToRad = Math.PI / 180.0;
 
-    public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
+    public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit, int weight) {
         gravity = 9.81;
 
         this.angleRad = angleInitDeg * degToRad;
@@ -41,11 +41,11 @@ public class Trajectoire {
         this.yInit = yInit;
 
         paramTraj = new ArrayList[3];
-        recalculate(angleInitDeg, speedInit, windSpeed, yInit);
+        recalculate(angleInitDeg, speedInit, windSpeed, yInit, weight);
 
     }
 
-    public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
+    public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit, int weight) {
         long executionTime = System.currentTimeMillis();
         // System.out.println("\narray of ArrayList DONE\n");
 
@@ -76,8 +76,9 @@ public class Trajectoire {
             y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                     (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
                     + absciss * Math.tan(angleInitDeg * degToRad) + yInit)
-                    - (int) (windSpeed * vitesse * 0.1); // coefficient d'aténuation 0.1, frottements dépendent de
-                                                         // vitesse relative au vent
+                    - (int) (windSpeed * vitesse * arrowType * 0.1); // coefficient d'aténuation 0.1, frottements
+                                                                     // dépendent de
+            // vitesse relative au vent
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
                 // (int) (windSpeed * vitesse)+ " px");
