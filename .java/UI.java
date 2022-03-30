@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
+import java.awt.Graphics;
+
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Dimension;
@@ -38,6 +40,7 @@ public class UI extends JFrame implements ActionListener {
         JLabel score;
         JLabel angleText;
         JLabel speedText;
+        gameZone gameZone;
 
         // attributs-parametres du menu
         //
@@ -56,7 +59,7 @@ public class UI extends JFrame implements ActionListener {
                 // Définition du fond du menu
                 background = new JPanel();
                 background.setSize(this.getWidth(), this.getHeight());
-                background.setLocation(0, 0);
+                background.setLocation(this.getInsets().left, this.getInsets().top);
                 background.setLayout(null);
 
                 if (type == 'm') {// Affichage du menu
@@ -124,7 +127,7 @@ public class UI extends JFrame implements ActionListener {
                         startGame.setSize(100, 40);
                         startGame.setLocation((int) ((screenSize.getWidth() / 2) - (startGame.getWidth() / 2)),
                                         arrowType.getLocation().y + arrowType.getHeight() + 100);
-                        startGame.setLayout(null);
+                        //startGame.setLayout();
 
                         // Ajout à background
                         background.add(username);
@@ -139,6 +142,13 @@ public class UI extends JFrame implements ActionListener {
                         // (éventuellement animation du joueur en attente)
                 } else if (type == 'g') {
 
+                        // Panel contenant l'affichage du jeu
+
+                        gameZone=new gameZone(1920,930);
+                        gameZone.setSize(gameZone.width,gameZone.height);
+                        gameZone.setLocation(0,0);
+
+                        gameZone.repaint();
                         // Panel contenant les réglages pour la flèche
                         settings = new JPanel();
                         settings.setSize(1000, 150);
@@ -205,13 +215,16 @@ public class UI extends JFrame implements ActionListener {
                         settings.add(shoot);
                         background.add(menu);
                         settings.add(score);
-                        background.add(settings);
 
+                        background.add(settings);
+                        background.add(gameZone);
+                        settings.setVisible(true);
                 }
                 // Ajout à la fenêtre
                 this.add(background);
-                setVisible(true);
 
+                setVisible(true);
+                
         }
 
         // TODO inclure le type d
@@ -224,7 +237,8 @@ public class UI extends JFrame implements ActionListener {
                  * game.masse=; //...
                  * game.difficulty=;
                  */
-
         }
+
+
 
 }
