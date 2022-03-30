@@ -4,12 +4,13 @@ import java.awt.event.*;
 public class game implements ActionListener {
 
     player player;
-    double masse;
+    int weight;
     int difficulty; // distance de la cible et et force du vent // de 1 à 3
     UI window;
     int roundNb;
     Arrow arrow;
     Target target;
+    int arrowType;
 
     public game(UI menu) {
         window = menu;
@@ -19,7 +20,7 @@ public class game implements ActionListener {
         target = new Target();
         onGoingGame();
         gameEnd();
-        
+       // arrowType = window.
         
     }
     public void actionPerformed(ActionEvent e) {
@@ -43,7 +44,12 @@ public class game implements ActionListener {
             if (roundNb >= 0){
                 roundNb --;
                 double angleInit = window.angle.getValue() ;
-                double speedInit = window.speed.getValue() ;
+                double speedInit ;
+                if (arrowType == 0) speedInit = window.speed.getValue()*40 ;
+                if (arrowType == 1) speedInit = window.speed.getValue()*30 ;
+                if (arrowType == 2) speedInit = window.speed.getValue()*20 ;
+                 
+
                 //Arrow arrow = new Arrow(masse, x, y, angleInit, speedInit);
             }
         }
