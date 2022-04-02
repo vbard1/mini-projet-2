@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 
 //TODO mettre en relatif aux dimensions de la fenetre
@@ -69,7 +70,7 @@ public class UI extends JFrame implements ActionListener {
                 background = new JPanel();
                 background.setSize(this.getWidth(), this.getHeight());
                 background.setLocation(this.getInsets().left, this.getInsets().top);
-                background.setBackground(new Color(255,255,204));   //COULEUR FOND
+                background.setBackground(new Color(250,255,224));   //COULEUR FOND
                 background.setLayout(null);
                 
                 
@@ -122,8 +123,8 @@ public class UI extends JFrame implements ActionListener {
                         //startGame.setLayout();
                         
                         // Ajout image de fond
-						image = new JLabel(new ImageIcon("./Images/archery_menu.png"));
-						
+						//image = new JLabel(new ImageIcon("./Images/archery_menu.png"));
+						//image.setBounds(500,500,100,150);
 
                         // Ajout à background
                         background.add(username);
@@ -134,7 +135,7 @@ public class UI extends JFrame implements ActionListener {
                         background.add(textType);
                         background.add(textUser);
                         background.add(title);
-                        background.add(image);
+                        //background.add(image);
 
                         // (éventuellement animation du joueur en attente)
                 } else if (type == 'g') {
@@ -272,8 +273,8 @@ public class UI extends JFrame implements ActionListener {
             startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
                                         arrowType.getLocation().y + arrowType.getHeight() + 100);
                                         
-            image.setLocation(100,200);
-            image.setSize(100,150);
+            //image.setLocation(100,200);
+            //image.setSize(100,150);
             
             
             
