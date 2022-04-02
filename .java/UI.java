@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.Color;
 
 
 //TODO mettre en relatif aux dimensions de la fenetre
@@ -35,6 +36,7 @@ public class UI extends JFrame implements ActionListener {
         JComboBox<String> difficulty;
         JLabel textType;
         JButton startGame;
+		JLabel image ;
 
         JPanel settings;
         JScrollBar angle;
@@ -67,6 +69,7 @@ public class UI extends JFrame implements ActionListener {
                 background = new JPanel();
                 background.setSize(this.getWidth(), this.getHeight());
                 background.setLocation(this.getInsets().left, this.getInsets().top);
+                background.setBackground(new Color(255,255,204));   //COULEUR FOND
                 background.setLayout(null);
                 
                 
@@ -76,34 +79,21 @@ public class UI extends JFrame implements ActionListener {
                         // Définition titre
                         title = new JLabel("Tir à l'arc");
                         title.setHorizontalAlignment(SwingConstants.CENTER);
-                        title.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/30));
-                        title.setSize((int) screenSize.getWidth(), (int)background.getHeight()/16);
-                        title.setLocation(0, (int) background.getHeight()/10);
                         title.setLayout(null);
 
                         // Définition texte "Nom de l'utilisateur"
                         textUser = new JLabel("Nom de l'utilisateur");
                         textUser.setHorizontalAlignment(SwingConstants.CENTER);
-                        textUser.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
-                        textUser.setSize((int) background.getWidth(), (int)background.getHeight()/16);
-                        textUser.setLocation(0, (int) background.getHeight()/3);
                         textUser.setLayout(null);
 
                         // Définition du nom de l'utilisateur
                         username = new JTextField();
-                        username.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
-                        username.setLocation((int) ((background.getWidth() / 2) - (username.getWidth() / 2)),
-                                        textUser.getLocation().y + textUser.getHeight() + 10);
                         username.setLayout(null);
 
                         // Définition texte "difficulté"
                         textDifficulty = new JLabel("Difficulté");
+                        
                         textDifficulty.setHorizontalAlignment(SwingConstants.CENTER);
-                        textDifficulty.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
-                        textDifficulty.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
-                        textDifficulty.setLocation(
-                                        (int) ((background.getWidth() / 2) - (textDifficulty.getWidth() / 2)),
-                                        username.getLocation().y + username.getHeight() + 50);
                         textDifficulty.setLayout(null);
 
                         // Definition difficulté
@@ -111,17 +101,11 @@ public class UI extends JFrame implements ActionListener {
                         difficulty = new JComboBox<String>(level);
                         difficulty.setSelectedIndex(0);
                         difficulty.setLayout(null);
-                        difficulty.setLocation((int) ((background.getWidth() / 2) - (difficulty.getWidth() / 2)),
-                                        textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
-                        difficulty.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
 
                         // Définition texte "Type de flèche"
                         textType = new JLabel("Type de flèche");
                         textType.setHorizontalAlignment(SwingConstants.CENTER);
                         textType.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
-                        textType.setSize((int) background.getWidth()/5, (int)background.getHeight()/25);
-                        textType.setLocation((int) ((screenSize.getWidth() / 2) - (textType.getWidth() / 2)),
-                                        difficulty.getLocation().y + difficulty.getHeight() + 50);
                         textType.setLayout(null);
 
                         // Définition type de flèche
@@ -130,16 +114,16 @@ public class UI extends JFrame implements ActionListener {
                         arrowType = new JComboBox<String>(arrowType1);
                         arrowType.setSelectedIndex(0);
                         arrowType.setLayout(null);
-                        arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
-                                        textType.getLocation().y + textType.getHeight() + 10);
-                        arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
 
                         // Bouton pour lancer la partie
-                        startGame = new JButton("Start Game");
-                        startGame.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
-                        startGame.setLocation((int) ((screenSize.getWidth() / 2) - (startGame.getWidth() / 2)),
-                                        arrowType.getLocation().y + arrowType.getHeight() + 100);
+                        startGame = new JButton("JOUER");
+                        startGame.setBackground(new Color(51,204,102));
+                        startGame.setForeground(Color.WHITE);
                         //startGame.setLayout();
+                        
+                        // Ajout image de fond
+						image = new JLabel(new ImageIcon("./Images/archery_menu.png"));
+						
 
                         // Ajout à background
                         background.add(username);
@@ -150,6 +134,7 @@ public class UI extends JFrame implements ActionListener {
                         background.add(textType);
                         background.add(textUser);
                         background.add(title);
+                        background.add(image);
 
                         // (éventuellement animation du joueur en attente)
                 } else if (type == 'g') {
@@ -170,7 +155,7 @@ public class UI extends JFrame implements ActionListener {
                         // scrollbar angle
                         angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 0, 90);
                         angle.setPreferredSize(new Dimension(200, 40));
-                        // angle.setLocation(10, 10);
+                        // angle.setLocation(10, 10);m
                         // angle.setLayout(null); //non sinon ça empêche l'affichage automatique géré
                         // par le layout
 
@@ -249,39 +234,47 @@ public class UI extends JFrame implements ActionListener {
         public void resize(){
 			background.setSize(this.getWidth()-this.getInsets().right-this.getInsets().left,this.getHeight()-this.getInsets().top-this.getInsets().bottom);
 			
-			title.setFont(new Font("Times New Roman", Font.BOLD,(int)((background.getHeight()+background.getWidth())/50)));
+			title.setFont(new Font("Comic sans MS", Font.BOLD,(int)((background.getHeight()+background.getWidth())/40)));
             title.setSize((int) background.getWidth(), (int)background.getHeight()/8);
             title.setLocation(0, (int) background.getHeight()/10);
             
-            textUser.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/50));
+            textUser.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/50));
             textUser.setSize((int) background.getWidth(), (int)background.getHeight()/16);
             textUser.setLocation(0, (int) background.getHeight()/3);           
             
+            username.setFont(new Font("Comic sans", Font.PLAIN,(int)background.getWidth()/90));
             username.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
             username.setLocation((int) ((background.getWidth() / 2) - (username.getWidth() / 2)),
                                         textUser.getLocation().y + textUser.getHeight() + 10);
                                         
-            textDifficulty.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+            textDifficulty.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/60));
             textDifficulty.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
             textDifficulty.setLocation((int) ((background.getWidth() / 2) - (textDifficulty.getWidth() / 2)),
                                         username.getLocation().y + username.getHeight() + 50);
                                         
+            difficulty.setFont(new Font("Comic sans", Font.PLAIN,(int)background.getWidth()/90));
             difficulty.setLocation((int) ((background.getWidth() / 2) - (difficulty.getWidth() / 2)),
             textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
             difficulty.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
             
-            textType.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+            textType.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/60));
             textType.setSize((int) background.getWidth()/5, (int)background.getHeight()/25);
             textType.setLocation((int) ((background.getWidth() / 2) - (textType.getWidth() / 2)),
 										difficulty.getLocation().y + difficulty.getHeight() + 50);
 		    
+            arrowType.setFont(new Font("Comic sans", Font.PLAIN,(int)background.getWidth()/90));		    
 		    arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
             textType.getLocation().y + textType.getHeight() + 10);
             arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
             
-            startGame.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
+            startGame.setFont(new Font("Comic sans MS", Font.BOLD,(int)background.getWidth()/60));
+            startGame.setSize((int) background.getWidth()/10, (int)background.getHeight()/10);
             startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
                                         arrowType.getLocation().y + arrowType.getHeight() + 100);
+                                        
+            image.setLocation(100,200);
+            image.setSize(100,150);
+            
             
             
 		}
