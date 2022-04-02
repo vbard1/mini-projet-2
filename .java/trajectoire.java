@@ -76,8 +76,8 @@ public class Trajectoire {
             y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                     (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
                     + absciss * Math.tan(angleInitDeg * degToRad) + yInit)
-                    - (int) (windSpeed * vitesse * arrowType * 0.1); // coefficient d'aténuation 0.1, frottements
-                                                                     // dépendent de
+                    - (int) (windSpeed * vitesse * 0.25); // coefficient d'aténuation 0.25, frottements
+                                                          // dépendent de
             // vitesse relative au vent
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
