@@ -17,8 +17,8 @@ public class game implements ActionListener {
         window.startGame.addActionListener(this);
         roundNb = 5 ;
         target = new Target();
-        onGoingGame();
-        gameEnd();
+        //onGoingGame();
+        //gameEnd();
         
         
     }
@@ -34,6 +34,7 @@ public class game implements ActionListener {
             window=new UI('g');
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
+            window.preview.addActionListener(this);
         }else if(e.getSource()==window.menu){
             window.setVisible(false);
             window.dispose();
@@ -46,6 +47,9 @@ public class game implements ActionListener {
                 double speedInit = window.speed.getValue() ;
                 //Arrow arrow = new Arrow(masse, x, y, angleInit, speedInit);
             }
+        }else if(e.getSource()==window.preview){
+            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,400);
+            window.gameZone.preview(t);
         }
             
     }
@@ -55,7 +59,7 @@ public class game implements ActionListener {
         //Ajouter au score du joueur si la cible est touchée (fait)
         //remettre la fenètre à zéro à chaque tour  
 
-    public void onGoingGame(){
+    /*public void onGoingGame(){
         while (roundNb > 0){
             if(arrow.collision(target)){
                 player.score ++;
@@ -64,6 +68,6 @@ public class game implements ActionListener {
     }
     public void gameEnd(){
         
-    }
+    }*/
 
 }
