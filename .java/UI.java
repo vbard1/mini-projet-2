@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import java.awt.Graphics;
 
@@ -15,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.*;
 
 //TODO mettre en relatif aux dimensions de la fenetre
@@ -22,6 +24,7 @@ import java.awt.event.*;
 
 public class UI extends JFrame implements ActionListener {
 
+        private Timer resizeTimer;
         char type;
         JPanel background;
         JLabel title;
@@ -31,6 +34,7 @@ public class UI extends JFrame implements ActionListener {
         JComboBox<String> difficulty;
         JLabel textType;
         JButton startGame;
+        JButton preview;
 
         JPanel settings;
         JScrollBar angle;
@@ -45,6 +49,8 @@ public class UI extends JFrame implements ActionListener {
         // attributs-parametres du menu
         //
         public UI(char type) {
+                //super();//nom
+                //resizeTimer.start();
                 this.type = type;
                 // Acquisition de la taille de l'écran
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -61,6 +67,9 @@ public class UI extends JFrame implements ActionListener {
                 background.setSize(this.getWidth(), this.getHeight());
                 background.setLocation(this.getInsets().left, this.getInsets().top);
                 background.setLayout(null);
+
+                //initialisation du timer
+                //resizeTimer = new Timer(100, this);
 
                 if (type == 'm') {// Affichage du menu
 
@@ -207,11 +216,18 @@ public class UI extends JFrame implements ActionListener {
                         // score.setLocation(shoot.getLocation().x + shoot.getWidth() + 10, 10);
                         score.setLayout(null);
 
+                        // JButton Preview
+                        preview = new JButton("Preview");
+                        preview.setSize(200, 40);
+                        // shoot.setLocation(speed.getLocation().x + speed.getWidth() + 10, 10);
+                        preview.setLayout(null);
+
                         // ajout au panel principal
                         settings.add(angle);
                         settings.add(angleText);
                         settings.add(speed);
                         settings.add(speedText);
+                        settings.add(preview);
                         settings.add(shoot);
                         background.add(menu);
                         settings.add(score);
@@ -237,7 +253,11 @@ public class UI extends JFrame implements ActionListener {
                  * game.masse=; //...
                  * game.difficulty=;
                  */
+                //background.setSize(this.getWidth()-this.getInsets().right-this.getInsets().left,this.getHeight()-this.getInsets().top-this.getInsets().bottom);
+                //repaint();
         }
+        
+        
 
 
 
