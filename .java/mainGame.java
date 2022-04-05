@@ -4,7 +4,7 @@ public class mainGame extends JFrame {
     // TODO ici on met les TODO (bugs, trucs à faire encore)
 
     public static void main(String[] args) {
-        launch(/* param? */);
+        //launch(/* param? */);
         Trajectoire e = new Trajectoire(45, 30, 1, 10, 10);
         System.out.println(" 1 \n" + e.toString());
         e.recalculate(45, 30, 2, 10, 10);

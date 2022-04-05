@@ -72,12 +72,16 @@ public class Trajectoire {
             // Trajectoire de y en fonction de x dans le vide
             vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
                     + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
-
-            y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-                    (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit)
-                    - (int) (windSpeed * vitesse * 0.25); // coefficient d'aténuation 0.25, frottements
-                                                          // dépendent de
+            if (windSpeed != 0) {
+                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+                        (1 + Math.pow(Math.tan(angleInitDeg / (windSpeed + 1) * degToRad), 2))
+                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            } else {
+                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            }
+            // dépendent de
             // vitesse relative au vent
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
