@@ -32,7 +32,7 @@ public class Trajectoire {
     // TODO trajectoires interdites
     double degToRad = Math.PI / 180.0;
 
-    public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
+    public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
         gravity = 9.81;
 
         this.angleRad = angleInitDeg * degToRad;
@@ -41,11 +41,11 @@ public class Trajectoire {
         this.yInit = yInit;
 
         paramTraj = new ArrayList[3];
-        recalculate(angleInitDeg, speedInit, windSpeed, yInit);
+        recalculate(angleInitDeg, speedInit, windSpeed, yInit, xInit);
 
     }
 
-    public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit) {
+    public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
         long executionTime = System.currentTimeMillis();
         // System.out.println("\narray of ArrayList DONE\n");
 
@@ -72,19 +72,23 @@ public class Trajectoire {
             // Trajectoire de y en fonction de x dans le vide
             vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
                     + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
-
-            y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-                    (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit)
-                    - (int) (windSpeed * vitesse * arrowType * 0.1); // coefficient d'aténuation 0.1, frottements
-                                                                     // dépendent de
+            if (windSpeed != 0) {
+                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+                        (1 + Math.pow(Math.tan(angleInitDeg / (windSpeed + 1) * degToRad), 2))
+                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            } else {
+                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            }
+            // dépendent de
             // vitesse relative au vent
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
                 // (int) (windSpeed * vitesse)+ " px");
 
                 // System.out.print(" => added the valid point");
-                paramTraj[0].add(absciss);
+                paramTraj[0].add(absciss + xInit);
                 // remplissage de y en fonction de x
                 paramTraj[1].add(y);
 
