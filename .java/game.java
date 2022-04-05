@@ -20,17 +20,10 @@ public class game implements ActionListener {
         window.startGame.addActionListener(this);
         roundNb = 5;
         target = new Target();
-<<<<<<< HEAD
-        //onGoingGame();
-        //gameEnd();
-        
-        
-=======
         onGoingGame();
         gameEnd();
         //arrowType = window.
 
->>>>>>> ec30ad813317310882f5d2d3a71bef54d025391a
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -46,13 +39,8 @@ public class game implements ActionListener {
             window = new UI('g'); // crée une fenètre "jeu"
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
-<<<<<<< HEAD
             window.preview.addActionListener(this);
         }else if(e.getSource()==window.menu){
-=======
-
-        } else if (e.getSource() == window.menu) {
->>>>>>> ec30ad813317310882f5d2d3a71bef54d025391a
             window.setVisible(false);
             window.dispose();
             window = new UI('m'); // crée une fenêtre "menu"
@@ -87,29 +75,11 @@ public class game implements ActionListener {
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK);
             }
         }else if(e.getSource()==window.preview){
-            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,400);
+            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,580,400);
             window.gameZone.preview(t);
         }
 
     }
-<<<<<<< HEAD
-    //TODO décompte score (fait)
-    //TODO gestion tours du jeu
-        // récupérer infos et créer flèche quand "shoot" cliqué (fait)
-        //Ajouter au score du joueur si la cible est touchée (fait)
-        //remettre la fenètre à zéro à chaque tour  
-
-    /*public void onGoingGame(){
-        while (roundNb > 0){
-            if(arrow.collision(target)){
-                player.score ++;
-            }
-        }
-    }
-    public void gameEnd(){
-        
-    }*/
-=======
     // TODO décompte score (fait)
     // TODO gestion tours du jeu
     // récupérer infos et créer flèche quand "shoot" cliqué (fait)
@@ -127,6 +97,5 @@ public class game implements ActionListener {
     public void gameEnd() {
 
     }
->>>>>>> ec30ad813317310882f5d2d3a71bef54d025391a
 
 }
