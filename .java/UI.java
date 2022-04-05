@@ -28,12 +28,8 @@ import javax.swing.ImageIcon;
 
 public class UI extends JFrame implements ActionListener {
 
-<<<<<<< HEAD
-        private Timer resizeTimer;
-=======
-		public Timer resizeTimer;
-		JComboBox<String> arrowType;
->>>>>>> ec30ad813317310882f5d2d3a71bef54d025391a
+        public Timer resizeTimer;
+        JComboBox<String> arrowType;
         char type;
         JPanel background;
         JLabel title;
@@ -43,11 +39,8 @@ public class UI extends JFrame implements ActionListener {
         JComboBox<String> difficulty;
         JLabel textType;
         JButton startGame;
-<<<<<<< HEAD
         JButton preview;
-=======
-		JLabel image ;
->>>>>>> ec30ad813317310882f5d2d3a71bef54d025391a
+        JLabel image ;
 
         JPanel settings;
         JScrollBar angle;
@@ -62,14 +55,9 @@ public class UI extends JFrame implements ActionListener {
         // attributs-parametres du menu
         //
         public UI(char type) {
-<<<<<<< HEAD
-                //super();//nom
-                //resizeTimer.start();
-=======
-				//initialisation du timer
+                //initialisation du timer
                 resizeTimer = new Timer(100, this);
-				resizeTimer.start();
->>>>>>> ec30ad813317310882f5d2d3a71bef54d025391a
+                resizeTimer.start();
                 this.type = type;
                 // Acquisition de la taille de l'écran
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -253,20 +241,6 @@ public class UI extends JFrame implements ActionListener {
         // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-                
-                // TODO Auto-generated method stub
-                /*
-                 * game.player.name=JTextField de nom;
-                 * game.masse=; //...
-                 * game.difficulty=;
-                 */
-                //background.setSize(this.getWidth()-this.getInsets().right-this.getInsets().left,this.getHeight()-this.getInsets().top-this.getInsets().bottom);
-                //repaint();
-        }
-        
-        
-=======
                 resize();
                 //repaint();
         }
@@ -318,7 +292,6 @@ public class UI extends JFrame implements ActionListener {
             
             
 		}
->>>>>>> ec30ad813317310882f5d2d3a71bef54d025391a
 
 
 
