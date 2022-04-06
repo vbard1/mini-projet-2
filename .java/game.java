@@ -13,6 +13,7 @@ public class game implements ActionListener {
     Target target;
     int arrowType;
     int windSpeed;
+    boolean victory ;
 
     public game(UI menu) {
         window = menu;
@@ -28,21 +29,20 @@ public class game implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == window.startGame) {
+        if (e.getSource() == window.startGame) { // l'utilisateur appuie sur le bouton Jouer
             window.resizeTimer.stop();
-            // Affecte à player le nom mis dans la case username du menu
+        // Affecte à player le nom mis dans la case username du menu
             player = new player(window.username.getText());
             // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus
             // compliqué)
             difficulty = window.difficulty.getSelectedIndex(); // récupère le niveau de difficulté choisi
             window.setVisible(false);
-            
             window.dispose();
             window = new UI('g'); // crée une fenètre "jeu"
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this);
-        }else if(e.getSource()==window.menu){
+        }else if(e.getSource()==window.menu){ // l'utilisateur appuie sur le bouton menu
             window.setVisible(false);
             window.dispose();
             window = new UI('m'); // crée une fenêtre "menu"
@@ -52,11 +52,14 @@ public class game implements ActionListener {
 
             if (roundNb >= 0) {
 
-                roundNb--;
+                roundNb--; // décompte du nombre de tours restants
 
                 double angleInit = window.angle.getValue();
                 double speedInit = 0;
-                arrowType = difficulty;
+               // arrowType = window. ;
+
+                //réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
+        
                 if (arrowType == 0)
                     speedInit = window.speed.getValue() * 40;
                 if (arrowType == 1)
@@ -64,26 +67,28 @@ public class game implements ActionListener {
                 if (arrowType == 2)
                     speedInit = window.speed.getValue() * 20;
 
+                /*    
                 if (difficulty == 0)
-                    windSpeed = 1;
+                    windSpeed = ;
                 if (difficulty == 1)
                     windSpeed = 2;
                 if (difficulty == 2)
-                    windSpeed = 3;
+                    windSpeed = 3; */
+                windSpeed = difficulty ;
 
                 int x = 10;
                 int y = 10;
 
-                Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK);
+                Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une flèche
             }
-        }else if(e.getSource()==window.preview){
-            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,580,400);
-            window.gameZone.preview(t);
+        }else if(e.getSource()==window.preview){ // bouton preview appuyé
+
+            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,580,400); // création de la trajectoire correspondante
+            window.gameZone.preview(t); 
         }
 
     }
-    // TODO décompte score (fait)
-    // TODO gestion tours du jeu
+   //TODO fin de partie
     // récupérer infos et créer flèche quand "shoot" cliqué (fait)
     // Ajouter au score du joueur si la cible est touchée (fait)
     // remettre la fenètre à zéro à chaque tour
@@ -91,13 +96,19 @@ public class game implements ActionListener {
     public void onGoingGame() {
         while (roundNb > 0) {
             if (arrow.reachedTarget) {
-                player.score++;
+                player.score ++ ;
             }
         }
     }
 
     public void gameEnd() {
-
+       if (player.score > 2){
+            victory = true ;
+       }
+       else{
+           victory = false ;
+       }
+       window = new UI('e');
     }
 
 }
