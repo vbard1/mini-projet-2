@@ -29,12 +29,14 @@ public class game implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == window.startGame) {
+            window.resizeTimer.stop();
             // Affecte à player le nom mis dans la case username du menu
             player = new player(window.username.getText());
             // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus
             // compliqué)
             difficulty = window.difficulty.getSelectedIndex(); // récupère le niveau de difficulté choisi
             window.setVisible(false);
+            
             window.dispose();
             window = new UI('g'); // crée une fenètre "jeu"
             window.menu.addActionListener(this);
