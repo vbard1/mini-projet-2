@@ -56,8 +56,7 @@ public class UI extends JFrame implements ActionListener {
         //
         public UI(char type) {
                 //initialisation du timer
-                resizeTimer = new Timer(100, this);
-                resizeTimer.start();
+                
                 this.type = type;
                 // Acquisition de la taille de l'écran
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -82,6 +81,10 @@ public class UI extends JFrame implements ActionListener {
                 //resizeTimer = new Timer(100, this);
 
                 if (type == 'm') {// Affichage du menu
+
+                        resizeTimer = new Timer(100, this);
+                        resizeTimer.start();
+                        
 
                         // Définition titre
                         title = new JLabel("Tir à l'arc");
