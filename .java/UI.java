@@ -109,18 +109,7 @@ public class UI extends JFrame implements ActionListener {
                         difficulty.setSelectedIndex(0);
                         difficulty.setLayout(null);
 
-                        // Définition texte "Type de flèche"
-                        textType = new JLabel("Type de flèche");
-                        textType.setHorizontalAlignment(SwingConstants.CENTER);
-                        textType.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
-                        textType.setLayout(null);
-
-                        // Définition type de flèche
-                        String[] arrowType1 = { "Aluminium", "Bois", "Carbone" }; // Tableau contenant les différents
-                                                                                  // type de flèche
-                        arrowType = new JComboBox<String>(arrowType1);
-                        arrowType.setSelectedIndex(0);
-                        arrowType.setLayout(null);
+                        
 
                         // Bouton pour lancer la partie
                         startGame = new JButton("JOUER");
@@ -135,10 +124,10 @@ public class UI extends JFrame implements ActionListener {
                         // Ajout à background
                         background.add(username);
                         background.add(difficulty);
-                        background.add(arrowType);
+                        //background.add(arrowType);
                         background.add(startGame);
                         background.add(textDifficulty);
-                        background.add(textType);
+                        //background.add(textType);
                         background.add(textUser);
                         background.add(title);
                         //background.add(image);
@@ -148,15 +137,15 @@ public class UI extends JFrame implements ActionListener {
 
                         // Panel contenant l'affichage du jeu
 
-                        gameZone=new gameZone(1920,930);
+                        gameZone=new gameZone(background.getWidth(),background.getHeight()-150);
                         gameZone.setSize(gameZone.width,gameZone.height);
                         gameZone.setLocation(0,0);
 
                         gameZone.repaint();
                         // Panel contenant les réglages pour la flèche
                         settings = new JPanel();
-                        settings.setSize(1000, 150);
-                        settings.setLocation(0, (int) screenSize.getHeight() - settings.getHeight());
+                        settings.setSize(this.getWidth(), 150);
+                        settings.setLocation(0, (int) (background.getHeight() - settings.getHeight()));
                         settings.setLayout(new FlowLayout()); // Layout qui permet de mettre les éléments à la suite
 
                         // scrollbar angle
@@ -217,12 +206,26 @@ public class UI extends JFrame implements ActionListener {
                         // shoot.setLocation(speed.getLocation().x + speed.getWidth() + 10, 10);
                         preview.setLayout(null);
 
+                        // Définition texte "Type de flèche"
+                        textType = new JLabel("Type de flèche");
+                        textType.setHorizontalAlignment(SwingConstants.CENTER);
+                        textType.setFont(new Font("Times New Roman", Font.BOLD,(int)background.getWidth()/60));
+                        textType.setLayout(null);
+
+                        // Définition type de flèche
+                        String[] arrowType1 = { "Aluminium", "Bois", "Carbone" }; // Tableau contenant les différents
+                                                                                  // type de flèche
+                        arrowType = new JComboBox<String>(arrowType1);
+                        arrowType.setSelectedIndex(0);
+                        arrowType.setLayout(null);
+
                         // ajout au panel principal
                         settings.add(menu);
                         settings.add(angle);
                         settings.add(angleText);
                         settings.add(speed);
                         settings.add(speedText);
+                        settings.add(arrowType);
                         settings.add(preview);
                         settings.add(shoot);
                         settings.add(score);
@@ -271,20 +274,20 @@ public class UI extends JFrame implements ActionListener {
             textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
             difficulty.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
             
-            textType.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/60));
+            /*textType.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/60));
             textType.setSize((int) background.getWidth()/5, (int)background.getHeight()/25);
             textType.setLocation((int) ((background.getWidth() / 2) - (textType.getWidth() / 2)),
 										difficulty.getLocation().y + difficulty.getHeight() + 50);
 		    
             arrowType.setFont(new Font("Comic sans", Font.PLAIN,(int)background.getWidth()/90));		    
-		    arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
+	        arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
             textType.getLocation().y + textType.getHeight() + 10);
-            arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
+            arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);*/
             
             startGame.setFont(new Font("Comic sans MS", Font.BOLD,(int)background.getWidth()/60));
             startGame.setSize((int) background.getWidth()/10, (int)background.getHeight()/10);
             startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
-                                        arrowType.getLocation().y + arrowType.getHeight() + 100);
+                                        difficulty.getLocation().y + difficulty.getHeight() + 100);
                                         
             //image.setLocation(100,200);
             //image.setSize(100,150);
