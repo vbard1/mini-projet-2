@@ -1,6 +1,7 @@
 import java.util.jar.Attributes.Name;
 import java.awt.Color;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class game implements ActionListener {
 
@@ -14,6 +15,7 @@ public class game implements ActionListener {
     int arrowType;
     int windSpeed;
     boolean victory ;
+    Timer arrowTimer;
 
     public game(UI menu) {
         window = menu;
@@ -21,6 +23,7 @@ public class game implements ActionListener {
         window.startGame.addActionListener(this);
         roundNb = 5;
         target = new Target();
+        arrowTimer=new Timer(100,this);
         onGoingGame();
         gameEnd();
         //arrowType = window.
