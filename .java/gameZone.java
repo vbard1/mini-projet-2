@@ -27,6 +27,8 @@ public class gameZone extends JPanel {
             for(int i= 0;i<traj.paramTraj[0].size();i+=3){
                 g.fillOval((int)(traj.paramTraj[0].get(i)),this.height-(int)(traj.paramTraj[1].get(i)),3,3);      
             }
+        } else if(dessin==2){
+
         }
         int [] xPoints={10,30,30,50};
         int [] yPoints={height,height,height-60,height-60};
