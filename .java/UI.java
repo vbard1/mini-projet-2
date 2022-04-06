@@ -218,13 +218,13 @@ public class UI extends JFrame implements ActionListener {
                         preview.setLayout(null);
 
                         // ajout au panel principal
+                        settings.add(menu);
                         settings.add(angle);
                         settings.add(angleText);
                         settings.add(speed);
                         settings.add(speedText);
                         settings.add(preview);
                         settings.add(shoot);
-                        background.add(menu);
                         settings.add(score);
 
                         background.add(settings);
