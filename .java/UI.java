@@ -84,7 +84,7 @@ public class UI extends JFrame implements ActionListener {
 
                         resizeTimer = new Timer(100, this);
                         resizeTimer.start();
-                        
+
 
                         // Définition titre
                         title = new JLabel("Tir à l'arc");
@@ -351,7 +351,10 @@ public class UI extends JFrame implements ActionListener {
             
             
             
-		}
+        }
+        public void moveArrow(){
+                
+        }
 
 
 
