@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import java.awt.Graphics;
 
@@ -15,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.Color;
@@ -26,8 +28,8 @@ import javax.swing.ImageIcon;
 
 public class UI extends JFrame implements ActionListener {
 
-		public Timer resizeTimer;
-		JComboBox<String> arrowType;
+        public Timer resizeTimer;
+        JComboBox<String> arrowType;
         char type;
         JPanel background;
         JLabel title;
@@ -37,7 +39,8 @@ public class UI extends JFrame implements ActionListener {
         JComboBox<String> difficulty;
         JLabel textType;
         JButton startGame;
-		JLabel image ;
+        JButton preview;
+        JLabel image ;
 
         JPanel settings;
         JScrollBar angle;
@@ -52,9 +55,9 @@ public class UI extends JFrame implements ActionListener {
         // attributs-parametres du menu
         //
         public UI(char type) {
-				//initialisation du timer
+                //initialisation du timer
                 resizeTimer = new Timer(100, this);
-				resizeTimer.start();
+                resizeTimer.start();
                 this.type = type;
                 // Acquisition de la taille de l'écran
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -74,6 +77,9 @@ public class UI extends JFrame implements ActionListener {
                 background.setLayout(null);
                 
                 
+
+                //initialisation du timer
+                //resizeTimer = new Timer(100, this);
 
                 if (type == 'm') {// Affichage du menu
 
@@ -247,7 +253,7 @@ public class UI extends JFrame implements ActionListener {
                         menu = new JButton("Menu");
                         menu.setSize(100, 50);
                         menu.setLocation(20, 20);
-                        menu.setLayout(null);
+                        //menu.setLayout(null);
 
                         // jlabel score
                         score = new JLabel("Score");
@@ -255,13 +261,20 @@ public class UI extends JFrame implements ActionListener {
                         // score.setLocation(shoot.getLocation().x + shoot.getWidth() + 10, 10);
                         score.setLayout(null);
 
+                        // JButton Preview
+                        preview = new JButton("Preview");
+                        preview.setSize(200, 40);
+                        // shoot.setLocation(speed.getLocation().x + speed.getWidth() + 10, 10);
+                        preview.setLayout(null);
+
                         // ajout au panel principal
+                        settings.add(menu);
                         settings.add(angle);
                         settings.add(angleText);
                         settings.add(speed);
                         settings.add(speedText);
+                        settings.add(preview);
                         settings.add(shoot);
-                        background.add(menu);
                         settings.add(score);
 
                         background.add(settings);
