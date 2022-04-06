@@ -294,7 +294,10 @@ public class UI extends JFrame implements ActionListener {
         // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
-                resize();
+                if (e.getSource()==resizeTimer && type=='m'){
+                        resize();
+                }
+                
                 //repaint();
         }
         
