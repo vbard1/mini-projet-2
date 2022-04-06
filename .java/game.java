@@ -59,7 +59,7 @@ public class game implements ActionListener {
 
                 double angleInit = window.angle.getValue();
                 double speedInit = 0;
-               // arrowType = window. ;
+                arrowType = window.arrowType.getSelectedIndex() ;
 
                 //réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
         
