@@ -21,14 +21,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-
-
+import java.awt.Image;
 //TODO mettre en relatif aux dimensions de la fenetre
 //TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
 
 public class UI extends JFrame implements ActionListener {
 
-        public Timer resizeTimer;
+        Timer resizeTimer;
         JComboBox<String> arrowType;
         char type;
         JPanel background;
@@ -40,7 +39,7 @@ public class UI extends JFrame implements ActionListener {
         JLabel textType;
         JButton startGame;
         JButton preview;
-        JLabel image ;
+        JLabel image_cible ;
 
         JPanel settings;
         JScrollBar angle;
@@ -77,9 +76,6 @@ public class UI extends JFrame implements ActionListener {
                 background.setLayout(null);
                 
                 
-
-                //initialisation du timer
-                //resizeTimer = new Timer(100, this);
 
                 if (type == 'm') {// Affichage du menu
 
@@ -126,62 +122,17 @@ public class UI extends JFrame implements ActionListener {
                         startGame = new JButton("JOUER");
                         startGame.setBackground(new Color(51,204,102));
                         startGame.setForeground(Color.WHITE);
-                        startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15));
                         //startGame.setLayout();
                         
                         // Ajout image de fond
-						//image = new JLabel(new ImageIcon("./Images/archery_menu.png"));
-						//image.setBounds(500,500,100,150);
+                        //ImageIcon imageIcon = new ImageIcon(new ImageIcon("./Images/archery_menu2.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+						//image_cible.setIcon(imageIcon);
 						
+						image_cible = new JLabel(new ImageIcon("./Images/archery_menu.png"),JLabel.LEFT);
+					
+				
+				
 						
-						
-						
-						
-			title.setFont(new Font("Comic sans MS", Font.BOLD,(int)((background.getHeight()+background.getWidth())/40)));
-            title.setSize((int) background.getWidth(), (int)background.getHeight()/8);
-            title.setLocation(0, (int) background.getHeight()/10);
-            
-            textUser.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/50));
-            textUser.setSize((int) background.getWidth(), (int)background.getHeight()/16);
-            textUser.setLocation(0, (int) background.getHeight()/3);           
-            
-            username.setFont(new Font("Comic sans", Font.PLAIN,(int)background.getWidth()/90));
-            username.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
-            username.setLocation((int) ((background.getWidth() / 2) - (username.getWidth() / 2)),
-                                        textUser.getLocation().y + textUser.getHeight() + 10);
-                                        
-            textDifficulty.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/60));
-            textDifficulty.setSize((int) background.getWidth()/10, (int)background.getHeight()/25);
-            textDifficulty.setLocation((int) ((background.getWidth() / 2) - (textDifficulty.getWidth() / 2)),
-                                        username.getLocation().y + username.getHeight() + 50);
-                                        
-            difficulty.setFont(new Font("Comic sans", Font.PLAIN,(int)background.getWidth()/90));
-            difficulty.setLocation((int) ((background.getWidth() / 2) - (difficulty.getWidth() / 2)),
-            textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
-            difficulty.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
-            
-            textType.setFont(new Font("Comic sans MS", Font.PLAIN,(int)background.getWidth()/60));
-            textType.setSize((int) background.getWidth()/5, (int)background.getHeight()/25);
-            textType.setLocation((int) ((background.getWidth() / 2) - (textType.getWidth() / 2)),
-										difficulty.getLocation().y + difficulty.getHeight() + 50);
-		    
-            arrowType.setFont(new Font("Comic sans", Font.PLAIN,(int)background.getWidth()/90));		    
-		    arrowType.setLocation((int) ((background.getWidth() / 2) - (arrowType.getWidth() / 2)),
-            textType.getLocation().y + textType.getHeight() + 10);
-            arrowType.setSize((int) background.getWidth()/11, (int)background.getHeight()/25);
-            
-            startGame.setFont(new Font("Comic sans MS", Font.BOLD,(int)background.getWidth()/60));
-            startGame.setSize((int) background.getWidth()/10, (int)background.getHeight()/10);
-            startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
-                                        arrowType.getLocation().y + arrowType.getHeight() + 100);
-                                        
-						
-						
-						
-						
-						
-						
-
                         // Ajout à background
                         background.add(username);
                         background.add(difficulty);
@@ -191,7 +142,7 @@ public class UI extends JFrame implements ActionListener {
                         background.add(textType);
                         background.add(textUser);
                         background.add(title);
-                        //background.add(image);
+                        background.add(image_cible);
 
                         // (éventuellement animation du joueur en attente)
                 } else if (type == 'g') {
@@ -275,6 +226,7 @@ public class UI extends JFrame implements ActionListener {
                         settings.add(speedText);
                         settings.add(preview);
                         settings.add(shoot);
+                        background.add(menu);
                         settings.add(score);
 
                         background.add(settings);
@@ -334,12 +286,11 @@ public class UI extends JFrame implements ActionListener {
             startGame.setFont(new Font("Comic sans MS", Font.BOLD,(int)background.getWidth()/60));
             startGame.setSize((int) background.getWidth()/10, (int)background.getHeight()/10);
             startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
-                                        arrowType.getLocation().y + arrowType.getHeight() + 100);
-            startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15/2));
-                                        
-            //image.setLocation(100,200);
-            //image.setSize(100,150);
+                                        arrowType.getLocation().y + arrowType.getHeight() + 100);             
             
+            image_cible.setSize((int) background.getWidth(), (int)background.getHeight());
+    
+      
             
             
 		}
