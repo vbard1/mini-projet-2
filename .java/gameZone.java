@@ -31,9 +31,9 @@ public class gameZone extends JPanel {
         int [] xPoints={10,30,30,50};
         int [] yPoints={height,height,height-60,height-60};
         g.fillPolygon(xPoints,yPoints,xPoints.length);
-        g.setColor(Color.red);
-        g.drawRect(0,0,this.width,this.height);
-        g.setColor(new Color(250,255,224));
+        //g.setColor(Color.red);
+        //g.drawRect(0,0,this.width,this.height);
+        //g.setColor(new Color(250,255,224));
         g.fillOval(200, 200, 50, 50);
         
         
