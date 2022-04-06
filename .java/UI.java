@@ -203,7 +203,7 @@ public class UI extends JFrame implements ActionListener {
                         menu = new JButton("Menu");
                         menu.setSize(100, 50);
                         menu.setLocation(20, 20);
-                        menu.setLayout(null);
+                        //menu.setLayout(null);
 
                         // jlabel score
                         score = new JLabel("Score");
