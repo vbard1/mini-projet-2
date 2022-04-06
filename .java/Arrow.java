@@ -1,5 +1,7 @@
 import java.awt.Color;
 
+import javax.swing.*;
+
 public class Arrow {
 
     double weight;
@@ -12,6 +14,8 @@ public class Arrow {
     boolean reachedTarget;
     Trajectoire traj;
     Color arrowColor;
+    JLabel arrowImage;
+
 
     /**
      * constructeur pour la flèche
@@ -33,6 +37,8 @@ public class Arrow {
         this.arrowColor = Color.BLACK;
         this.traj = new Trajectoire(angleInit, speedInit, windSpeed, posY, posX);
         this.reachedTarget = false;
+        ImageIcon icon =new ImageIcon("arrow.png");
+        arrowImage.setIcon(icon);
     }
 
     /*
@@ -49,6 +55,7 @@ public class Arrow {
             this.posX = (int) traj.paramTraj[0].get(positionNumber);
             this.posY = (int) traj.paramTraj[1].get(positionNumber);
             this.angle = (double) traj.paramTraj[2].get(positionNumber);
+
             // TODO repaint
         } else {
             speed = 0;
