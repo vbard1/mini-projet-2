@@ -5,12 +5,12 @@ public class mainGame extends JFrame {
 
     public static void main(String[] args) {
         launch(/* param? */);
-        Trajectoire e = new Trajectoire(45, 30, 1, 10, 10);
+        /*Trajectoire e = new Trajectoire(45, 30, 1, 10, 10);
         System.out.println(" 1 \n" + e.toString());
         e.recalculate(45, 30, 2, 10, 10);
         System.out.println(" 2\n" + e.toString());
         e.recalculate(45, 30, 0, 10, 10);
-        System.out.println(" 0\n" + e.toString());
+        System.out.println(" 0\n" + e.toString());*/
 
         // TESTS trajectoire
 
