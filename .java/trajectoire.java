@@ -108,8 +108,9 @@ public class Trajectoire {
             X2 = (double) (int) (paramTraj[0].get(x + 1));
             Y1 = (double) (int) (paramTraj[1].get(x));
             Y2 = (double) (int) (paramTraj[1].get(x + 1));
-            angleRad = Math.acos((X2 - X1) / (Y2 - Y1));
+            angleRad = Math.atan((Y2 - Y1) / (X2 - X1));
             paramTraj[2].add(angleRad);
+            System.out.print(angleRad + "");
         }
         executionTime = System.currentTimeMillis() - executionTime;
         System.out.println("\nall DONE \n[recalculation complete] : execution time = "
