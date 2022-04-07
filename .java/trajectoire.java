@@ -101,9 +101,9 @@ public class Trajectoire {
         double X2 = 0;
         double Y1 = 0;
         double Y2 = 0;
-
+        paramTraj[2].add(angleInitDeg * degToRad);
         for (int x = 0; x < paramTraj[0].size() - 1; x++) {
-            paramTraj[2].add(angleInitDeg * degToRad);
+
             X1 = (double) (int) (paramTraj[0].get(x));
             X2 = (double) (int) (paramTraj[0].get(x + 1));
             Y1 = (double) (int) (paramTraj[1].get(x));
