@@ -104,12 +104,12 @@ public class Trajectoire {
         double nextAngle = 0;
         angleRad = angleInitDeg * degToRad;
         paramTraj[2].add(angleRad);
-        for (int x = 1; x < paramTraj[0].size() - 2; x++) {
+        for (int x = 0; x < paramTraj[0].size() - 4; x++) {
 
             X1 = (double) (int) (paramTraj[0].get(x));
-            X2 = (double) (int) (paramTraj[0].get(x + 2));
+            X2 = (double) (int) (paramTraj[0].get(x + 4));
             Y1 = (double) (int) (paramTraj[1].get(x));
-            Y2 = (double) (int) (paramTraj[1].get(x + 2));
+            Y2 = (double) (int) (paramTraj[1].get(x + 4));
 
             nextAngle = Math.atan((Y2 - Y1) / (X2 - X1));
             System.out.println(nextAngle);
