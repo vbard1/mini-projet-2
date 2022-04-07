@@ -96,21 +96,29 @@ public class Trajectoire {
             absciss++;
         }
         maxX = absciss; // réafectation à maxX de la distance max horizontale réelle
-        System.out.println("\nx and y DONE : maxX -absciss=" + (maxX - absciss));
+
         double X1 = 0;
         double X2 = 0;
         double Y1 = 0;
         double Y2 = 0;
-        paramTraj[2].add(angleInitDeg * degToRad);
-        for (int x = 0; x < paramTraj[0].size() - 1; x++) {
+        double nextAngle = 0;
+        angleRad = angleInitDeg * degToRad;
+        paramTraj[2].add(angleRad);
+        for (int x = 1; x < paramTraj[0].size() - 2; x++) {
 
             X1 = (double) (int) (paramTraj[0].get(x));
-            X2 = (double) (int) (paramTraj[0].get(x + 1));
+            X2 = (double) (int) (paramTraj[0].get(x + 2));
             Y1 = (double) (int) (paramTraj[1].get(x));
-            Y2 = (double) (int) (paramTraj[1].get(x + 1));
-            angleRad = Math.atan((Y2 - Y1) / (X2 - X1));
+            Y2 = (double) (int) (paramTraj[1].get(x + 2));
+
+            nextAngle = Math.atan((Y2 - Y1) / (X2 - X1));
+            System.out.println(nextAngle);
+            if (nextAngle < angleRad) {
+
+                angleRad = nextAngle;
+            }
             paramTraj[2].add(angleRad);
-            System.out.print(angleRad + "");
+
         }
         executionTime = System.currentTimeMillis() - executionTime;
         System.out.println("\nall DONE \n[recalculation complete] : execution time = "

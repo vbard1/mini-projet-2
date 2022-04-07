@@ -79,9 +79,8 @@ public class UI extends JFrame implements ActionListener {
 
                 if (type == 'm') {// Affichage du menu
 
-                        resizeTimer = new Timer(100, this);
+                        resizeTimer = new Timer(10, this);
                         resizeTimer.start();
-
 
                         // Définition titre
                         title = new JLabel("Tir à l'arc");
@@ -307,7 +306,7 @@ public class UI extends JFrame implements ActionListener {
                 title.setSize((int) background.getWidth(), (int) background.getHeight() / 8);
                 title.setLocation(0, (int) background.getHeight() / 10);
 
-                textUser.setFont(new Font("Comic sans MS", Font.PLAIN, (int) background.getWidth() / 50));
+                //textUser.setFont(new Font("Comic sans MS", Font.PLAIN, (int) background.getWidth() / 50));
                 textUser.setSize((int) background.getWidth(), (int) background.getHeight() / 16);
                 textUser.setLocation(0, (int) background.getHeight() / 3);
 
