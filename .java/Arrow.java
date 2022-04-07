@@ -37,8 +37,9 @@ public class Arrow {
         this.arrowColor = Color.BLACK;
         this.traj = new Trajectoire(angleInit, speedInit, windSpeed, posY, posX);
         this.reachedTarget = false;
-        ImageIcon icon =new ImageIcon("arrow.png");
-        arrowImage.setIcon(icon);
+        length=50;
+        //ImageIcon icon =new ImageIcon("arrow.png");
+        //arrowImage.setIcon(icon);
     }
 
     /*
