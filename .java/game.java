@@ -22,7 +22,7 @@ public class game implements ActionListener {
         player = new player();
         window.startGame.addActionListener(this);
         roundNb = 5;
-        target = new Target();
+        //target = new Target();
         
         gameEnd();
 
