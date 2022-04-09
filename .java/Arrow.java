@@ -1,6 +1,7 @@
 import java.awt.Color;
-
+import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 public class Arrow {
 
@@ -15,7 +16,9 @@ public class Arrow {
     Trajectoire traj;
     Color arrowColor;
     JLabel arrowImage;
-
+    int positionNumber;
+    int trajSize;
+    
 
     /**
      * constructeur pour la flèche
@@ -28,7 +31,7 @@ public class Arrow {
      * @param c         couleur de la flèche en fonction du type de flèche
      * 
      */
-    public Arrow(int weight, int posX, int posY, double angleInit, double speedInit, int windSpeed, Color c) {
+    public Arrow(int weight, int posX, int posY, double angleInit, double speedInit, int windSpeed, Color c)  {
         this.posX = posX;
         this.posY = posY;
         this.angle = angleInit;
@@ -38,6 +41,9 @@ public class Arrow {
         this.traj = new Trajectoire(angleInit, speedInit, windSpeed, posY, posX);
         this.reachedTarget = false;
         length=50;
+        positionNumber=0;
+        trajSize=traj.paramTraj[0].size();
+        
         //ImageIcon icon =new ImageIcon("arrow.png");
         //arrowImage.setIcon(icon);
     }
@@ -51,7 +57,8 @@ public class Arrow {
      * }
      */
 
-    public void move(Target target, int positionNumber) {
+    public void nextPos(Target target) {
+
         if (!collision(target, positionNumber)) {
             this.posX = (int) traj.paramTraj[0].get(positionNumber);
             this.posY = (int) traj.paramTraj[1].get(positionNumber);
@@ -61,6 +68,7 @@ public class Arrow {
         } else {
             speed = 0;
         }
+        positionNumber++;
     }
 
     public boolean collision(Target target, int positionNumber) {
