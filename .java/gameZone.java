@@ -42,29 +42,20 @@ public class gameZone extends JPanel implements ActionListener {
         g.fillRect((int)3*width/4,height-300 , width, 300);
         g.setColor(new Color(135, 206, 235));
         g.fillRect(0,0 , width, height-300);
-        /*
-        int[] xGrass = { 0,(int) width/4,(int) width/4 ,0  };
-        int[] yGrass = { height, height, height- 250 , height-200  };
-        g.fillPolygon(xGrass, yGrass, xGrass.length);
         
-        int[] xGrass1 = { (int)width/4,(int) width/2,(int) width/2 ,(int)width/4  };
-        int[] yGrass1 = { height, height, height- 300 , height-250  };
-        g.fillPolygon(xGrass1, yGrass1, xGrass1.length);
-        
-        int[] xGrass2 = {(int) width/2,(int) 3*width/4,(int) 3*width/4 ,(int) width/2  };
-        int[] yGrass2 = { height, height, height- 350 , height-300  };
-        g.fillPolygon(xGrass2, yGrass2, xGrass2.length);
-        
-        int[] xGrass3 = {(int) 3*width/4, width, width ,(int) 3*width/4  };
-        int[] yGrass3 = { height, height, height- 400 , height-350  };
-        g.fillPolygon(xGrass3, yGrass3, xGrass3.length);
-        */
         //Personnage
-        g.setColor(Color.BLACK);
+        /*g.setColor(Color.BLACK);
         int[] xPoints = { 10, 30, 50, 30 };
-        int[] yPoints = { height, height, height - 60, height - 60 };
-        g.fillPolygon(xPoints, yPoints, xPoints.length);
-        g.fillOval(200, 200, 50, 50);
+        int[] yPoints = { height-30, height-30, height - 90, height - 90 };
+        g.fillPolygon(xPoints, yPoints, xPoints.length);*/
+        g.setColor(Color.BLACK);
+        int[] xLegL = { 10, 20, 30, 20 };
+        int[] yLegL = { height-30, height-30, height - 90, height - 90 };
+        g.fillPolygon(xLegL, yLegL, xLegL.length);
+        int[] xLegR = { 30, 40, 50, 40 };
+        int[] yLegR = { height-90, height-90, height - 30, height - 30 };
+        g.fillPolygon(xLegR, yLegR, xLegR.length);
+        g.fillOval(25, height-200, 50, 50);
         if (dessin == 1) {
 
             g.setColor(Color.black);
