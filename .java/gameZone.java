@@ -52,6 +52,8 @@ public class gameZone extends JPanel implements ActionListener {
         int[] yLegR = { height-90, height-90, height - 30, height - 30 };
         g.fillPolygon(xLegR, yLegR, xLegR.length);
         g.fillOval(25, height-200, 50, 50);
+        //Cible
+        
         if (dessin == 1) {
 
             g.setColor(Color.black);
