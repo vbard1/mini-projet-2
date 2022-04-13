@@ -123,7 +123,7 @@ public class UI extends JFrame implements ActionListener {
 						//image_cible.setIcon(imageIcon);
 						
 						image_cible = new JLabel(new ImageIcon("./Images/archery_menu.png"),JLabel.LEFT);
-						image_cible.setSize(100, 200);
+						image_cible.setSize(800, 800);
 						
 						//Image imageTailleResize = new ImageIcon("./Images/archery_menu.png").getImage().getScaledInstance(image_cible.getWidth(), image_cible.getHeight(), Image.SCALE_DEFAULT);
 						//image_cible.setIcon(new ImageIcon(imageTailleResize));
