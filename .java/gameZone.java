@@ -63,17 +63,15 @@ public class gameZone extends JPanel implements ActionListener {
         } else if (dessin == 2) {
 
             g.setColor(arrow.arrowColor);
-            g.drawLine(
-                    (int) ((int) arrow.traj.paramTraj[0].get(i)
-                            - (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))),
-                    this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
-                            - (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))),
-                    (int) ((int) arrow.traj.paramTraj[0].get(i)
-                            + (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))),
-                    this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
-                            + (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))));
+            if((int) ((int) arrow.traj.paramTraj[0].get(i)+ (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i))))<=this.width  && this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)+ (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i)))))<=this.height){
+                g.drawLine((int) ((int) arrow.traj.paramTraj[0].get(i)- (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))),
+                    this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)- (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))),
+                    (int) ((int) arrow.traj.paramTraj[0].get(i)+ (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))),
+                    this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)+ (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))));
             g.drawString("" + i, 10, 10);
             g.drawString("" + (double) (arrow.traj.paramTraj[2].get(i)), 20, 20);
+            }
+            
 
         }
         
@@ -90,8 +88,9 @@ public class gameZone extends JPanel implements ActionListener {
 
     public void shoot(Arrow a) {
         dessin = 2;
-        arrowTimer.start();
         arrow = a;
+        arrowTimer.start();
+        
 
     }
 
@@ -100,6 +99,9 @@ public class gameZone extends JPanel implements ActionListener {
             i++;
             repaint();
         } else if (e.getSource() == arrowTimer && (i >= arrow.trajSize || !arrow.collision(target, i+1))) {
+            arrowTimer.stop();
+            i = 0;
+        }else if((int) ((int) arrow.traj.paramTraj[0].get(i)+ (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i))))<=this.width  && this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)+ (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i)))))<=this.height){
             arrowTimer.stop();
             i = 0;
         }
