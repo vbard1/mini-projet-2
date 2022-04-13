@@ -22,12 +22,14 @@ import javax.swing.*;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
+import java.awt.Image;
+
 //TODO mettre en relatif aux dimensions de la fenetre
 //TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
 
 public class UI extends JFrame implements ActionListener {
 
-        public Timer resizeTimer;
+        Timer resizeTimer;
         JComboBox<String> arrowType;
         char type;
         JPanel background;
@@ -39,7 +41,9 @@ public class UI extends JFrame implements ActionListener {
         JLabel textType;
         JButton startGame;
         JButton preview;
+        JLabel image_cible ;
         JLabel image;
+
 
         JPanel settings;
         JScrollBar angle;
@@ -74,8 +78,7 @@ public class UI extends JFrame implements ActionListener {
                 background.setBackground(new Color(250, 255, 224)); // COULEUR FOND
                 background.setLayout(null);
 
-                // initialisation du timer
-                // resizeTimer = new Timer(100, this);
+    
 
                 if (type == 'm') {// Affichage du menu
 
@@ -112,6 +115,23 @@ public class UI extends JFrame implements ActionListener {
                         startGame = new JButton("JOUER");
                         startGame.setBackground(new Color(51, 204, 102));
                         startGame.setForeground(Color.WHITE);
+
+                        //startGame.setLayout();
+                        
+                        // Ajout image de fond
+                        //ImageIcon imageIcon = new ImageIcon(new ImageIcon("./Images/archery_menu2.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+						//image_cible.setIcon(imageIcon);
+						
+						image_cible = new JLabel(new ImageIcon("./Images/archery_menu.png"),JLabel.LEFT);
+						image_cible.setSize(800, 800);
+						
+						//Image imageTailleResize = new ImageIcon("./Images/archery_menu.png").getImage().getScaledInstance(image_cible.getWidth(), image_cible.getHeight(), Image.SCALE_DEFAULT);
+						//image_cible.setIcon(new ImageIcon(imageTailleResize));
+					
+				
+				
+						
+
                         startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15));
                         // startGame.setLayout();
 
@@ -167,6 +187,7 @@ public class UI extends JFrame implements ActionListener {
                         startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
                                         difficulty.getLocation().y + difficulty.getHeight() + 100);
 
+
                         // Ajout à background
                         background.add(username);
                         background.add(difficulty);
@@ -176,8 +197,10 @@ public class UI extends JFrame implements ActionListener {
                         // background.add(textType);
                         background.add(textUser);
                         background.add(title);
+                        background.add(image_cible);
                         // background.add(image);
                         resizeTimer.start();
+
 
                         // (éventuellement animation du joueur en attente)
                 } else if (type == 'g') {
@@ -275,6 +298,7 @@ public class UI extends JFrame implements ActionListener {
                         settings.add(arrowType);
                         settings.add(preview);
                         settings.add(shoot);
+                        background.add(menu);
                         settings.add(score);
 
                         background.add(settings);
@@ -296,7 +320,10 @@ public class UI extends JFrame implements ActionListener {
                 }
         }
 
-        public void resize() {
+        
+
+
+        public void resize(){
                 background.setSize(this.getWidth() - this.getInsets().right - this.getInsets().left,
                                 this.getHeight() - this.getInsets().top - this.getInsets().bottom);
 
@@ -347,10 +374,9 @@ public class UI extends JFrame implements ActionListener {
                 startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
                                 difficulty.getLocation().y + difficulty.getHeight() + 100);
                 startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15 / 2));
-
-                // image.setLocation(100,200);
-                // image.setSize(100,150);
-
+                
+                
+                
         }
 
 }
