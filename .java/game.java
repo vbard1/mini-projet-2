@@ -15,18 +15,16 @@ public class game implements ActionListener {
     int arrowType;
     int windSpeed;
     boolean victory ;
-    Timer arrowTimer;
+    
 
     public game(UI menu) {
         window = menu;
         player = new player();
         window.startGame.addActionListener(this);
         roundNb = 5;
-        target = new Target();
-        arrowTimer=new Timer(100,this);
-        onGoingGame();
+        //target = new Target();
+        
         gameEnd();
-        //arrowType = window.
 
     }
 
@@ -34,10 +32,9 @@ public class game implements ActionListener {
 
         if (e.getSource() == window.startGame) { // l'utilisateur appuie sur le bouton Jouer
             window.resizeTimer.stop();
-        // Affecte à player le nom mis dans la case username du menu
+            // Affecte à player le nom mis dans la case username du menu
             player = new player(window.username.getText());
-            // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus
-            // compliqué)
+            // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus compliqué)
             difficulty = window.difficulty.getSelectedIndex(); // récupère le niveau de difficulté choisi
             window.setVisible(false);
             window.dispose();
@@ -64,11 +61,11 @@ public class game implements ActionListener {
                 //réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
         
                 if (arrowType == 0)
-                    speedInit = window.speed.getValue() * 40;
+                    speedInit = window.speed.getValue() * 0.9;
                 if (arrowType == 1)
-                    speedInit = window.speed.getValue() * 30;
+                    speedInit = window.speed.getValue() * 0.8;
                 if (arrowType == 2)
-                    speedInit = window.speed.getValue() * 20;
+                    speedInit = window.speed.getValue() * 0.7;
 
                 /*    
                 if (difficulty == 0)
@@ -79,10 +76,12 @@ public class game implements ActionListener {
                     windSpeed = 3; */
                 windSpeed = difficulty ;
 
-                int x = 10;
-                int y = 10;
+                int x = 580;
+                int y = 400;
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une flèche
+                window.gameZone.shoot(arrow);
+                //onGoingGame();
             }
         }else if(e.getSource()==window.preview){ // bouton preview appuyé
 
@@ -111,7 +110,7 @@ public class game implements ActionListener {
        else{
            victory = false ;
        }
-       window = new UI('e');
+       //window = new UI('e');
     }
 
 }

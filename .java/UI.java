@@ -82,9 +82,8 @@ public class UI extends JFrame implements ActionListener {
 
                 if (type == 'm') {// Affichage du menu
 
-                        resizeTimer = new Timer(100, this);
-                        resizeTimer.start();
-
+                        resizeTimer = new Timer(10, this);
+                        
 
                         // Définition titre
                         title = new JLabel("Tir à l'arc");
@@ -164,7 +163,7 @@ public class UI extends JFrame implements ActionListener {
                         difficulty.setLocation((int) ((background.getWidth() / 2) - (difficulty.getWidth() / 2)),
                                         textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
                         difficulty.setSize((int) background.getWidth() / 11, (int) background.getHeight() / 25);
-
+                        
                         /*
                          * textType.setFont(new Font("Comic sans MS",
                          * Font.PLAIN,(int)background.getWidth()/60));
@@ -200,6 +199,7 @@ public class UI extends JFrame implements ActionListener {
                         background.add(title);
                         background.add(image_cible);
                         // background.add(image);
+                        resizeTimer.start();
 
 
                         // (éventuellement animation du joueur en attente)
@@ -207,14 +207,14 @@ public class UI extends JFrame implements ActionListener {
 
                         // Panel contenant l'affichage du jeu
 
-                        gameZone = new gameZone(background.getWidth(), background.getHeight() - 150);
+                        gameZone = new gameZone(background.getWidth(), (int)(background.getHeight()*0.85));
                         gameZone.setSize(gameZone.width, gameZone.height);
                         gameZone.setLocation(0, 0);
 
                         gameZone.repaint();
                         // Panel contenant les réglages pour la flèche
                         settings = new JPanel();
-                        settings.setSize(this.getWidth(), 150);
+                        settings.setSize(this.getWidth(),(int)(background.getHeight()*0.15) );
                         settings.setLocation(0, (int) (background.getHeight() - settings.getHeight()));
                         settings.setLayout(new FlowLayout()); // Layout qui permet de mettre les éléments à la suite
 
@@ -318,8 +318,6 @@ public class UI extends JFrame implements ActionListener {
                 if (e.getSource() == resizeTimer && type == 'm') {
                         resize();
                 }
-
-                // repaint();
         }
 
         
@@ -334,7 +332,7 @@ public class UI extends JFrame implements ActionListener {
                 title.setSize((int) background.getWidth(), (int) background.getHeight() / 8);
                 title.setLocation(0, (int) background.getHeight() / 10);
 
-                textUser.setFont(new Font("Comic sans MS", Font.PLAIN, (int) background.getWidth() / 50));
+                //textUser.setFont(new Font("Comic sans MS", Font.PLAIN, (int) background.getWidth() / 50));
                 textUser.setSize((int) background.getWidth(), (int) background.getHeight() / 16);
                 textUser.setLocation(0, (int) background.getHeight() / 3);
 
