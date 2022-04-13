@@ -44,10 +44,6 @@ public class gameZone extends JPanel implements ActionListener {
         g.fillRect(0,0 , width, height-300);
         
         //Personnage
-        /*g.setColor(Color.BLACK);
-        int[] xPoints = { 10, 30, 50, 30 };
-        int[] yPoints = { height-30, height-30, height - 90, height - 90 };
-        g.fillPolygon(xPoints, yPoints, xPoints.length);*/
         g.setColor(Color.BLACK);
         int[] xLegL = { 10, 20, 30, 20 };
         int[] yLegL = { height-30, height-30, height - 90, height - 90 };
