@@ -260,8 +260,8 @@ public class UI extends JFrame implements ActionListener {
 
                         // JButton menu (fait quitter la partie -> action event)
                         menu = new JButton("Menu");
-                        menu.setSize(100, 50);
-                        menu.setLocation(20, 20);
+                        //menu.setSize(100, 50);
+                        //menu.setLocation(20, 20);
                         // menu.setLayout(null);
 
                         // jlabel score
@@ -298,7 +298,7 @@ public class UI extends JFrame implements ActionListener {
                         settings.add(arrowType);
                         settings.add(preview);
                         settings.add(shoot);
-                        background.add(menu);
+                        //background.add(menu);
                         settings.add(score);
 
                         background.add(settings);
