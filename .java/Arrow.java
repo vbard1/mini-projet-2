@@ -75,7 +75,7 @@ public class Arrow {
         boolean collision = false;
         if (((this.posX + length / 2) * Math.acos((double) traj.paramTraj[2].get(positionNumber)) == target.posX)
                 && ((this.posY * Math.asin((double) traj.paramTraj[2].get(positionNumber))) >= target.posLowY
-                        && this.posY <= target.posHighY)) {
+                        && this.posY <= target.posLowY+target.height)) {
             collision = true;
             speed = 0;
             reachedTarget = true;
