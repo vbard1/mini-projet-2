@@ -76,16 +76,17 @@ public class game implements ActionListener {
                     windSpeed = 3; */
                 windSpeed = difficulty ;
 
-                int x = 580;
-                int y = 400;
+                int x = 70;
+                int y = 125;
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une flèche
                 window.gameZone.shoot(arrow);
                 //onGoingGame();
             }
         }else if(e.getSource()==window.preview){ // bouton preview appuyé
-
-            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,580,400); // création de la trajectoire correspondante
+            int x = 70;
+            int y = 125;
+            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,y,x); // création de la trajectoire correspondante
             window.gameZone.preview(t); 
         }
 
