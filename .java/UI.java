@@ -310,6 +310,7 @@ public class UI extends JFrame implements ActionListener {
 
                 setVisible(true);
 
+                
         }
 
         // TODO inclure le type d
