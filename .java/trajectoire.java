@@ -112,7 +112,7 @@ public class Trajectoire {
             Y2 = (double) (int) (paramTraj[1].get(x + 4));
 
             nextAngle = Math.atan((Y2 - Y1) / (X2 - X1));
-            System.out.println(nextAngle);
+            //System.out.println(nextAngle);
             if (nextAngle < angleRad) {
 
                 angleRad = nextAngle;
