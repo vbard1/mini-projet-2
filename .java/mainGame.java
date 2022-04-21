@@ -1,6 +1,6 @@
  import javax.swing.JFrame;
 
-public class mainGame extends JFrame {
+public class MainGame extends JFrame {
     // TODO ici on met les TODO (bugs, trucs à faire encore)
 
     public static void main(String[] args) {
@@ -34,6 +34,6 @@ public class mainGame extends JFrame {
     }
 
     public static void launch(/* param? */) {
-        game newGame = new game(new UI('m'));
+        Game newGame = new Game(new UI('m'));
     }
 }
