@@ -3,9 +3,9 @@ import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class game implements ActionListener {
+public class Game implements ActionListener {
 
-    player player;
+    Player player;
     int weight;
     int difficulty; // distance de la cible et et force du vent // de 1 à 3
     UI window;
@@ -17,9 +17,9 @@ public class game implements ActionListener {
     boolean victory ;
     
 
-    public game(UI menu) {
+    public Game(UI menu) {
         window = menu;
-        player = new player();
+        player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 5;
         //target = new Target();
@@ -33,7 +33,7 @@ public class game implements ActionListener {
         if (e.getSource() == window.startGame) { // l'utilisateur appuie sur le bouton Jouer
             window.resizeTimer.stop();
             // Affecte à player le nom mis dans la case username du menu
-            player = new player(window.username.getText());
+            player = new Player(window.username.getText());
             // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus compliqué)
             difficulty = window.difficulty.getSelectedIndex(); // récupère le niveau de difficulté choisi
             window.setVisible(false);
