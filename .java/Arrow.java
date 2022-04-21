@@ -42,7 +42,7 @@ public class Arrow {
         this.reachedTarget = false;
         length=50;
         positionNumber=0;
-        trajSize=traj.paramTraj[0].size();
+        trajSize=traj.paramTraj[2].size();
         
         //ImageIcon icon =new ImageIcon("arrow.png");
         //arrowImage.setIcon(icon);
@@ -57,8 +57,8 @@ public class Arrow {
      * }
      */
 
-    public void nextPos(Target target) {
-
+    public boolean nextPos(Target target) {
+        boolean exist=false;
         if (!collision(target, positionNumber)) {
             this.posX = (int) traj.paramTraj[0].get(positionNumber);
             this.posY = (int) traj.paramTraj[1].get(positionNumber);
@@ -69,11 +69,14 @@ public class Arrow {
             speed = 0;
         }
         positionNumber++;
+        return exist;
     }
 
     public boolean collision(Target target, int positionNumber) {
         boolean collision = false;
-        if (((this.posX + length / 2) * Math.acos((double) traj.paramTraj[2].get(positionNumber)) == target.posX)
+        if(positionNumber>=trajSize){
+
+        }else if ( ((this.posX + length / 2) * Math.acos((double) traj.paramTraj[2].get(positionNumber)) == target.posX)
                 && ((this.posY * Math.asin((double) traj.paramTraj[2].get(positionNumber))) >= target.posLowY
                         && this.posY <= target.posLowY+target.height)) {
             collision = true;
