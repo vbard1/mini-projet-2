@@ -53,7 +53,7 @@ public class UI extends JFrame implements ActionListener {
         JLabel score;
         JLabel angleText;
         JLabel speedText;
-        gameZone gameZone;
+        GameZone gameZone;
 
         // attributs-parametres du menu
         //
@@ -207,7 +207,7 @@ public class UI extends JFrame implements ActionListener {
 
                         // Panel contenant l'affichage du jeu
 
-                        gameZone = new gameZone(background.getWidth(), (int)(background.getHeight()*0.85));
+                        gameZone = new GameZone(background.getWidth(), (int)(background.getHeight()*0.85));
                         gameZone.setSize(gameZone.width, gameZone.height);
                         gameZone.setLocation(0, 0);
 
