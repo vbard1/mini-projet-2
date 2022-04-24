@@ -61,8 +61,7 @@ public class Trajectoire {
         paramTraj[0] = new ArrayList<Integer>(maxX); // param x // on a x(t)=v°*cos(angleInit)*t dans le vide
         paramTraj[1] = new ArrayList<Integer>(maxX); // param y pour chaque x
         paramTraj[2] = new ArrayList<Double>(maxX); // param angle pour chaque x
-
-        // paramTraj[3] = new ArrayList<Double>(maxX); // vitesse pour chaque x
+        paramTraj[3] = new ArrayList<Double>(maxX); // vitesse pour chaque x
 
         // base de temps de 0.1 sec?
         int y = 0;
@@ -76,13 +75,15 @@ public class Trajectoire {
                 y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                         (1 + Math.pow(Math.tan(angleInitDeg / (windSpeed + 1) * degToRad), 2))
                         + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-            } else {
-                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-            }
-            // dépendent de
-            // vitesse relative au vent
+            } /*
+               * else {
+               * y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+               * (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+               * + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+               * }
+               */
+            // inutile
+
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
                 // (int) (windSpeed * vitesse)+ " px");
@@ -91,6 +92,7 @@ public class Trajectoire {
                 paramTraj[0].add(absciss + xInit);
                 // remplissage de y en fonction de x
                 paramTraj[1].add(y);
+                paramTraj[3].add(vitesse);
 
             }
             absciss++;
@@ -112,7 +114,7 @@ public class Trajectoire {
             Y2 = (double) (int) (paramTraj[1].get(x + 4));
 
             nextAngle = Math.atan((Y2 - Y1) / (X2 - X1));
-            //System.out.println(nextAngle);
+            // System.out.println(nextAngle);
             if (nextAngle < angleRad) {
 
                 angleRad = nextAngle;
