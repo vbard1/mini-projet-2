@@ -76,13 +76,7 @@ public class Trajectoire {
                 y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                         (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
                         + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-            } else {
-                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
             }
-
-            // inutile
 
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
