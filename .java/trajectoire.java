@@ -67,13 +67,14 @@ public class Trajectoire {
         int y = 0;
         double vitesse;
         int absciss = 0;
+        angleInitDeg /= (windSpeed + 1);
         while (absciss < maxX) {
             // Trajectoire de y en fonction de x dans le vide
             vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
                     + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
             if (windSpeed != 0) {
                 y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-                        (1 + Math.pow(Math.tan(angleInitDeg / (windSpeed + 1) * degToRad), 2))
+                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
                         + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
             } else {
                 y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
