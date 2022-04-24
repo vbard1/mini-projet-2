@@ -40,7 +40,7 @@ public class Trajectoire {
         this.windSpeed = windSpeed; // ?
         this.yInit = yInit;
 
-        paramTraj = new ArrayList[3];
+        paramTraj = new ArrayList[4];
         recalculate(angleInitDeg, speedInit, windSpeed, yInit, xInit);
 
     }
@@ -75,13 +75,12 @@ public class Trajectoire {
                 y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                         (1 + Math.pow(Math.tan(angleInitDeg / (windSpeed + 1) * degToRad), 2))
                         + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-            } /*
-               * else {
-               * y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-               * (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-               * + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-               * }
-               */
+            } else {
+                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            }
+
             // inutile
 
             if (y > -1) {
