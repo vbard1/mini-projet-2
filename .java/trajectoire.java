@@ -72,17 +72,11 @@ public class Trajectoire {
             // Trajectoire de y en fonction de x dans le vide
             vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
                     + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
-            if (windSpeed != 0) {
-                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-            } else {
-                y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
-                        (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
-                        + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-            }
 
-            // inutile
+            y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
+                    (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
+                    + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
+            System.out.print(y + ";");
 
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
