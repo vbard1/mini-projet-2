@@ -87,11 +87,6 @@ public class Game implements ActionListener {
         } else if (e.getSource() == window.preview) { // bouton preview appuyé
             int x = 70;
             int y = 125;
-<<<<<<< HEAD
-    Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue()*1.5,0,y,x); // création de la trajectoire correspondante
-            window.gameZone.preview(t); 
-        }
-=======
             Trajectoire t = new Trajectoire(window.angle.getValue(), window.speed.getValue(), 0, y, x); // création de
                                                                                                         // la
                                                                                                         // trajectoire
@@ -100,7 +95,6 @@ public class Game implements ActionListener {
         } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création d'un 
             window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
         }//else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la fenêtre, arrête le programme
->>>>>>> 1a86685e758f9504bfa49262316033d4ad8570b1
 
         //}
     }
