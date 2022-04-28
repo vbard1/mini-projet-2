@@ -24,7 +24,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.Image;
 
-//TODO mettre en relatif aux dimensions de la fenetre
+
 //TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
 
 public class UI extends JFrame implements ActionListener {
@@ -405,7 +405,7 @@ public class UI extends JFrame implements ActionListener {
                         background.add(settings);
                         background.add(gameZone);
                         settings.setVisible(true);
-                }/*else if ((type == v)||(type == d)){
+                }else if ((type == 'v')||(type == 'd')){
 
                         // Création du JPanel contenant le résustat/choix de fin de partie, style popup (relatif), au centre de la fenêtre de jeu
                         gameEnd = new JPanel();
@@ -414,10 +414,10 @@ public class UI extends JFrame implements ActionListener {
 
                         //JPanel announcement : annonce la victoire ou la défaite du joueur
                         announcement = new JLabel();
-                        if (type == v){
-                                announcement.setText("Victory !")
+                        if (type == 'v'){
+                                announcement.setText("Victory !");
                         }
-                        else if (Type == d){
+                        else if (type == 'd'){
                                 announcement.setText("Defeat");
                         }
                         //JButton menu : retour au menu de création de partie
@@ -438,7 +438,7 @@ public class UI extends JFrame implements ActionListener {
                         gameEnd.add(quit);
                         gameEnd.add(announcement);
                         gameEnd.setVisible(true);
-                }*/
+                }
                 // Ajout à la fenêtre
                 this.add(background);
 
@@ -446,7 +446,6 @@ public class UI extends JFrame implements ActionListener {
 
         }
 
-        // TODO inclure le type d
         @Override
         public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == resizeTimer && type == 'm') {

@@ -18,11 +18,12 @@ public class Game implements ActionListener {
         window = menu;
         player = new Player();
         window.startGame.addActionListener(this);
-        roundNb = 5;
+        roundNb = 0;
         // target = new Target();
 
-        gameEnd();
-
+        if(roundNb>5){
+            gameEnd();
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -48,9 +49,9 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.shoot) {
 
-            if (roundNb >= 0) {
+            if (roundNb <= 5) {
 
-                roundNb--; // décompte du nombre de tours restants
+                roundNb++; // décompte du nombre de tours restants
 
                 double angleInit = window.angle.getValue();
                 double speedInit = 0;
@@ -91,9 +92,13 @@ public class Game implements ActionListener {
                                                                                                         // trajectoire
                                                                                                         // correspondante
             window.gameZone.preview(t);
-        }
+        } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création d'un 
+            window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
+        }//else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la fenêtre, arrête le programme
 
+        //}
     }
+
     // TODO fin de partie
     // récupérer infos et créer flèche quand "shoot" cliqué (fait)
     // Ajouter au score du joueur si la cible est touchée (fait)
@@ -109,11 +114,10 @@ public class Game implements ActionListener {
 
     public void gameEnd() {
         if (player.score > 2) {
-            victory = true;
+            window = new UI('v');
         } else {
-            victory = false;
+            window = new UI('d');
         }
-        // window = new UI('e');
     }
 
 }
