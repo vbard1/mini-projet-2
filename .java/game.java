@@ -61,7 +61,7 @@ public class Game implements ActionListener {
                 //réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
         
                 if (arrowType == 0)
-                    speedInit = window.speed.getValue() * 0.9;
+                    speedInit = window.speed.getValue() * 1.5;
                 if (arrowType == 1)
                     speedInit = window.speed.getValue() * 0.8;
                 if (arrowType == 2)
@@ -86,7 +86,7 @@ public class Game implements ActionListener {
         }else if(e.getSource()==window.preview){ // bouton preview appuyé
             int x = 70;
             int y = 125;
-            Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue(),0,y,x); // création de la trajectoire correspondante
+    Trajectoire t=new Trajectoire(window.angle.getValue(),window.speed.getValue()*1.5,0,y,x); // création de la trajectoire correspondante
             window.gameZone.preview(t); 
         }
 
