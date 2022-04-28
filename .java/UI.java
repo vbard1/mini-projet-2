@@ -54,6 +54,11 @@ public class UI extends JFrame implements ActionListener {
         JLabel speedText;
         GameZone gameZone;
 
+        JPanel gameEnd;
+        JButton restart;
+        JButton quit ;
+        JLabel announcement ;
+
         // attributs-parametres du menu
         //
         public UI(char type) {
@@ -298,11 +303,146 @@ public class UI extends JFrame implements ActionListener {
                         background.add(settings);
                         background.add(gameZone);
                         settings.setVisible(true);
-                }
+                
+                } else if (type == 'g') {
+
+                        // Panel contenant l'affichage du jeu
+
+                        gameZone = new GameZone(background.getWidth(), (int) (background.getHeight() * 0.85));
+                        gameZone.setSize(gameZone.width, gameZone.height);
+                        gameZone.setLocation(0, 0);
+
+                        gameZone.repaint();
+                        // Panel contenant les réglages pour la flèche
+                        settings = new JPanel();
+                        settings.setSize(this.getWidth(), (int) (background.getHeight() * 0.15));
+                        settings.setLocation(0, (int) (background.getHeight() - settings.getHeight()));
+                        settings.setLayout(new FlowLayout()); // Layout qui permet de mettre les éléments à la suite
+
+                        // scrollbar angle
+                        angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 0, 90);
+                        angle.setPreferredSize(new Dimension(200, 40));
+                        // angle.setLocation(10, 10);m
+                        // angle.setLayout(null); //non sinon ça empêche l'affichage automatique géré
+                        // par le layout
+
+                        // Affichage angle
+                        angleText = new JLabel("Angle : " + angle.getValue() + "°");
+                        angle.addAdjustmentListener(new AdjustmentListener() {
+                                @Override
+                                public void adjustmentValueChanged(AdjustmentEvent e) {
+                                        angleText.setText("Angle : " + e.getValue() + "°");
+
+                                        // TODO repaint!
+                                }
+                        });
+                        // addAdjustmentListener(new AdjustmentListener())
+
+                        // scrollbar vitesse
+                        speed = new JScrollBar(JScrollBar.HORIZONTAL, 50, 1, 0, 101);
+                        speed.setPreferredSize(new Dimension(200, 40));
+                        // speed.setLocation(angle.getLocation().x + angle.getWidth() + 10, 10);
+                        // speed.setLayout(null); ////non sinon ça empêche l'affichage automatique géré
+                        // par le layout
+
+                        // Affichage speed
+                        speedText = new JLabel("Speed : " + speed.getValue() + "%");
+                        speed.addAdjustmentListener(new AdjustmentListener() {
+                                @Override
+                                public void adjustmentValueChanged(AdjustmentEvent e) {
+                                        speedText.setText("Speed : " + e.getValue() + "%");
+                                }
+                        });
+                        // JButton tirer
+                        shoot = new JButton("Tirer");
+                        shoot.setSize(200, 40);
+                        // shoot.setLocation(speed.getLocation().x + speed.getWidth() + 10, 10);
+                        shoot.setLayout(null);
+
+                        // JButton menu (fait quitter la partie -> action event)
+                        menu = new JButton("Menu");
+                        // menu.setSize(100, 50);
+                        // menu.setLocation(20, 20);
+                        // menu.setLayout(null);
+
+                        // jlabel score
+                        score = new JLabel("Score");
+                        score.setSize(100, 40);
+                        // score.setLocation(shoot.getLocation().x + shoot.getWidth() + 10, 10);
+                        score.setLayout(null);
+
+                        // JButton Preview
+                        preview = new JButton("Preview");
+                        preview.setSize(200, 40);
+                        // shoot.setLocation(speed.getLocation().x + speed.getWidth() + 10, 10);
+                        preview.setLayout(null);
+
+                        // Définition texte "Type de flèche"
+                        textType = new JLabel("Type de flèche");
+                        textType.setHorizontalAlignment(SwingConstants.CENTER);
+                        textType.setFont(new Font("Times New Roman", Font.BOLD, (int) background.getWidth() / 60));
+                        textType.setLayout(null);
+
+                        // Définition type de flèche
+                        String[] arrowType1 = { "Aluminium", "Bois", "Carbone" }; // Tableau contenant les différents
+                                                                                  // type de flèche
+                        arrowType = new JComboBox<String>(arrowType1);
+                        arrowType.setSelectedIndex(0);
+                        arrowType.setLayout(null);
+
+                        // ajout au panel principal
+                        settings.add(menu);
+                        settings.add(angle);
+                        settings.add(angleText);
+                        settings.add(speed);
+                        settings.add(speedText);
+                        settings.add(arrowType);
+                        settings.add(preview);
+                        settings.add(shoot);
+                        // background.add(menu);
+                        settings.add(score);
+
+                        background.add(settings);
+                        background.add(gameZone);
+                        settings.setVisible(true);
+                }/*else if ((type == v)||(type == d)){
+
+                        // Création du JPanel contenant le résustat/choix de fin de partie, style popup (relatif), au centre de la fenêtre de jeu
+                        gameEnd = new JPanel();
+                        gameEnd.setSize((int)(this.getWidth()/2), (int)(this.getHeight()/2));
+                        gameEnd.setLocation(0, 0);
+
+                        //JPanel announcement : annonce la victoire ou la défaite du joueur
+                        announcement = new JLabel();
+                        if (type == v){
+                                announcement.setText("Victory !")
+                        }
+                        else if (Type == d){
+                                announcement.setText("Defeat");
+                        }
+                        //JButton menu : retour au menu de création de partie
+                        menu = new JButton("Menu");
+                        menu.setLocation(gameEnd.getWidth()/2-(menu.getWidth()+10), gameEnd.getHeight()/2+(menu.getHeight()+10) );
+
+                        //JButton restart : recommencer une partie avec les mêmes réglages
+                        restart = new JButton("Restart");
+                        restart.setLocation(gameEnd.getWidth()/2+10, gameEnd.getHeight()/2+(restart.getHeight()+10) );
+                        // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
+                        quit = new JButton("Quit Game");
+                        quit.setLocation(gameEnd.getWidth()/2-(quit.getWidth()/2), gameEnd.getHeight()/2+(menu.getHeight()+10) );
+
+                        // AJout des éléments au Jpanel de fin de partie
+
+                        gameEnd.add(menu);
+                        gameEnd.add(restart);
+                        gameEnd.add(quit);
+                        gameEnd.add(announcement);
+                        gameEnd.setVisible(true);
+                }*/
                 // Ajout à la fenêtre
                 this.add(background);
 
-                setVisible(true);
+                this.setVisible(true);
 
         }
 
