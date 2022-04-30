@@ -49,7 +49,7 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.shoot) {
 
-            if (roundNb <= 5) {
+            if (roundNb < 5) {
 
                 roundNb++; // décompte du nombre de tours restants
 

@@ -14,6 +14,7 @@ public class GameZone extends JPanel implements ActionListener {
     int i = 0;
     Target target;
     Timer arrowTimer;
+    int score = 0;
 
     public GameZone() {
         target = new Target(width - 100, height - 100);
@@ -56,71 +57,94 @@ public class GameZone extends JPanel implements ActionListener {
         // Torse
         g.fillRect(20, height - 130, 20, 40);
         // Tete
-        //g.fillOval(20, height - 155, 25, 25);
+        // g.fillOval(20, height - 155, 25, 25);
         // Bras
         // g.fillRect(20, height-130, 20,10 );
-        if(arrow==null){
-            g.fillRect(40,height-130,40,10);
-            g.fillRect(0,height-130,20,10);
-            Shape bow = new Arc2D.Double(80-50, height - 125-100/2, 50, 100,100,-190,Arc2D.CHORD);
+        if (arrow == null) {
+            g.fillRect(40, height - 130, 40, 10);
+            g.fillRect(0, height - 130, 20, 10);
+            Shape bow = new Arc2D.Double(80 - 50, height - 125 - 100 / 2, 50, 100, 100, -190, Arc2D.CHORD);
             g2.draw(bow);
-        }else{
-            /*int newX1=(int)(+40.0*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));//écart entre la nouvelle abscisse de l'éxtrémité du bras et l'ancienne
-            int newY1=(int)(40*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));//écart entre la nouvelle ordonnée de l'éxtrémité du bras et l'ancienne
-            int newX2=(int)(+40.0*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-            int newY2=(int)(+40*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-            int newX0=(int)(10.0*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-            int newY0=(int)(10*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-            int[] xArmL = { 40-newX0, 40+newX2-newX0, 40+newX1, 40 };
-            int[] yArmL = { height - 120-newY0, height - 130-newY2, height - 120-newY1, height - 120 };
+        } else {
+            /*
+             * int
+             * newX1=(int)(+40.0*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));//écart
+             * entre la nouvelle abscisse de l'éxtrémité du bras et l'ancienne
+             * int
+             * newY1=(int)(40*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));//écart
+             * entre la nouvelle ordonnée de l'éxtrémité du bras et l'ancienne
+             * int newX2=(int)(+40.0*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
+             * int newY2=(int)(+40*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
+             * int newX0=(int)(10.0*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
+             * int newY0=(int)(10*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
+             * int[] xArmL = { 40-newX0, 40+newX2-newX0, 40+newX1, 40 };
+             * int[] yArmL = { height - 120-newY0, height - 130-newY2, height - 120-newY1,
+             * height - 120 };
+             * 
+             * int
+             * newX1R=(int)(20*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));//écart
+             * entre la nouvelle abscisse de l'éxtrémité du bras et l'ancienne
+             * int
+             * newY1R=(int)(20*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));//écart
+             * entre la nouvelle ordonnée de l'éxtrémité du bras et l'ancienne
+             * int newX2R=(int)(20*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
+             * int newY2R=(int)(20*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
+             * int newX0R=(int)(10.0*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
+             * int newY0R=(int)(10*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
+             * int[] xArmR = {/*HG 20-newX1R, 20, 20+newX0R, 20-newX2R+newX0R };
+             * int[] yArmR = { height - 130+newY1R, height - 130, height - 130+newY0R,
+             * height - 130+newY2R+newY0R };
+             * g.fillPolygon(xArmR, yArmR, xArmR.length);
+             * 
+             * g.fillPolygon(xArmL, yArmL, xArmL.length);
+             * 
+             * int
+             * newWidth=(int)(25*Math.cos((double)arrow.traj.paramTraj[2].get(0))+100*Math.
+             * sin((double)arrow.traj.paramTraj[2].get(0)));
+             * int
+             * newHeight=(int)(100*Math.cos((double)arrow.traj.paramTraj[2].get(0))+25*Math.
+             * sin((double)arrow.traj.paramTraj[2].get(0)));
+             * newWidth=75;
+             * newHeight=75;
+             * g.drawArc((80+newX1+newX2-newX0)/2-newWidth/2, height -
+             * 130-newY1-newHeight/2, newWidth, newHeight,
+             * (int)(90+Math.toDegrees((double)arrow.traj.paramTraj[2].get(0))),-180);
+             * g.drawString("Pos "+((double)arrow.traj.paramTraj[2].get(0))*180/Math.PI, 10,
+             * 30);
+             * g.drawString("x "+(15+newX1)+" y "+(height - 130-newY1), 10, 40);
+             * g.drawString("strt ang "+(int)(90+Math.toDegrees((double)arrow.traj.paramTraj
+             * [2].get(0)))+" end ang "+(int)
+             * (Math.toDegrees((double)arrow.traj.paramTraj[2].get(0))-180), 10, 50);
+             */
+            // g.drawString("x "+xArmL[0]+" "+xArmL[1]+" "+xArmL[2]+" "+xArmL[3]+" ", 10,
+            // 40);
+            // g.drawString("y "+yArmL[0]+" "+yArmL[1]+" "+yArmL[2]+" "+yArmL[3]+" ", 10,
+            // 50);
 
-            int newX1R=(int)(20*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));//écart entre la nouvelle abscisse de l'éxtrémité du bras et l'ancienne
-            int newY1R=(int)(20*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));//écart entre la nouvelle ordonnée de l'éxtrémité du bras et l'ancienne
-            int newX2R=(int)(20*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-            int newY2R=(int)(20*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-            int newX0R=(int)(10.0*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-            int newY0R=(int)(10*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-            int[] xArmR = {/*HG  20-newX1R, 20, 20+newX0R, 20-newX2R+newX0R };
-            int[] yArmR = { height - 130+newY1R, height - 130, height - 130+newY0R, height - 130+newY2R+newY0R };
-            g.fillPolygon(xArmR, yArmR, xArmR.length);
-
-            g.fillPolygon(xArmL, yArmL, xArmL.length);
-            
-            int newWidth=(int)(25*Math.cos((double)arrow.traj.paramTraj[2].get(0))+100*Math.sin((double)arrow.traj.paramTraj[2].get(0)));
-            int newHeight=(int)(100*Math.cos((double)arrow.traj.paramTraj[2].get(0))+25*Math.sin((double)arrow.traj.paramTraj[2].get(0)));
-            newWidth=75;
-            newHeight=75;
-            g.drawArc((80+newX1+newX2-newX0)/2-newWidth/2, height - 130-newY1-newHeight/2, newWidth, newHeight, (int)(90+Math.toDegrees((double)arrow.traj.paramTraj[2].get(0))),-180);
-            g.drawString("Pos "+((double)arrow.traj.paramTraj[2].get(0))*180/Math.PI, 10, 30);
-            g.drawString("x "+(15+newX1)+" y "+(height - 130-newY1), 10, 40);
-            g.drawString("strt ang "+(int)(90+Math.toDegrees((double)arrow.traj.paramTraj[2].get(0)))+" end ang "+(int) (Math.toDegrees((double)arrow.traj.paramTraj[2].get(0))-180), 10, 50);*/
-            //g.drawString("x "+xArmL[0]+" "+xArmL[1]+" "+xArmL[2]+" "+xArmL[3]+" ", 10, 40);
-            //g.drawString("y "+yArmL[0]+" "+yArmL[1]+" "+yArmL[2]+" "+yArmL[3]+" ", 10, 50);
-            
-            g.fillRect(26, height-140, 8, 10);
-            Shape armL=new Rectangle.Double(40,height-130,40,10);
-            Shape bow = new Arc2D.Double(80-50, height - 125-100/2, 50, 100,100,-190,Arc2D.CHORD);
-            g2.rotate(-(double)arrow.traj.paramTraj[2].get(0),40,height-130 );
+            g.fillRect(26, height - 140, 8, 10);
+            Shape armL = new Rectangle.Double(40, height - 130, 40, 10);
+            Shape bow = new Arc2D.Double(80 - 50, height - 125 - 100 / 2, 50, 100, 100, -190, Arc2D.CHORD);
+            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0), 40, height - 130);
             g2.setPaint(Color.YELLOW);
             g2.fill(armL);
             g2.draw(bow);
-            g2.rotate((double)arrow.traj.paramTraj[2].get(0),40 ,height-130 );
-            Shape armR=new Rectangle.Double(0,height-130,20,10);
-            g2.rotate(-(double)arrow.traj.paramTraj[2].get(0),20 ,height-130 );
+            g2.rotate((double) arrow.traj.paramTraj[2].get(0), 40, height - 130);
+            Shape armR = new Rectangle.Double(0, height - 130, 20, 10);
+            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0), 20, height - 130);
             g2.fill(armR);
-            g2.rotate((double)arrow.traj.paramTraj[2].get(0),20 ,height-130 );
+            g2.rotate((double) arrow.traj.paramTraj[2].get(0), 20, height - 130);
             Shape head = new Ellipse2D.Float(20, height - 160, 25, 30);
-            g2.rotate(-(double)arrow.traj.paramTraj[2].get(0),20+25/2, height-160+(30/ 2));
+            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0), 20 + 25 / 2, height - 160 + (30 / 2));
             g2.fill(head);
-            g2.rotate((double)arrow.traj.paramTraj[2].get(0),20+25/2, height-155+25/ 2);
-            
-            //g2.rotate((double)arrow.traj.paramTraj[2].get(0),20+25/2, height-155+25/ 2);
-            
-            //g2.rotate(-(double)arrow.traj.paramTraj[2].get(0),20+25/2, height-155+25/ 2);
+            g2.rotate((double) arrow.traj.paramTraj[2].get(0), 20 + 25 / 2, height - 155 + 25 / 2);
+
+            // g2.rotate((double)arrow.traj.paramTraj[2].get(0),20+25/2, height-155+25/ 2);
+
+            // g2.rotate(-(double)arrow.traj.paramTraj[2].get(0),20+25/2, height-155+25/ 2);
 
         }
-       g.setColor(Color.BLACK);
-        
+        g.setColor(Color.BLACK);
+
         // g.drawLine(x1, y1, x2, y2);
         // g.drawLine(x1, y1, x2, y2);
         // Cible
@@ -146,7 +170,6 @@ public class GameZone extends JPanel implements ActionListener {
                             + (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))));
             g.drawString("" + i, 10, 10);
             g.drawString("" + (double) (arrow.traj.paramTraj[2].get(i)), 20, 20);
-            
 
         }
 
@@ -168,26 +191,18 @@ public class GameZone extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        
-        if (e.getSource() == arrowTimer && i < arrow.trajSize-1 && (int) ((int) arrow.traj.paramTraj[0].get(i)
-                        + (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))) <= this.width
-                && this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
-                        + (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))) <= this.height) {
-                if( !arrow.collision(target, i)){
-                    i++;
-                    repaint();
-                }
-        }/* else if (e.getSource() == arrowTimer && (i >= arrow.trajSize || !arrow.collision(target, i ))) {
-            arrowTimer.stop();
-            i = 0;
-        } else if ((int) ((int) arrow.traj.paramTraj[0].get(i)
+
+        if (e.getSource() == arrowTimer && i < arrow.trajSize - 1 && (int) ((int) arrow.traj.paramTraj[0].get(i)
                 + (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))) <= this.width
                 && this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
                         + (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))) <= this.height) {
-            arrowTimer.stop();
-            i = 0;
-        }*/
-        else if(e.getSource() == arrowTimer){
+            if (!arrow.collision(target, i)) {
+                i++;
+                repaint();
+            } else {
+                score++;
+            }
+        } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();
             i = 0;
         }
