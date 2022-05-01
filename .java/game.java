@@ -21,9 +21,9 @@ public class Game implements ActionListener {
         roundNb = 0;
         target = new Target(window.getWidth() - 100, window.getHeight() - 100);
 
-        if(roundNb>=5){
+        if (roundNb >= 5) {
             gameEnd();
-            
+
         }
     }
 
@@ -61,11 +61,11 @@ public class Game implements ActionListener {
                 // réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
 
                 if (arrowType == 0)
-                    speedInit = window.speed.getValue() * 1.5;
+                    speedInit = window.speed.getValue() * 2;
                 if (arrowType == 1)
-                    speedInit = window.speed.getValue() * 0.8;
+                    speedInit = window.speed.getValue() * 1.5;
                 if (arrowType == 2)
-                    speedInit = window.speed.getValue() * 0.7;
+                    speedInit = window.speed.getValue() * 1.2;
 
                 /*
                  * if (difficulty == 0)
@@ -86,7 +86,7 @@ public class Game implements ActionListener {
                 if (arrow.reachedTarget) {
                     player.score++;
                 }
-                String scoreText = "Score : "+ player.score;
+                String scoreText = "Score : " + player.score;
                 window.score.setText(scoreText);
             }
         } else if (e.getSource() == window.preview) { // bouton preview appuyé
@@ -97,11 +97,13 @@ public class Game implements ActionListener {
                                                                                                         // trajectoire
                                                                                                         // correspondante
             window.gameZone.preview(t);
-        } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création d'un 
+        } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création
+                                                      // d'un
             window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
-        }//else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la fenêtre, arrête le programme
+        } // else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
+          // fenêtre, arrête le programme
 
-        //}
+        // }
     }
 
     // TODO fin de partie
