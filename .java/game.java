@@ -19,10 +19,11 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 0;
-        // target = new Target();
+        target = new Target(window.getWidth() - 100, window.getHeight() - 100);
 
-        if(roundNb>5){
+        if(roundNb>=5){
             gameEnd();
+            
         }
     }
 
@@ -82,7 +83,11 @@ public class Game implements ActionListener {
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
                 window.gameZone.shoot(arrow);
-                // onGoingGame();
+                if (arrow.reachedTarget) {
+                    player.score++;
+                }
+                String scoreText = "Score : "+ player.score;
+                window.score.setText(scoreText);
             }
         } else if (e.getSource() == window.preview) { // bouton preview appuyé
             int x = 70;
@@ -118,6 +123,7 @@ public class Game implements ActionListener {
         } else {
             window = new UI('d');
         }
+        roundNb = 0;
     }
 
 }
