@@ -12,7 +12,6 @@ public class Game implements ActionListener {
     Target target;
     int arrowType;
     int windSpeed;
-    boolean victory;
 
     public Game(UI menu) {
         window = menu;
@@ -67,14 +66,6 @@ public class Game implements ActionListener {
                 if (arrowType == 2)
                     speedInit = window.speed.getValue() * 1.2;
 
-                /*
-                 * if (difficulty == 0)
-                 * windSpeed = ;
-                 * if (difficulty == 1)
-                 * windSpeed = 2;
-                 * if (difficulty == 2)
-                 * windSpeed = 3;
-                 */
                 windSpeed = difficulty;
 
                 int x = 70;
