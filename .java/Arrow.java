@@ -18,6 +18,7 @@ public class Arrow {
     JLabel arrowImage;
     int positionNumber;
     int trajSize;
+    int windSpeed;
     
 
     /**
@@ -29,7 +30,7 @@ public class Arrow {
      * @param angleInit angle initial de lancer
      * @param speedInit vitesse de lancer
      * @param c         couleur de la flèche en fonction du type de flèche
-     * 
+     * @param windSpeed
      */
     public Arrow(int weight, int posX, int posY, double angleInit, double speedInit, int windSpeed, Color c)  {
         this.posX = posX;
@@ -38,6 +39,8 @@ public class Arrow {
         this.weight = weight;
         this.speed = speedInit;
         this.arrowColor = Color.BLACK;
+        this.windSpeed=windSpeed;
+        trajectory(posX,posY);
         this.traj = new Trajectoire(angleInit, speedInit, windSpeed, posY, posX);
         this.reachedTarget = false;
         length=50;
@@ -47,6 +50,28 @@ public class Arrow {
         //ImageIcon icon =new ImageIcon("arrow.png");
         //arrowImage.setIcon(icon);
     }
+    public Arrow(int weight, double angleInit, double speedInit, int windSpeed, Color c)  {
+        this.angle = angleInit;
+        this.weight = weight;
+        this.speed = speedInit;
+        this.arrowColor = Color.BLACK;
+        this.reachedTarget = false;
+
+        length=50;
+        positionNumber=0;
+        trajSize=traj.paramTraj[2].size();
+        
+        //ImageIcon icon =new ImageIcon("arrow.png");
+        //arrowImage.setIcon(icon);
+    }
+    public Arrow(){
+        this.arrowColor = Color.BLACK;
+        this.reachedTarget = false;
+        length=50;
+        positionNumber=0;
+        //trajSize=traj.paramTraj[2].size();
+    }
+    
 
     /*
      * public Arrow(int weight, int posX, int posY, double angle) {
@@ -56,29 +81,35 @@ public class Arrow {
      * this.angle = angle;
      * }
      */
-
-    public boolean nextPos(Target target) {
+    public void trajectory(int x,int y){
+        this.traj = new Trajectoire(this.angle, this.speed, windSpeed, y, x);
+    }
+    public boolean nextPos(Target target,int width,int height) {
         boolean exist=false;
-        if (!collision(target, positionNumber)) {
+        if (positionNumber<trajSize && !collision(target) && inScreen(width, height)) {
             this.posX = (int) traj.paramTraj[0].get(positionNumber);
             this.posY = (int) traj.paramTraj[1].get(positionNumber);
             this.angle = (double) traj.paramTraj[2].get(positionNumber);
-
-            // TODO repaint
+            exist=true;
+            positionNumber++;
         } else {
-            speed = 0;
+
         }
-        positionNumber++;
         return exist;
     }
+    public boolean inScreen(int width, int height){
+        boolean b=false;
+        if(positionNumber<trajSize){
+            b=((int) ((int) traj.paramTraj[0].get(positionNumber)+ (length / 2) * Math.cos((double) (traj.paramTraj[2].get(positionNumber)))) <= width
+                && height - ((int) ((int)traj.paramTraj[1].get(positionNumber)+ (length / 2) * Math.sin((double) (traj.paramTraj[2].get(positionNumber))))) <= height);
+        }
+        return b;
+    }
 
-    public boolean collision(Target target, int positionNumber) {
+    public boolean collision(Target target) {
         boolean collision = false;
-        if(positionNumber>=trajSize){
-
-        }else if ( ((this.posX + length / 2) * Math.acos((double) traj.paramTraj[2].get(positionNumber)) == target.posX)
-                && ((this.posY * Math.asin((double) traj.paramTraj[2].get(positionNumber))) >= target.posLowY
-                        && this.posY <= target.posLowY+target.height)) {
+         if ( this.posX  == target.posX && this.posY  <= target.posY
+                && this.posY >= target.posY-target.side ) {
             collision = true;
             speed = 0;
             reachedTarget = true;
