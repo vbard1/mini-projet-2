@@ -87,7 +87,7 @@ public class UI extends JFrame implements ActionListener {
                         textDifficulty.setLayout(null);
 
                         // Definition difficulté
-                        String[] level = { "Facile", "Normal", "Difficile" };
+                        String[] level = { "Mode sans échec", "Légère bise", "Tempête" };
                         difficulty = new JComboBox<String>(level);
                         difficulty.setSelectedIndex(0);
                         difficulty.setLayout(null);
@@ -261,8 +261,9 @@ public class UI extends JFrame implements ActionListener {
                         textType.setLayout(null);
 
                         // Définition type de flèche
-                        String[] arrowType1 = { "Aluminium", "Bois", "Carbone" }; // Tableau contenant les différents
-                                                                                  // type de flèche
+                        String[] arrowType1 = { "Carbone", "Aluminium", "Caillou" }; // Tableau contenant les
+                                                                                     // différents
+                                                                                     // type de flèche
                         arrowType = new JComboBox<String>(arrowType1);
                         arrowType.setSelectedIndex(0);
                         arrowType.setLayout(null);
@@ -281,10 +282,9 @@ public class UI extends JFrame implements ActionListener {
 
                         background.add(settings);
                         background.add(gameZone);
-                        
+
                 } else if ((type == 'v') || (type == 'd')) {
 
-                        
                 }
                 // Ajout à la fenêtre
                 this.add(background);
@@ -355,47 +355,47 @@ public class UI extends JFrame implements ActionListener {
                 startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15 / 2));
 
         }
-        public void gameEnd(char type){
+
+        public void gameEnd(char type) {
                 // Création du JPanel contenant le résustat/choix de fin de partie, style popup
-                        // (relatif), au centre de la fenêtre de jeu
-                        //this.setLocation((int) (this.getWidth() / 4),(int) (this.getHeight() / 4) );
-                        //this.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
-                        gameEnd = new JPanel();
-                        gameEnd.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
-                        gameEnd.setLocation((int) (this.getWidth() / 4),(int) (this.getHeight() / 4));
+                // (relatif), au centre de la fenêtre de jeu
+                // this.setLocation((int) (this.getWidth() / 4),(int) (this.getHeight() / 4) );
+                // this.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
+                gameEnd = new JPanel();
+                gameEnd.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
+                gameEnd.setLocation((int) (this.getWidth() / 4), (int) (this.getHeight() / 4));
 
-                        // JPanel announcement : annonce la victoire ou la défaite du joueur
-                        announcement = new JLabel();
-                        if (type == 'v') {
-                                announcement.setText("Victory !");
-                        } else if (type == 'd') {
-                                announcement.setText("Defeat");
-                        }
-                        // JButton menu : retour au menu de création de partie
-                        menu = new JButton("Menu");
-                        menu.setSize(10, 10);
-                        menu.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),
-                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
-                        
+                // JPanel announcement : annonce la victoire ou la défaite du joueur
+                announcement = new JLabel();
+                if (type == 'v') {
+                        announcement.setText("Victory !");
+                } else if (type == 'd') {
+                        announcement.setText("Defeat");
+                }
+                // JButton menu : retour au menu de création de partie
+                menu = new JButton("Menu");
+                menu.setSize(10, 10);
+                menu.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),
+                                gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
 
-                        // JButton restart : recommencer une partie avec les mêmes réglages
-                        restart = new JButton("Restart");
-                        restart.setSize(10, 10);
-                        restart.setLocation(gameEnd.getWidth() / 2 + 10,
-                                        gameEnd.getHeight() / 2 + (restart.getHeight() + 10));
-                        // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
-                        quit = new JButton("Quit Game");
-                        quit.setSize(10, 10);
-                        quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth() / 2),
-                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
+                // JButton restart : recommencer une partie avec les mêmes réglages
+                restart = new JButton("Restart");
+                restart.setSize(10, 10);
+                restart.setLocation(gameEnd.getWidth() / 2 + 10,
+                                gameEnd.getHeight() / 2 + (restart.getHeight() + 10));
+                // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
+                quit = new JButton("Quit Game");
+                quit.setSize(10, 10);
+                quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth() / 2),
+                                gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
 
-                        // AJout des éléments au Jpanel de fin de partie
+                // AJout des éléments au Jpanel de fin de partie
 
-                        gameEnd.add(menu);
-                        gameEnd.add(restart);
-                        gameEnd.add(quit);
-                        gameEnd.add(announcement);
-                        gameZone.add(gameEnd);
-                        this.setVisible(true);
+                gameEnd.add(menu);
+                gameEnd.add(restart);
+                gameEnd.add(quit);
+                gameEnd.add(announcement);
+                gameZone.add(gameEnd);
+                this.setVisible(true);
         }
 }
