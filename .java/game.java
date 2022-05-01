@@ -21,8 +21,8 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 0;
-        target = new Target(window.getWidth() - 100,  100,50);
-        updateScore=new Timer(100,this);
+        target = new Target(window.getWidth() - 100, 100, 50);
+        updateScore = new Timer(100, this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -41,14 +41,14 @@ public class Game implements ActionListener {
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this);
             updateScore.start();
-        } else if(e.getSource()==updateScore){
-            String scoreText = "Score : "+ player.score;
+        } else if (e.getSource() == updateScore) {
+            String scoreText = "Score : " + player.score;
             window.score.setText(scoreText);
-            if(roundNb>4  && !window.gameZone.shooting){
+            if (roundNb > 4 && !window.gameZone.shooting) {
                 gameEnd();
             }
-             
-        }else if (e.getSource() == window.menu) { // l'utilisateur appuie sur le bouton menu
+
+        } else if (e.getSource() == window.menu) { // l'utilisateur appuie sur le bouton menu
             window.setVisible(false);
             window.dispose();
             window = new UI('m'); // crée une fenêtre "menu"
@@ -56,12 +56,12 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.shoot && !window.gameZone.shooting) {
 
-            if (roundNb < 5 ) {
+            if (roundNb < 5) {
 
                 roundNb++; // décompte du nombre de tours restants
 
                 double angleInit = window.angle.getValue();
-                double speedInit=0;
+                double speedInit = 0;
                 arrowType = window.arrowType.getSelectedIndex();
 
                 // réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
@@ -75,36 +75,37 @@ public class Game implements ActionListener {
 
                 windSpeed = difficulty;
 
-                int x =(int)(40+(40)*Math.cos((double)angleInit));
-                int y =(int)(130+(40)*Math.sin((double)angleInit));
+                int x = (int) (40 + (40) * Math.cos((double) angleInit));
+                int y = (int) (130 + (40) * Math.sin((double) angleInit));
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
-                window.gameZone.shoot(arrow,player);
+                window.gameZone.shoot(arrow, player);
             }
         } else if (e.getSource() == window.preview) { // bouton preview appuyé
-                double angleInit = window.angle.getValue();
-                double speedInit=0;
-                arrowType = window.arrowType.getSelectedIndex();
+            double angleInit = window.angle.getValue();
+            double speedInit = 0;
+            arrowType = window.arrowType.getSelectedIndex();
 
-                // réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
+            // réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
 
-                if (arrowType == 0)
-                    speedInit = window.speed.getValue() * 2;
-                if (arrowType == 1)
-                    speedInit = window.speed.getValue() * 1.5;
-                if (arrowType == 2)
-                    speedInit = window.speed.getValue() * 1.2;
-                
-                windSpeed = difficulty;
+            if (arrowType == 0)
+                speedInit = window.speed.getValue() * 2;
+            if (arrowType == 1)
+                speedInit = window.speed.getValue() * 1.5;
+            if (arrowType == 2)
+                speedInit = window.speed.getValue() * 1.2;
 
-                int x =(int)(40+(40)*Math.cos((double)angleInit));
-                int y =(int)(130+(40)*Math.sin((double)angleInit));
-                //  création d'uneflèche
-                Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); //
-                window.gameZone.preview(arrow,player);
+            windSpeed = difficulty;
 
-        } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création d'un 
+            int x = (int) (40 + (40) * Math.cos((double) angleInit));
+            int y = (int) (130 + (40) * Math.sin((double) angleInit));
+            // création d'uneflèche
+            Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); //
+            window.gameZone.preview(arrow, player);
+
+        } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création
+                                                      // d'un
             window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
         } // else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
           // fenêtre, arrête le programme

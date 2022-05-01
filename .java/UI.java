@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.*;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -38,6 +42,8 @@ public class UI extends JFrame implements ActionListener {
         JButton restart;
         JButton quit;
         JLabel announcement;
+
+        String toMemory;
 
         // attributs-parametres du menu
         //
@@ -297,7 +303,9 @@ public class UI extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == resizeTimer && type == 'm') {
                         resize();
-                        // ici rentrer les noms et les scores en utilisant filereader
+                }
+                if (e.getSource() == resizeTimer) {
+                        toMemory += username.getText();
                 }
         }
 

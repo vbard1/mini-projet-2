@@ -17,19 +17,19 @@ public class GameZone extends JPanel implements ActionListener {
     int roundNb;
 
     public GameZone() {
-        target = new Target(width - 100, height-100,50);
-        roundNb=0;
+        target = new Target(width - 100, height - 100, 50);
+        roundNb = 0;
     }
 
     public GameZone(int w, int h) {
         width = w;
         height = h;
-        //arrow=new Arrow();
+        // arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
-        target = new Target(width - 100,100, 50);
+        target = new Target(width - 100, 100, 50);
         setVisible(true);
-        roundNb=0;
+        roundNb = 0;
     }
 
     public void paintComponent(Graphics g) {
@@ -97,63 +97,65 @@ public class GameZone extends JPanel implements ActionListener {
         // g.drawLine(x1, y1, x2, y2);
         // g.drawLine(x1, y1, x2, y2);
         // Cible
-        g.fillRect(target.posX, height-target.posY, target.side, target.side);
-        g.drawString("Nombre de tir: "+roundNb,width-100,10);
+        g.fillRect(target.posX, height - target.posY, target.side, target.side);
+        g.drawString("Nombre de tir: " + roundNb, width - 100, 10);
         if (dessin == 1) {
 
             g.setColor(Color.black);
-            for (int i = 0; i < arrow.traj.paramTraj[0].size() ; i+=2) {
-                g.fillOval((int)arrow.traj.paramTraj[0].get(i), this.height-(int)arrow.traj.paramTraj[1].get(i), 2, 2);
-                
+            for (int i = 0; i < arrow.traj.paramTraj[0].size(); i += 2) {
+                g.fillOval((int) arrow.traj.paramTraj[0].get(i), this.height - (int) arrow.traj.paramTraj[1].get(i), 2,
+                        2);
+
             }
 
         } else if (dessin == 2) {
 
             g.setColor(arrow.arrowColor);
-            g2.rotate(-arrow.angle,(double)arrow.posX, height-(double)arrow.posY);
-            g.drawLine(arrow.posX-arrow.length/2, this.height-arrow.posY, arrow.posX+arrow.length/2, this.height-arrow.posY);
-            g2.rotate(arrow.angle,(double)arrow.posX, height-(double)arrow.posY);
+            g2.rotate(-arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
+            g.drawLine(arrow.posX - arrow.length / 2, this.height - arrow.posY, arrow.posX + arrow.length / 2,
+                    this.height - arrow.posY);
+            g2.rotate(arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
             g.drawString("" + arrow.positionNumber, 10, 10);
             g.drawString("" + arrow.angle, 20, 20);
-            g.drawString("" + arrow.posX+" "+arrow.posY, 10, 30);
+            g.drawString("" + arrow.posX + " " + arrow.posY, 10, 30);
 
         }
 
     }
 
-    public void preview(Arrow a,Player p) {
+    public void preview(Arrow a, Player p) {
         dessin = 1;
-        arrow= a;
+        arrow = a;
         arrow.positionNumber = 0;
-        player=p;
+        player = p;
         repaint();
     }
 
-    public void shoot(Arrow a,Player p) {
+    public void shoot(Arrow a, Player p) {
         roundNb++;
         dessin = 2;
         arrow = a;
-        player=p;
-        shooting=true;
+        player = p;
+        shooting = true;
         arrowTimer.start();
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == arrowTimer && arrow.nextPos(target,width,height)) {
+        if (e.getSource() == arrowTimer && arrow.nextPos(target, width, height)) {
             repaint();
-        }else if(e.getSource() == arrowTimer && arrow.reachedTarget==true){
+        } else if (e.getSource() == arrowTimer && arrow.reachedTarget == true) {
             arrowTimer.stop();
-            arrow.positionNumber=0;
-            shooting=false;
-            arrow.reachedTarget=false;
+            arrow.positionNumber = 0;
+            shooting = false;
+            arrow.reachedTarget = false;
             player.score++;
-        
+
         } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();
-            arrow.positionNumber=0;
-            shooting=false;
-            arrow.reachedTarget=false;
+            arrow.positionNumber = 0;
+            shooting = false;
+            arrow.reachedTarget = false;
         }
     }
 }
