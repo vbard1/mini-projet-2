@@ -1,29 +1,11 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
 import javax.swing.*;
-
-import java.awt.Graphics;
-
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-
 import java.awt.Image;
-
 
 //TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
 
@@ -56,8 +38,8 @@ public class UI extends JFrame implements ActionListener {
 
         JPanel gameEnd;
         JButton restart;
-        JButton quit ;
-        JLabel announcement ;
+        JButton quit;
+        JLabel announcement;
 
         // attributs-parametres du menu
         //
@@ -303,7 +285,7 @@ public class UI extends JFrame implements ActionListener {
                         background.add(settings);
                         background.add(gameZone);
                         settings.setVisible(true);
-                
+
                 } else if (type == 'g') {
 
                         // Panel contenant l'affichage du jeu
@@ -405,31 +387,34 @@ public class UI extends JFrame implements ActionListener {
                         background.add(settings);
                         background.add(gameZone);
                         settings.setVisible(true);
-                }else if ((type == 'v')||(type == 'd')){
+                } else if ((type == 'v') || (type == 'd')) {
 
-                        // Création du JPanel contenant le résustat/choix de fin de partie, style popup (relatif), au centre de la fenêtre de jeu
+                        // Création du JPanel contenant le résustat/choix de fin de partie, style popup
+                        // (relatif), au centre de la fenêtre de jeu
                         gameEnd = new JPanel();
-                        gameEnd.setSize((int)(this.getWidth()/2), (int)(this.getHeight()/2));
+                        gameEnd.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
                         gameEnd.setLocation(0, 0);
 
-                        //JPanel announcement : annonce la victoire ou la défaite du joueur
+                        // JPanel announcement : annonce la victoire ou la défaite du joueur
                         announcement = new JLabel();
-                        if (type == 'v'){
+                        if (type == 'v') {
                                 announcement.setText("Victory !");
-                        }
-                        else if (type == 'd'){
+                        } else if (type == 'd') {
                                 announcement.setText("Defeat");
                         }
-                        //JButton menu : retour au menu de création de partie
+                        // JButton menu : retour au menu de création de partie
                         menu = new JButton("Menu");
-                        menu.setLocation(gameEnd.getWidth()/2-(menu.getWidth()+10), gameEnd.getHeight()/2+(menu.getHeight()+10) );
+                        menu.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),
+                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
 
-                        //JButton restart : recommencer une partie avec les mêmes réglages
+                        // JButton restart : recommencer une partie avec les mêmes réglages
                         restart = new JButton("Restart");
-                        restart.setLocation(gameEnd.getWidth()/2+10, gameEnd.getHeight()/2+(restart.getHeight()+10) );
+                        restart.setLocation(gameEnd.getWidth() / 2 + 10,
+                                        gameEnd.getHeight() / 2 + (restart.getHeight() + 10));
                         // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
                         quit = new JButton("Quit Game");
-                        quit.setLocation(gameEnd.getWidth()/2-(quit.getWidth()/2), gameEnd.getHeight()/2+(menu.getHeight()+10) );
+                        quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth() / 2),
+                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
 
                         // AJout des éléments au Jpanel de fin de partie
 
