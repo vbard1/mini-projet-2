@@ -13,9 +13,12 @@ public class GameZone extends JPanel implements ActionListener {
     Target target;
     Timer arrowTimer;
     Player player;
+    boolean shooting;
+    int roundNb;
 
     public GameZone() {
         target = new Target(width - 100, height-100,50);
+        roundNb=0;
     }
 
     public GameZone(int w, int h) {
@@ -26,6 +29,7 @@ public class GameZone extends JPanel implements ActionListener {
         arrowTimer = new Timer(1, this);
         target = new Target(width - 100,100, 50);
         setVisible(true);
+        roundNb=0;
     }
 
     public void paintComponent(Graphics g) {
@@ -94,7 +98,7 @@ public class GameZone extends JPanel implements ActionListener {
         // g.drawLine(x1, y1, x2, y2);
         // Cible
         g.fillRect(target.posX, height-target.posY, target.side, target.side);
-        g.drawString("" + target.posX+" "+(height-target.posY )+" " +(height-target.posY+target.side), 10,40);
+        g.drawString("Nombre de tir: "+roundNb,width-100,10);
         if (dessin == 1) {
 
             g.setColor(Color.black);
@@ -126,39 +130,29 @@ public class GameZone extends JPanel implements ActionListener {
     }
 
     public void shoot(Arrow a,Player p) {
+        roundNb++;
         dessin = 2;
         arrow = a;
         player=p;
+        shooting=true;
         arrowTimer.start();
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        /*if (e.getSource() == arrowTimer && i < arrow.trajSize && (int) ((int) arrow.traj.paramTraj[0].get(i)
-                + (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))) <= this.width
-                && this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
-                        + (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))) <= this.height) {
-            if (!arrow.collision(target, i)) {
-                i++;
-                repaint();
-            } else {
-                score++;
-            }
-        } else if (e.getSource() == arrowTimer) {
-            arrowTimer.stop();
-            i = 0;
-        }*/
         if (e.getSource() == arrowTimer && arrow.nextPos(target,width,height)) {
             repaint();
         }else if(e.getSource() == arrowTimer && arrow.reachedTarget==true){
             arrowTimer.stop();
             arrow.positionNumber=0;
+            shooting=false;
             arrow.reachedTarget=false;
             player.score++;
         
         } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();
             arrow.positionNumber=0;
+            shooting=false;
             arrow.reachedTarget=false;
         }
     }
