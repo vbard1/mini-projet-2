@@ -185,7 +185,6 @@ public class UI extends JFrame implements ActionListener {
                 } else if (type == 'g') {
 
                         // Panel contenant l'affichage du jeu
-
                         gameZone = new GameZone(background.getWidth(), (int) (background.getHeight() * 0.85));
                         gameZone.setSize(gameZone.width, gameZone.height);
                         gameZone.setLocation(0, 0);
@@ -282,43 +281,10 @@ public class UI extends JFrame implements ActionListener {
 
                         background.add(settings);
                         background.add(gameZone);
-                        settings.setVisible(true);
+                        
                 } else if ((type == 'v') || (type == 'd')) {
 
-                        // Création du JPanel contenant le résustat/choix de fin de partie, style popup
-                        // (relatif), au centre de la fenêtre de jeu
-                        gameEnd = new JPanel();
-                        gameEnd.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
-                        gameEnd.setLocation(0, 0);
-
-                        // JPanel announcement : annonce la victoire ou la défaite du joueur
-                        announcement = new JLabel();
-                        if (type == 'v') {
-                                announcement.setText("Victory !");
-                        } else if (type == 'd') {
-                                announcement.setText("Defeat");
-                        }
-                        // JButton menu : retour au menu de création de partie
-                        menu = new JButton("Menu");
-                        menu.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),
-                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
-
-                        // JButton restart : recommencer une partie avec les mêmes réglages
-                        restart = new JButton("Restart");
-                        restart.setLocation(gameEnd.getWidth() / 2 + 10,
-                                        gameEnd.getHeight() / 2 + (restart.getHeight() + 10));
-                        // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
-                        quit = new JButton("Quit Game");
-                        quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth() / 2),
-                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
-
-                        // AJout des éléments au Jpanel de fin de partie
-
-                        gameEnd.add(menu);
-                        gameEnd.add(restart);
-                        gameEnd.add(quit);
-                        gameEnd.add(announcement);
-                        gameEnd.setVisible(true);
+                        
                 }
                 // Ajout à la fenêtre
                 this.add(background);
@@ -389,5 +355,47 @@ public class UI extends JFrame implements ActionListener {
                 startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15 / 2));
 
         }
+        public void gameEnd(char type){
+                // Création du JPanel contenant le résustat/choix de fin de partie, style popup
+                        // (relatif), au centre de la fenêtre de jeu
+                        //this.setLocation((int) (this.getWidth() / 4),(int) (this.getHeight() / 4) );
+                        //this.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
+                        gameEnd = new JPanel();
+                        gameEnd.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
+                        gameEnd.setLocation((int) (this.getWidth() / 4),(int) (this.getHeight() / 4));
 
+                        // JPanel announcement : annonce la victoire ou la défaite du joueur
+                        announcement = new JLabel();
+                        if (type == 'v') {
+                                announcement.setText("Victory !");
+                        } else if (type == 'd') {
+                                announcement.setText("Defeat");
+                        }
+                        // JButton menu : retour au menu de création de partie
+                        menu = new JButton("Menu");
+                        menu.setSize(10, 10);
+                        menu.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),
+                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
+                        
+
+                        // JButton restart : recommencer une partie avec les mêmes réglages
+                        restart = new JButton("Restart");
+                        restart.setSize(10, 10);
+                        restart.setLocation(gameEnd.getWidth() / 2 + 10,
+                                        gameEnd.getHeight() / 2 + (restart.getHeight() + 10));
+                        // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
+                        quit = new JButton("Quit Game");
+                        quit.setSize(10, 10);
+                        quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth() / 2),
+                                        gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
+
+                        // AJout des éléments au Jpanel de fin de partie
+
+                        gameEnd.add(menu);
+                        gameEnd.add(restart);
+                        gameEnd.add(quit);
+                        gameEnd.add(announcement);
+                        gameZone.add(gameEnd);
+                        this.setVisible(true);
+        }
 }
