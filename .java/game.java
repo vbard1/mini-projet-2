@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class Game implements ActionListener {
 
@@ -13,13 +14,15 @@ public class Game implements ActionListener {
     int arrowType;
     int windSpeed;
     boolean victory;
+    Timer updateScore;
 
     public Game(UI menu) {
         window = menu;
         player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 0;
-        target = new Target(window.getWidth() - 100, window.getHeight() - 100);
+        target = new Target(window.getWidth() - 100,  100,50);
+        updateScore=new Timer(100,this);
 
         if(roundNb>=5){
             gameEnd();
@@ -42,7 +45,12 @@ public class Game implements ActionListener {
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this);
-        } else if (e.getSource() == window.menu) { // l'utilisateur appuie sur le bouton menu
+            updateScore.start();
+        } else if(e.getSource()==updateScore){
+            String scoreText = "Score : "+ player.score;
+            window.score.setText(scoreText);
+            gameEnd();
+        }else if (e.getSource() == window.menu) { // l'utilisateur appuie sur le bouton menu
             window.setVisible(false);
             window.dispose();
             window = new UI('m'); // crée une fenêtre "menu"
@@ -55,7 +63,7 @@ public class Game implements ActionListener {
                 roundNb++; // décompte du nombre de tours restants
 
                 double angleInit = window.angle.getValue();
-                double speedInit = 0;
+                double speedInit=0;
                 arrowType = window.arrowType.getSelectedIndex();
 
                 // réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
@@ -66,37 +74,38 @@ public class Game implements ActionListener {
                     speedInit = window.speed.getValue() * 0.8;
                 if (arrowType == 2)
                     speedInit = window.speed.getValue() * 0.7;
-
-                /*
-                 * if (difficulty == 0)
-                 * windSpeed = ;
-                 * if (difficulty == 1)
-                 * windSpeed = 2;
-                 * if (difficulty == 2)
-                 * windSpeed = 3;
-                 */
+                
                 windSpeed = difficulty;
 
-                int x = 70;
-                int y = 125;
+                int x =(int)(40+(40)*Math.cos((double)angleInit));
+                int y =(int)(120+(40)*Math.sin((double)angleInit));
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
-                window.gameZone.shoot(arrow);
-                if (arrow.reachedTarget) {
-                    player.score++;
-                }
-                String scoreText = "Score : "+ player.score;
-                window.score.setText(scoreText);
+                window.gameZone.shoot(arrow,player);
             }
         } else if (e.getSource() == window.preview) { // bouton preview appuyé
-            int x = 70;
-            int y = 125;
-            Trajectoire t = new Trajectoire(window.angle.getValue(), window.speed.getValue(), 0, y, x); // création de
-                                                                                                        // la
-                                                                                                        // trajectoire
-                                                                                                        // correspondante
-            window.gameZone.preview(t);
+                double angleInit = window.angle.getValue();
+                double speedInit=0;
+                arrowType = window.arrowType.getSelectedIndex();
+
+                // réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
+
+                if (arrowType == 0)
+                    speedInit = window.speed.getValue() * 1.5;
+                if (arrowType == 1)
+                    speedInit = window.speed.getValue() * 0.8;
+                if (arrowType == 2)
+                    speedInit = window.speed.getValue() * 0.7;
+                
+                windSpeed = difficulty;
+
+                int x =(int)(40+(40)*Math.cos((double)angleInit));
+                int y =(int)(120+(40)*Math.sin((double)angleInit));
+                //  création d'uneflèche
+                Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); //
+                window.gameZone.preview(arrow,player);
+
         } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création d'un 
             window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
         }//else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la fenêtre, arrête le programme
@@ -118,12 +127,11 @@ public class Game implements ActionListener {
     }
 
     public void gameEnd() {
-        if (player.score > 2) {
+        if (player.score > 2 && roundNb==5) {
             window = new UI('v');
-        } else {
+        } else if(roundNb==5) {
             window = new UI('d');
         }
-        roundNb = 0;
     }
 
 }
