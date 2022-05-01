@@ -9,23 +9,22 @@ public class GameZone extends JPanel implements ActionListener {
     int height;
     Graphics graph;
     int dessin;
-    Trajectoire traj;
     Arrow arrow;
-    int i = 0;
     Target target;
     Timer arrowTimer;
-    int score = 0;
+    Player player;
 
     public GameZone() {
-        target = new Target(width - 100, height - 100);
+        target = new Target(width - 100, height-100,50);
     }
 
     public GameZone(int w, int h) {
         width = w;
         height = h;
+        //arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
-        target = new Target(width - 100, height - 100);
+        target = new Target(width - 100,100, 50);
         setVisible(true);
     }
 
@@ -66,60 +65,6 @@ public class GameZone extends JPanel implements ActionListener {
             Shape bow = new Arc2D.Double(80 - 50, height - 125 - 100 / 2, 50, 100, 100, -190, Arc2D.CHORD);
             g2.draw(bow);
         } else {
-            /*
-             * int
-             * newX1=(int)(+40.0*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));//écart
-             * entre la nouvelle abscisse de l'éxtrémité du bras et l'ancienne
-             * int
-             * newY1=(int)(40*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));//écart
-             * entre la nouvelle ordonnée de l'éxtrémité du bras et l'ancienne
-             * int newX2=(int)(+40.0*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-             * int newY2=(int)(+40*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-             * int newX0=(int)(10.0*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-             * int newY0=(int)(10*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-             * int[] xArmL = { 40-newX0, 40+newX2-newX0, 40+newX1, 40 };
-             * int[] yArmL = { height - 120-newY0, height - 130-newY2, height - 120-newY1,
-             * height - 120 };
-             * 
-             * int
-             * newX1R=(int)(20*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));//écart
-             * entre la nouvelle abscisse de l'éxtrémité du bras et l'ancienne
-             * int
-             * newY1R=(int)(20*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));//écart
-             * entre la nouvelle ordonnée de l'éxtrémité du bras et l'ancienne
-             * int newX2R=(int)(20*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-             * int newY2R=(int)(20*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-             * int newX0R=(int)(10.0*(Math.sin((double)arrow.traj.paramTraj[2].get(0))));
-             * int newY0R=(int)(10*(Math.cos((double)arrow.traj.paramTraj[2].get(0))));
-             * int[] xArmR = {/*HG 20-newX1R, 20, 20+newX0R, 20-newX2R+newX0R };
-             * int[] yArmR = { height - 130+newY1R, height - 130, height - 130+newY0R,
-             * height - 130+newY2R+newY0R };
-             * g.fillPolygon(xArmR, yArmR, xArmR.length);
-             * 
-             * g.fillPolygon(xArmL, yArmL, xArmL.length);
-             * 
-             * int
-             * newWidth=(int)(25*Math.cos((double)arrow.traj.paramTraj[2].get(0))+100*Math.
-             * sin((double)arrow.traj.paramTraj[2].get(0)));
-             * int
-             * newHeight=(int)(100*Math.cos((double)arrow.traj.paramTraj[2].get(0))+25*Math.
-             * sin((double)arrow.traj.paramTraj[2].get(0)));
-             * newWidth=75;
-             * newHeight=75;
-             * g.drawArc((80+newX1+newX2-newX0)/2-newWidth/2, height -
-             * 130-newY1-newHeight/2, newWidth, newHeight,
-             * (int)(90+Math.toDegrees((double)arrow.traj.paramTraj[2].get(0))),-180);
-             * g.drawString("Pos "+((double)arrow.traj.paramTraj[2].get(0))*180/Math.PI, 10,
-             * 30);
-             * g.drawString("x "+(15+newX1)+" y "+(height - 130-newY1), 10, 40);
-             * g.drawString("strt ang "+(int)(90+Math.toDegrees((double)arrow.traj.paramTraj
-             * [2].get(0)))+" end ang "+(int)
-             * (Math.toDegrees((double)arrow.traj.paramTraj[2].get(0))-180), 10, 50);
-             */
-            // g.drawString("x "+xArmL[0]+" "+xArmL[1]+" "+xArmL[2]+" "+xArmL[3]+" ", 10,
-            // 40);
-            // g.drawString("y "+yArmL[0]+" "+yArmL[1]+" "+yArmL[2]+" "+yArmL[3]+" ", 10,
-            // 50);
 
             g.fillRect(26, height - 140, 8, 10);
             Shape armL = new Rectangle.Double(40, height - 130, 40, 10);
@@ -148,51 +93,48 @@ public class GameZone extends JPanel implements ActionListener {
         // g.drawLine(x1, y1, x2, y2);
         // g.drawLine(x1, y1, x2, y2);
         // Cible
-        g.fillRect(target.posX, this.height - 100, 50, 50);
-
+        g.fillRect(target.posX, height-target.posY, target.side, target.side);
+        g.drawString("" + target.posX+" "+(height-target.posY )+" " +(height-target.posY+target.side), 10,40);
         if (dessin == 1) {
 
             g.setColor(Color.black);
-            for (int i = 0; i < traj.paramTraj[0].size() - 1; i += 3) {
-                g.fillOval((int) (traj.paramTraj[0].get(i)), this.height - (int) (traj.paramTraj[1].get(i)), 3, 3);
+            for (int i = 0; i < arrow.traj.paramTraj[0].size() ; i+=2) {
+                g.fillOval((int)arrow.traj.paramTraj[0].get(i), this.height-(int)arrow.traj.paramTraj[1].get(i), 2, 2);
+                
             }
+
         } else if (dessin == 2) {
 
             g.setColor(arrow.arrowColor);
-            g.drawLine(
-                    (int) ((int) arrow.traj.paramTraj[0].get(i)
-                            - (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))),
-                    this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
-                            - (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))),
-                    (int) ((int) arrow.traj.paramTraj[0].get(i)
-                            + (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))),
-                    this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
-                            + (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))));
-            g.drawString("" + i, 10, 10);
-            g.drawString("" + (double) (arrow.traj.paramTraj[2].get(i)), 20, 20);
+            g2.rotate(-arrow.angle,(double)arrow.posX, height-(double)arrow.posY);
+            g.drawLine(arrow.posX-arrow.length/2, this.height-arrow.posY, arrow.posX+arrow.length/2, this.height-arrow.posY);
+            g2.rotate(arrow.angle,(double)arrow.posX, height-(double)arrow.posY);
+            g.drawString("" + arrow.positionNumber, 10, 10);
+            g.drawString("" + arrow.angle, 20, 20);
+            g.drawString("" + arrow.posX+" "+arrow.posY, 10, 30);
 
         }
 
     }
 
-    public void preview(Trajectoire t) {
+    public void preview(Arrow a,Player p) {
         dessin = 1;
-        traj = t;
-        i = 0;
+        arrow= a;
+        arrow.positionNumber = 0;
+        player=p;
         repaint();
-
     }
 
-    public void shoot(Arrow a) {
+    public void shoot(Arrow a,Player p) {
         dessin = 2;
         arrow = a;
+        player=p;
         arrowTimer.start();
-
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == arrowTimer && i < arrow.trajSize - 1 && (int) ((int) arrow.traj.paramTraj[0].get(i)
+        /*if (e.getSource() == arrowTimer && i < arrow.trajSize && (int) ((int) arrow.traj.paramTraj[0].get(i)
                 + (arrow.length / 2) * Math.cos((double) (arrow.traj.paramTraj[2].get(i)))) <= this.width
                 && this.height - ((int) ((int) arrow.traj.paramTraj[1].get(i)
                         + (arrow.length / 2) * Math.sin((double) (arrow.traj.paramTraj[2].get(i))))) <= this.height) {
@@ -205,6 +147,19 @@ public class GameZone extends JPanel implements ActionListener {
         } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();
             i = 0;
+        }*/
+        if (e.getSource() == arrowTimer && arrow.nextPos(target,width,height)) {
+            repaint();
+        }else if(e.getSource() == arrowTimer && arrow.reachedTarget==true){
+            arrowTimer.stop();
+            arrow.positionNumber=0;
+            arrow.reachedTarget=false;
+            player.score++;
+        
+        } else if (e.getSource() == arrowTimer) {
+            arrowTimer.stop();
+            arrow.positionNumber=0;
+            arrow.reachedTarget=false;
         }
     }
 }
