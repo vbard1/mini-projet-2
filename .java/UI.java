@@ -7,8 +7,6 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
-//TODO @abdel pour résoudre les barres qui s'affichent pas https://stackoverflow.com/questions/16737767/scroll-bar-not-visible-in-jpanel
-
 public class UI extends JFrame implements ActionListener {
 
         Timer resizeTimer;
