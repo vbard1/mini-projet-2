@@ -13,8 +13,11 @@ public class Game implements ActionListener {
     Target target;
     int arrowType;
     int windSpeed;
+<<<<<<< HEAD
     boolean victory;
     Timer updateScore;
+=======
+>>>>>>> 0ca3e8f5e65e221b12f85e917959dd1d2079a5a0
 
     public Game(UI menu) {
         window = menu;
@@ -24,9 +27,9 @@ public class Game implements ActionListener {
         target = new Target(window.getWidth() - 100,  100,50);
         updateScore=new Timer(100,this);
 
-        if(roundNb>=5){
+        if (roundNb >= 5) {
             gameEnd();
-            
+
         }
     }
 
@@ -69,12 +72,17 @@ public class Game implements ActionListener {
                 // réglage des paramètres en fn de la difficulté et type de flèche sélectionnés
 
                 if (arrowType == 0)
-                    speedInit = window.speed.getValue() * 1.5;
+                    speedInit = window.speed.getValue() * 2;
                 if (arrowType == 1)
-                    speedInit = window.speed.getValue() * 0.8;
+                    speedInit = window.speed.getValue() * 1.5;
                 if (arrowType == 2)
+<<<<<<< HEAD
                     speedInit = window.speed.getValue() * 0.7;
                 
+=======
+                    speedInit = window.speed.getValue() * 1.2;
+
+>>>>>>> 0ca3e8f5e65e221b12f85e917959dd1d2079a5a0
                 windSpeed = difficulty;
 
                 int x =(int)(40+(40)*Math.cos((double)angleInit));
@@ -82,6 +90,7 @@ public class Game implements ActionListener {
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
+<<<<<<< HEAD
                 window.gameZone.shoot(arrow,player);
             }
         } else if (e.getSource() == window.preview) { // bouton preview appuyé
@@ -107,10 +116,30 @@ public class Game implements ActionListener {
                 window.gameZone.preview(arrow,player);
 
         } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création d'un 
+=======
+                window.gameZone.shoot(arrow);
+                if (arrow.reachedTarget) {
+                    player.score++;
+                }
+                String scoreText = "Score : " + player.score;
+                window.score.setText(scoreText);
+            }
+        } else if (e.getSource() == window.preview) { // bouton preview appuyé
+            int x = 70;
+            int y = 125;
+            Trajectoire t = new Trajectoire(window.angle.getValue(), window.speed.getValue(), 0, y, x); // création de
+                                                                                                        // la
+                                                                                                        // trajectoire
+                                                                                                        // correspondante
+            window.gameZone.preview(t);
+        } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création
+                                                      // d'un
+>>>>>>> 0ca3e8f5e65e221b12f85e917959dd1d2079a5a0
             window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
-        }//else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la fenêtre, arrête le programme
+        } // else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
+          // fenêtre, arrête le programme
 
-        //}
+        // }
     }
 
     // TODO fin de partie
