@@ -159,6 +159,7 @@ public class GameZone extends JPanel implements ActionListener {
             this.target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)),
                     (int) (Math.random() * (100)),
                     (int) (Math.random() * (50) + 10));
+            dessin = 0;
             repaint();
 
         } else if (e.getSource() == arrowTimer) {
