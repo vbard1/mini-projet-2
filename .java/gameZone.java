@@ -22,7 +22,7 @@ public class GameZone extends JPanel implements ActionListener {
         roundNb = 0;
     }
 
-    public GameZone(int w, int h, UI ui) {
+    public GameZone(int w, int h) {
         width = w;
         height = h;
         // arrow=new Arrow();
@@ -31,7 +31,7 @@ public class GameZone extends JPanel implements ActionListener {
         target = new Target(width - 100, 100, 50);
         setVisible(true);
         roundNb = 0;
-        associatedUI = ui;
+        
     }
 
     public void paintComponent(Graphics g) {
@@ -152,6 +152,7 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
             player.score++;
+            
 
         } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();

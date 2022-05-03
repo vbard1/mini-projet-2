@@ -16,8 +16,8 @@ public class Game implements ActionListener {
     boolean victory;
     Timer updateScore;
 
-    public Game(UI menu) {
-        window = menu;
+    public Game(UI fenetre) {
+        window = fenetre;
         player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 0;
@@ -134,6 +134,9 @@ public class Game implements ActionListener {
             window.gameEnd('d');
         }
         System.out.println("aaaaaa");
+        // stockage du score
+        window.toMemory += " " + player.score;
+        window.storeScore();
     }
 
 }

@@ -191,7 +191,7 @@ public class UI extends JFrame implements ActionListener {
                 } else if (type == 'g') {
 
                         // Panel contenant l'affichage du jeu
-                        gameZone = new GameZone(background.getWidth(), (int) (background.getHeight() * 0.85), this);
+                        gameZone = new GameZone(background.getWidth(), (int) (background.getHeight() * 0.85));
                         gameZone.setSize(gameZone.width, gameZone.height);
                         gameZone.setLocation(0, 0);
 
