@@ -10,7 +10,6 @@ public class Game implements ActionListener {
     UI window;
     int roundNb;
     Arrow arrow;
-    Target target;
     int arrowType;
     int windSpeed;
     boolean victory;
@@ -21,8 +20,6 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 0;
-        target = new Target((int) (Math.random() * (window.getWidth() - 100)), (int) (Math.random() * (100)),
-                (int) Math.random() * (50));
         updateScore = new Timer(100, this);
     }
 
@@ -76,14 +73,14 @@ public class Game implements ActionListener {
 
                 windSpeed = difficulty;
 
-                int x = (int) (40 + (40) * Math.cos((double) angleInit));
-                int y = (int) (130 + (40) * Math.sin((double) angleInit));
+                int x = (int) (40 + (20) * Math.cos((double) Math.toRadians(angleInit)));
+                int y = (int) (130 + (20) * Math.sin((double)  Math.toRadians(angleInit)));
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
                 window.gameZone.shoot(arrow, player);
             }
-        } else if (e.getSource() == window.preview) { // bouton preview appuyé
+        } else if (e.getSource() == window.preview && !window.gameZone.shooting) { // bouton preview appuyé
             double angleInit = window.angle.getValue();
             double speedInit = 0;
             arrowType = window.arrowType.getSelectedIndex();
@@ -99,8 +96,9 @@ public class Game implements ActionListener {
 
             windSpeed = difficulty;
 
-            int x = (int) (40 + (40) * Math.cos((double) angleInit));
-            int y = (int) (130 + (40) * Math.sin((double) angleInit));
+            int x = (int) (40 + (20) * Math.cos((double) Math.toRadians(angleInit)));
+            int y = (int) (130 + (20) * Math.sin((double)  Math.toRadians(angleInit)));
+
             // création d'uneflèche
             Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); //
             window.gameZone.preview(arrow, player);
