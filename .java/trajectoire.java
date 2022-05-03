@@ -67,7 +67,7 @@ public class Trajectoire {
         int y = 0;
         double vitesse;
         int absciss = 0;
-        speedInit /= (windSpeed/2 + 1);
+        speedInit /= (windSpeed / 2 + 1);
         while (absciss < maxX) {
             // Trajectoire de y en fonction de x dans le vide
             vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)

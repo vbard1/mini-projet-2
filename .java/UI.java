@@ -406,4 +406,8 @@ public class UI extends JFrame implements ActionListener {
                 gameZone.add(gameEnd);
                 this.setVisible(true);
         }
+
+        public void storeScore() {
+                System.out.println(toMemory);
+        }
 }
