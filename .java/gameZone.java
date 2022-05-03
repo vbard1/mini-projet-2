@@ -8,7 +8,7 @@ public class GameZone extends JPanel implements ActionListener {
     int width;
     int height;
     Graphics graph;
-    int dessin;
+    int drawingType;
     Arrow arrow;
     Target target;
     Timer arrowTimer;
@@ -107,8 +107,11 @@ public class GameZone extends JPanel implements ActionListener {
         // g.drawLine(x1, y1, x2, y2);
         // Cible
         g.fillRect(target.posX, height - target.posY, target.side, target.side);
-        g.drawString("Nombre de tir: " + roundNb, width - 100, 10);
-        if (dessin == 1) {
+        g.drawString("Nombre de tir: " + roundNb, width - 100, 10); 
+        if(drawingType==-1){
+            g.drawString("Bravo! Tu as touché la cible",100,200);
+        }
+        else if (drawingType == 1) {
 
             g.setColor(Color.black);
             for (int i = 0; i < arrow.traj.paramTraj[0].size(); i += 2) {
@@ -117,7 +120,7 @@ public class GameZone extends JPanel implements ActionListener {
 
             }
 
-        } else if (dessin == 2) {
+        } else if (drawingType == 2) {
 
             g.setColor(arrow.arrowColor);
             g2.rotate(-arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
@@ -133,7 +136,7 @@ public class GameZone extends JPanel implements ActionListener {
     }
 
     public void preview(Arrow a, Player p) {
-        dessin = 1;
+        drawingType = 1;
         arrow = a;
         arrow.positionNumber = 0;
         player = p;
@@ -142,7 +145,7 @@ public class GameZone extends JPanel implements ActionListener {
 
     public void shoot(Arrow a, Player p) {
         roundNb++;
-        dessin = 2;
+        drawingType = 2;
         arrow = a;
         player = p;
         shooting = true;
@@ -162,7 +165,7 @@ public class GameZone extends JPanel implements ActionListener {
             this.target = new Target((int) (-100 * Math.random() + (associatedUI.getWidth() - 100)),
                     (int) (Math.random() * -75 + (associatedUI.getHeight() - 100)),
                     (int) (Math.random() * (50) + 10));
-            dessin = 0;
+            drawingType = -1;
             repaint();
 
         } else if (e.getSource() == arrowTimer) {
