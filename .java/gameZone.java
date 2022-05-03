@@ -19,7 +19,8 @@ public class GameZone extends JPanel implements ActionListener {
 
     public GameZone(UI ui) {
         associatedUI = ui;
-        target = new Target((int) (-100 * Math.random() + (associatedUI.getWidth() - 100)),
+        target = new Target(
+                (int) (Math.random() * -100 + (associatedUI.getWidth() - 100)),
                 (int) (Math.random() * -75 + (associatedUI.getHeight() - 100)),
                 (int) (Math.random() * (50) + 10));
         roundNb = 0;
