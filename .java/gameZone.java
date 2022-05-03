@@ -65,6 +65,7 @@ public class GameZone extends JPanel implements ActionListener {
         // g.fillOval(20, height - 155, 25, 25);
         // Bras
         // g.fillRect(20, height-130, 20,10 );
+        
         if (arrow == null) {
             g.fillRect(40, height - 130, 40, 10);
             g.fillRect(0, height - 130, 20, 10);
@@ -119,7 +120,7 @@ public class GameZone extends JPanel implements ActionListener {
             g2.rotate(arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
             g.drawString("" + arrow.positionNumber, 10, 10);
             g.drawString("" + arrow.angle, 20, 20);
-            g.drawString("" + arrow.posX + " " + arrow.posY, 10, 30);
+            g.drawString("" + arrow.traj.paramTraj[0].get(0)+ " " + arrow.traj.paramTraj[1].get(0), 10, 50);
 
         }
 
