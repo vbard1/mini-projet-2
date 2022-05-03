@@ -15,13 +15,14 @@ public class GameZone extends JPanel implements ActionListener {
     Player player;
     boolean shooting;
     int roundNb;
+    UI associatedUI;
 
     public GameZone() {
         target = new Target(width - 100, height - 100, 50);
         roundNb = 0;
     }
 
-    public GameZone(int w, int h) {
+    public GameZone(int w, int h, UI ui) {
         width = w;
         height = h;
         // arrow=new Arrow();
@@ -30,6 +31,7 @@ public class GameZone extends JPanel implements ActionListener {
         target = new Target(width - 100, 100, 50);
         setVisible(true);
         roundNb = 0;
+        associatedUI = ui;
     }
 
     public void paintComponent(Graphics g) {
