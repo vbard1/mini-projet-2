@@ -31,7 +31,7 @@ public class GameZone extends JPanel implements ActionListener {
         // arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
-        target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)), (int) (Math.random() * (100))+10,
+        target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)), (int) (Math.random() * (100)),
                 (int) (Math.random() * (50) + 10));
         setVisible(true);
         roundNb = 0;

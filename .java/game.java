@@ -21,7 +21,6 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 0;
-        System.out.println("x : " + target.posX + " y : " + target.posY);
         updateScore = new Timer(100, this);
     }
 
@@ -44,6 +43,7 @@ public class Game implements ActionListener {
         } else if (e.getSource() == updateScore) {
             String scoreText = "Score : " + player.score;
             window.score.setText(scoreText);
+            System.out.println(scoreText);
             if (roundNb > 4 && !window.gameZone.shooting) {
                 gameEnd();
             }
