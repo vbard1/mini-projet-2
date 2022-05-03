@@ -17,21 +17,25 @@ public class GameZone extends JPanel implements ActionListener {
     int roundNb;
     UI associatedUI;
 
-    public GameZone() {
-        target = new Target(width - 100, height - 100, 50);
+    public GameZone(UI ui) {
+        associatedUI = ui;
+        target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)), (int) (Math.random() * (100)),
+                (int) (Math.random() * (50)));
         roundNb = 0;
     }
 
-    public GameZone(int w, int h) {
+    public GameZone(int w, int h, UI ui) {
+        associatedUI = ui;
         width = w;
         height = h;
         // arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
-        target = new Target(width - 100, 100, 50);
+        target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)), (int) (Math.random() * (100))+10,
+                (int) (Math.random() * (50) + 10));
         setVisible(true);
         roundNb = 0;
-        
+
     }
 
     public void paintComponent(Graphics g) {
@@ -152,7 +156,6 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
             player.score++;
-            
 
         } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();

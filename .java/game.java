@@ -21,8 +21,7 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         roundNb = 0;
-        target = new Target((int) (Math.random() * (window.getWidth() - 100)), (int) (Math.random() * (100)),
-                (int) Math.random() * (50));
+        System.out.println("x : " + target.posX + " y : " + target.posY);
         updateScore = new Timer(100, this);
     }
 
