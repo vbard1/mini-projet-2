@@ -19,8 +19,9 @@ public class GameZone extends JPanel implements ActionListener {
 
     public GameZone(UI ui) {
         associatedUI = ui;
-        target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)), (int) (Math.random() * (100)),
-                (int) (Math.random() * (50)));
+        target = new Target((int) (-100 * Math.random() + (associatedUI.getWidth() - 100)),
+                (int) (Math.random() * -75 + (associatedUI.getHeight() - 100)),
+                (int) (Math.random() * (50) + 10));
         roundNb = 0;
     }
 
@@ -156,8 +157,8 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
             player.score++;
-            this.target = new Target((int) (-100*Math.random() + (associatedUI.getWidth() - 100)),
-                    (int) (Math.random() * (100)),
+            this.target = new Target((int) (-100 * Math.random() + (associatedUI.getWidth() - 100)),
+                    (int) (Math.random() * -75 + (associatedUI.getHeight() - 100)),
                     (int) (Math.random() * (50) + 10));
             dessin = 0;
             repaint();
