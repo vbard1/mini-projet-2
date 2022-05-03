@@ -203,7 +203,7 @@ public class UI extends JFrame implements ActionListener {
                         settings.setLayout(new FlowLayout()); // Layout qui permet de mettre les éléments à la suite
 
                         // scrollbar angle
-                        angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 0, 90);
+                        angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 1, 90);
                         angle.setPreferredSize(new Dimension(200, 40));
                         // angle.setLocation(10, 10);m
                         // angle.setLayout(null); //non sinon ça empêche l'affichage automatique géré
