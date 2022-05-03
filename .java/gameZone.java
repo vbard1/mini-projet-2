@@ -156,6 +156,10 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
             player.score++;
+            this.target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)),
+                    (int) (Math.random() * (100)),
+                    (int) (Math.random() * (50) + 10));
+            repaint();
 
         } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();
