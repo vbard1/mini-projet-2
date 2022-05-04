@@ -29,8 +29,8 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         updateScore = new Timer(100, this);
-        maxRound = 2;
-        victoryMinScore = 1;
+        maxRound = 6;
+        victoryMinScore = 3;
 
     }
 
