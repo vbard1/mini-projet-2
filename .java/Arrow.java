@@ -40,7 +40,6 @@ public class Arrow {
         this.speed = speedInit;
         this.arrowColor = Color.BLACK;
         this.windSpeed=windSpeed;
-        trajectory(posX,posY);
         this.traj = new Trajectoire(angleInit, speedInit, windSpeed, posY, posX);
         this.reachedTarget = false;
         length=50;
@@ -69,21 +68,8 @@ public class Arrow {
         this.reachedTarget = false;
         length=50;
         positionNumber=0;
-        //trajSize=traj.paramTraj[2].size();
     }
     
-
-    /*
-     * public Arrow(int weight, int posX, int posY, double angle) {
-     * this.posX = posX;
-     * this.posY = posY;
-     * this.weight = weight;
-     * this.angle = angle;
-     * }
-     */
-    public void trajectory(int x,int y){
-        this.traj = new Trajectoire(this.angle, this.speed, windSpeed, y, x);
-    }
     public boolean nextPos(Target target,int width,int height) {
         boolean exist=false;
         if (positionNumber<trajSize && !collision(target) && inScreen(width, height)) {
