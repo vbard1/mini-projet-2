@@ -16,6 +16,8 @@ public class GameZone extends JPanel implements ActionListener {
     boolean shooting;
     int roundNb;
     UI associatedUI;
+    Timer playerAnimation;
+    long animationStart;
 
     public GameZone() {
         //associatedUI = ui;
@@ -34,6 +36,7 @@ public class GameZone extends JPanel implements ActionListener {
         // arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
+        playerAnimation= new Timer(50,this);
         target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),
                 (int) (-Math.random() * (height-100) + (height - 100)),
                 (int) (Math.random() * (90) + 10));
@@ -122,7 +125,10 @@ public class GameZone extends JPanel implements ActionListener {
 
             }
 
-        } else if (drawingType == 2) {
+        }else if(drawingType == 2){
+
+        } 
+        else if (drawingType == 3) {
 
             g.setColor(arrow.arrowColor);
             g2.rotate(-arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
@@ -151,12 +157,20 @@ public class GameZone extends JPanel implements ActionListener {
         arrow = a;
         player = p;
         shooting = true;
-        arrowTimer.start();
+        playerAnimation.start();
+        animationStart=System.currentTimeMillis();
+
     }
 
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == arrowTimer && arrow.nextPos(target, width, height)) {
+        if(e.getSource()==playerAnimation){
+            if ((System.currentTimeMillis()-animationStart)>500){
+                playerAnimation.stop();
+                drawingType = 3;
+                arrowTimer.start();
+            }
+            
+        }else if (e.getSource() == arrowTimer && arrow.nextPos(target, width, height)) {
             repaint();
         } else if (e.getSource() == arrowTimer && arrow.reachedTarget == true) {
             arrowTimer.stop();
@@ -176,5 +190,6 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
         }
+        
     }
 }
