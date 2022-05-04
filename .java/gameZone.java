@@ -156,6 +156,12 @@ public class GameZone extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * @method preview lance le dessin de la trajectoire sans mouvement de flèche en apellant repaint et en affectant à drawingType la valeur 1
+     * @param a flèche qui doit être dessiné
+     * @param p joueur
+     */
+
     public void preview(Arrow a, Player p) {
         drawingType = 1;
         arrow = a;
@@ -163,6 +169,13 @@ public class GameZone extends JPanel implements ActionListener {
         player = p;
         repaint();
     }
+
+    /**
+     * @method shoot lance le dessin de la mouvement de la flèche en apellant repaint et en affectant à drawingType la valeur 2
+     * @param a flèche qui doit être dessiné
+     * @param p joueur
+     * @param m nombre maximum de manche
+     */
 
     public void shoot(Arrow a, Player p,int m) {
         roundNb++;
@@ -175,6 +188,11 @@ public class GameZone extends JPanel implements ActionListener {
         maxRound=m;
 
     }
+
+    /**
+     * @method actionPerfomed lance l'animation du joueur sur 0,5s et lance ensuite le mouvement de la flèche jusqu'à atteindre les bordures de l'écran ou la cible.
+     *  Dans ces cas les valeurs sont réinitialisé pour premrettre de tirer une autre flèche.
+     */
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==playerAnimation){
