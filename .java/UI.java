@@ -9,11 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.swing.*;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.awt.*;
 
 public class UI extends JFrame implements ActionListener {
 
@@ -61,7 +59,7 @@ public class UI extends JFrame implements ActionListener {
 
                 // Définition de la fenêtre du menu
                 this.setLocation(0, 0);
-                this.setSize(1910, 1070);
+                this.setSize((int)screenSize.getWidth(), (int)screenSize.getHeight());
                 this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Défini la taille de la fenêtre à celle de l'écran
                 this.setResizable(true);
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,28 +106,11 @@ public class UI extends JFrame implements ActionListener {
                         startGame.setBackground(new Color(51, 204, 102));
                         startGame.setForeground(Color.WHITE);
 
-                        // startGame.setLayout();
-
-                        // Ajout image de fond
-                        // ImageIcon imageIcon = new ImageIcon(new
-                        // ImageIcon("./Images/archery_menu2.png").getImage().getScaledInstance(20, 20,
-                        // Image.SCALE_DEFAULT));
-                        // image_cible.setIcon(imageIcon);
-
                         image_cible = new JLabel(new ImageIcon("./Images/archery_menu.png"), JLabel.LEFT);
                         image_cible.setSize(800, 800);
 
-                        // Image imageTailleResize = new
-                        // ImageIcon("./Images/archery_menu.png").getImage().getScaledInstance(image_cible.getWidth(),
-                        // image_cible.getHeight(), Image.SCALE_DEFAULT);
-                        // image_cible.setIcon(new ImageIcon(imageTailleResize));
 
                         startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15));
-                        // startGame.setLayout();
-
-                        // Ajout image de fond
-                        // image = new JLabel(new ImageIcon("./Images/archery_menu.png"));
-                        // image.setBounds(500,500,100,150);
 
                         title.setFont(new Font("Comic sans MS", Font.BOLD,
                                         (int) ((background.getHeight() + background.getWidth()) / 40)));
@@ -156,24 +137,6 @@ public class UI extends JFrame implements ActionListener {
                                         textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
                         difficulty.setSize((int) background.getWidth() / 11, (int) background.getHeight() / 25);
 
-                        /*
-                         * textType.setFont(new Font("Comic sans MS",
-                         * Font.PLAIN,(int)background.getWidth()/60));
-                         * textType.setSize((int) background.getWidth()/5,
-                         * (int)background.getHeight()/25);
-                         * textType.setLocation((int) ((background.getWidth() / 2) -
-                         * (textType.getWidth() / 2)),
-                         * difficulty.getLocation().y + difficulty.getHeight() + 50);
-                         * 
-                         * arrowType.setFont(new Font("Comic sans",
-                         * Font.PLAIN,(int)background.getWidth()/90));
-                         * arrowType.setLocation((int) ((background.getWidth() / 2) -
-                         * (arrowType.getWidth() / 2)),
-                         * textType.getLocation().y + textType.getHeight() + 10);
-                         * arrowType.setSize((int) background.getWidth()/11,
-                         * (int)background.getHeight()/25);
-                         */
-
                         startGame.setFont(new Font("Comic sans MS", Font.BOLD, (int) background.getWidth() / 60));
                         startGame.setSize((int) background.getWidth() / 10, (int) background.getHeight() / 10);
                         startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
@@ -182,17 +145,13 @@ public class UI extends JFrame implements ActionListener {
                         // Ajout à background
                         background.add(username);
                         background.add(difficulty);
-                        // background.add(arrowType);
                         background.add(startGame);
                         background.add(textDifficulty);
-                        // background.add(textType);
                         background.add(textUser);
                         background.add(title);
                         background.add(image_cible);
-                        // background.add(image);
                         resizeTimer.start();
 
-                        // (éventuellement animation du joueur en attente)
                 } else if (type == 'g') {
 
                         // Panel contenant l'affichage du jeu
@@ -210,7 +169,6 @@ public class UI extends JFrame implements ActionListener {
                         // jlabel score
                         score = new JLabel("Score");
                         score.setSize(100, 40);
-                        // score.setLocation(shoot.getLocation().x + shoot.getWidth() + 10, 10);
                         score.setLayout(null);
                         
                         // scrollbar angle
@@ -225,14 +183,10 @@ public class UI extends JFrame implements ActionListener {
                                         angleText.setText("Angle : " + e.getValue() + "°");
                                 }
                         });
-                        // addAdjustmentListener(new AdjustmentListener())
 
                         // scrollbar vitesse
                         speed = new JScrollBar(JScrollBar.HORIZONTAL, 50, 1, 1, 101);
                         speed.setPreferredSize(new Dimension(200, 40));
-                        // speed.setLocation(angle.getLocation().x + angle.getWidth() + 10, 10);
-                        // speed.setLayout(null); ////non sinon ça empêche l'affichage automatique géré
-                        // par le layout
 
                         // Affichage speed
                         speedText = new JLabel("Speed : " + speed.getValue() + "%");
@@ -245,16 +199,10 @@ public class UI extends JFrame implements ActionListener {
                         // JButton tirer
                         shoot = new JButton("Tirer");
                         shoot.setSize(200, 40);
-                        // shoot.setLocation(speed.getLocation().x + speed.getWidth() + 10, 10);
                         shoot.setLayout(null);
 
                         // JButton menu (fait quitter la partie -> action event)
                         menu = new JButton("Menu");
-                        // menu.setSize(100, 50);
-                        // menu.setLocation(20, 20);
-                        // menu.setLayout(null);
-
-                        
 
                         // JButton Preview
                         preview = new JButton("Preview");
@@ -269,9 +217,7 @@ public class UI extends JFrame implements ActionListener {
                         textType.setLayout(null);
 
                         // Définition type de flèche
-                        String[] arrowType1 = { "Carbone", "Aluminium", "Caillou" }; // Tableau contenant les
-                                                                                     // différents
-                                                                                     // type de flèche
+                        String[] arrowType1 = { "Carbone", "Aluminium", "Bois" }; // Tableau contenant les différents// type de flèche
                         arrowType = new JComboBox<String>(arrowType1);
                         arrowType.setSelectedIndex(0);
                         arrowType.setLayout(null);
@@ -318,8 +264,6 @@ public class UI extends JFrame implements ActionListener {
                 title.setSize((int) background.getWidth(), (int) background.getHeight() / 8);
                 title.setLocation(0, (int) background.getHeight() / 10);
 
-                // textUser.setFont(new Font("Comic sans MS", Font.PLAIN, (int)
-                // background.getWidth() / 50));
                 textUser.setSize((int) background.getWidth(), (int) background.getHeight() / 16);
                 textUser.setLocation(0, (int) background.getHeight() / 3);
 
@@ -338,24 +282,6 @@ public class UI extends JFrame implements ActionListener {
                                 textDifficulty.getLocation().y + textDifficulty.getHeight() + 10);
                 difficulty.setSize((int) background.getWidth() / 11, (int) background.getHeight() / 25);
 
-                /*
-                 * textType.setFont(new Font("Comic sans MS",
-                 * Font.PLAIN,(int)background.getWidth()/60));
-                 * textType.setSize((int) background.getWidth()/5,
-                 * (int)background.getHeight()/25);
-                 * textType.setLocation((int) ((background.getWidth() / 2) -
-                 * (textType.getWidth() / 2)),
-                 * difficulty.getLocation().y + difficulty.getHeight() + 50);
-                 * 
-                 * arrowType.setFont(new Font("Comic sans",
-                 * Font.PLAIN,(int)background.getWidth()/90));
-                 * arrowType.setLocation((int) ((background.getWidth() / 2) -
-                 * (arrowType.getWidth() / 2)),
-                 * textType.getLocation().y + textType.getHeight() + 10);
-                 * arrowType.setSize((int) background.getWidth()/11,
-                 * (int)background.getHeight()/25);
-                 */
-
                 startGame.setFont(new Font("Comic sans MS", Font.BOLD, (int) background.getWidth() / 60));
                 startGame.setSize((int) background.getWidth() / 10, (int) background.getHeight() / 10);
                 startGame.setLocation((int) ((background.getWidth() / 2) - (startGame.getWidth() / 2)),
@@ -371,7 +297,7 @@ public class UI extends JFrame implements ActionListener {
                 gameEnd.setPreferredSize( new Dimension((int) (this.getWidth() / 2), (int) (this.getHeight() / 2)));
                 SpringLayout layout=new SpringLayout();
                 gameEnd.setLocation((int) (this.getWidth() / 4), (int) (this.getHeight() / 4));
-                //gameEnd.setLayout(layout);
+
                 gameEnd.setBackground(new Color(250, 255, 224));
                 gameEnd.setBorder(BorderFactory.createLineBorder(Color.black, 5));
                 // JPanel announcement : annonce la victoire ou la défaite du joueur
