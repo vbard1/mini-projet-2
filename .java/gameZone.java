@@ -23,7 +23,8 @@ public class GameZone extends JPanel implements ActionListener {
     boolean randomTarget;
 
     /**
-     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche et la cible
+     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche
+     *         et la cible
      */
 
     public GameZone() {
@@ -31,11 +32,13 @@ public class GameZone extends JPanel implements ActionListener {
         target = new Target(width - 100, 100, 50);
         roundNb = 0;
     }
+
     /**
-     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche et la cible selon la difficulté défini par randomTarget 
+     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche
+     *         et la cible selon la difficulté défini par randomTarget
      * 
-     * @param w     largeur de la 
-     * @param h     longueur 
+     * @param w largeur de la
+     * @param h longueur
      */
 
     public GameZone(int w, int h) {
@@ -43,13 +46,6 @@ public class GameZone extends JPanel implements ActionListener {
         height = h;
         repaint();
         arrowTimer = new Timer(10, this);
-<<<<<<< HEAD
-        playerAnimation= new Timer(50,this);
-        if (randomTarget){
-            target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),(int) (-Math.random() * (height-100) + (height - 100)),(int) (Math.random() * (90) + 10));
-        }else{
-            target = new Target(width-100,100,50);
-=======
         playerAnimation = new Timer(50, this);
         System.out.println(randomTarget);
         if (randomTarget) {
@@ -57,7 +53,6 @@ public class GameZone extends JPanel implements ActionListener {
                     (int) (-Math.random() * (height - 100) + (height - 100)), (int) (Math.random() * (90) + 10));
         } else {
             target = new Target(width - 100, 100, 50);
->>>>>>> 83234718e27d7e97bec3d116e88595589a04df17
         }
         setVisible(true);
         roundNb = 0;
@@ -91,15 +86,15 @@ public class GameZone extends JPanel implements ActionListener {
         g.fillPolygon(xLegR, yLegR, xLegR.length);
         // Torse
         g.fillRect(20, height - 130, 20, 40);
-        
+
         // g.fillOval(20, height - 155, 25, 25);
 
         if (arrow == null) {
-            //Bras gauche à l'initial
+            // Bras gauche à l'initial
             g.fillRect(40, height - 130, 40, 10);
-            //Bras droit à l'initial
+            // Bras droit à l'initial
             g.fillRect(0, height - 130, 20, 10);
-            //Arc à l'initial
+            // Arc à l'initial
             Shape bow = new Arc2D.Double(80 - 50, height - 125 - 100 / 2, 50, 100, 100, -190, Arc2D.CHORD);
             g2.draw(bow);
             // Cou et tête à l'initial
