@@ -1,18 +1,17 @@
 import java.util.ArrayList;
 
-/**
- * @author Victor BARDIN
- */
 public class Trajectoire {
 
-    int arrowType;
-    int windSpeed;
-    double angleRad;
-    double speed;
-    double gravity;
-    int yInit;
-    int maxX;
-    ArrayList[] paramTraj;
+    int arrowType; // type de fleche
+    int windSpeed; // force du vent (multiplicateur entier)
+    double angleRad; // angle de la fleche à un point de la trajectoire
+    double speed; // vitesse de la fleche a un point de la trajectoire
+    double gravity; // gravitee du milieu
+    int yInit; // position initiale en y
+    int maxX; // deuxieme racine de la parabole (parametre abscisse x)
+    ArrayList[] paramTraj; // le tableau de stockage des points de la trajectoire et autres parametres (cf.
+                           // initialisation)
+    double degToRad = Math.PI / 180.0; // conversion degrés à radians
 
     /**
      * @method Trajectoire constructeur de l'objet Trajectoire, permet de tracer les
@@ -24,20 +23,11 @@ public class Trajectoire {
      * @param speedInit    vitesse de tir initiale
      * @param windSpeed    vitesse du vent
      */
-    // TODO prender en compte le vent :
-    // https://media.eduscol.education.fr/file/Formation_continue_enseignants/15/8/StFlour2007_Etienne_110158.pdf
-    // page 27
-    // https://www.solumaths.com/en/calculator/calculate/solve_equations pour la
-    // spatialiser'
-    // TODO trajectoires interdites
-    double degToRad = Math.PI / 180.0;
-
     public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
         gravity = 9.81;
-
         this.angleRad = angleInitDeg * degToRad;
         this.speed = speedInit;
-        this.windSpeed = windSpeed; // ?
+        this.windSpeed = windSpeed;
         this.yInit = yInit;
 
         paramTraj = new ArrayList[4];
@@ -123,6 +113,10 @@ public class Trajectoire {
 
     }
 
+    /**
+     * @method
+     * 
+     */
     private void smoothen() {
         double change0 = (Double) paramTraj[2].get(0);
         double change1 = 0;
