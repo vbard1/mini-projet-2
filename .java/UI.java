@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.awt.*;
 
 public class UI extends JFrame implements ActionListener {
 
@@ -366,41 +367,47 @@ public class UI extends JFrame implements ActionListener {
         public void gameEnd(char type,Player p, int maxRound) {
                 // Création du JPanel contenant le résustat/choix de fin de partie, style popup
                 // (relatif), au centre de la fenêtre de jeu
-                // this.setLocation((int) (this.getWidth() / 4),(int) (this.getHeight() / 4) );
-                // this.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
                 gameEnd = new JPanel();
-                gameEnd.setSize((int) (this.getWidth() / 2), (int) (this.getHeight() / 2));
+                gameEnd.setPreferredSize( new Dimension((int) (this.getWidth() / 2), (int) (this.getHeight() / 2)));
+                SpringLayout layout=new SpringLayout();
                 gameEnd.setLocation((int) (this.getWidth() / 4), (int) (this.getHeight() / 4));
-                gameEnd.setLayout(new BoxLayout(gameEnd, BoxLayout.PAGE_AXIS));
+                //gameEnd.setLayout(layout);
+                gameEnd.setBackground(new Color(250, 255, 224));
+                gameEnd.setBorder(BorderFactory.createLineBorder(Color.black, 5));
                 // JPanel announcement : annonce la victoire ou la défaite du joueur
                 announcement = new JLabel();
                 if (type == 'v') {
-                        announcement.setText("Victoire ! Vous avez touché la cible "+p.score+" fois sur "+maxRound);
+                        announcement.setText("Victoire! Vous avez touché la cible "+p.score+" fois sur "+maxRound+".");
                 } else if (type == 'd') {
-                        announcement.setText("Défaite ! Vous avez touché la cible "+p.score+" fois sur "+maxRound);
+                        announcement.setText("Défaite! Vous avez touché la cible "+p.score+" fois sur "+maxRound+".");
                 }
-                announcement.setLayout(new BoxLayout(announcement, BoxLayout.Y_AXIS));
+                announcement.setFont(new Font("Comic sans MS", Font.BOLD, (int) background.getWidth() / 60));
+                
                 // JButton menu : retour au menu de création de partie
                 menuEndGame = new JButton("Menu");
-                menuEndGame.setSize(10, 10);
-                //menuEndGame.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
-                menuEndGame.add(Box.createRigidArea(new Dimension(5,5)));
+                menuEndGame.setPreferredSize( new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
+                menuEndGame.setLocation(gameEnd.getWidth() / 2 - (menuEndGame.getWidth()/2 ),announcement.getLocation().y +50);
 
                 // JButton restart : recommencer une partie avec les mêmes réglages
                 restart = new JButton("Rejouer");
-                restart.setSize(10, 10);
-                //restart.setLocation(gameEnd.getWidth() / 2 + 10,gameEnd.getHeight() / 2 + (restart.getHeight() + 10));
-                restart.add(Box.createRigidArea(new Dimension(5,5)));
+                restart.setPreferredSize( new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
+                restart.setLocation(gameEnd.getWidth() / 2 - (restart.getWidth()/2 ),menuEndGame.getLocation().y +menuEndGame.getWidth()+10);
+                
                 // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
                 quit = new JButton("Quiter");
-                quit.setSize(10, 10);
-                //quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth() / 2),gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
-                quit.add(Box.createRigidArea(new Dimension(5,5)));
+                quit.setPreferredSize( new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
+                quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth()/2 ),restart.getLocation().y +restart.getWidth()+10);
+                
                 // AJout des éléments au Jpanel de fin de partie
+
                 gameEnd.add(announcement);
+                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
                 gameEnd.add(menu);
+                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
                 gameEnd.add(restart);
+                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
                 gameEnd.add(quit);
+                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
                 gameZone.add(gameEnd);
                 this.setVisible(true);
         }
