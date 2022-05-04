@@ -36,6 +36,17 @@ public class Trajectoire {
 
     }
 
+    /**
+     * @method actualise la trajectoire en fonction des parametres initiaux
+     *         actualises par l'utilisateurs, ne cree pas de nouvel objet
+     *         trajectoire
+     * 
+     * @param angleInitDeg l'angle initial en degres
+     * @param speedInit    la vitesse initiale en px/s
+     * @param windSpeed    vitesse du vent (coefficient)
+     * @param yInit        position y initiale
+     * @param xInit        position x initiale
+     */
     public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
 
         long executionTime = System.currentTimeMillis(); // test de performance
@@ -69,18 +80,14 @@ public class Trajectoire {
                     (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
                     + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
 
-            if (y > -1) {
-                // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
-                // (int) (windSpeed * vitesse)+ " px");
+            if (y > -1) { // aucun point en dessous de 0
 
-                // System.out.print(" => added the valid point");
                 paramTraj[0].add(absciss + xInit);
-                // remplissage de y en fonction de x
                 paramTraj[1].add(y);
                 paramTraj[3].add(speed);
 
             }
-            absciss++;
+            absciss++; // point suivant
         }
         maxX = absciss; // réafectation à maxX de la distance max horizontale réelle
 
@@ -99,9 +106,8 @@ public class Trajectoire {
             Y2 = (double) (int) (paramTraj[1].get(x + 4));
 
             nextAngle = Math.atan((Y2 - Y1) / (X2 - X1));
-            // System.out.println(nextAngle);
-            if (nextAngle < angleRad) {
 
+            if (nextAngle < angleRad) { // evite l'effet tremblement
                 angleRad = nextAngle;
             }
             paramTraj[2].add(angleRad);
@@ -115,18 +121,23 @@ public class Trajectoire {
     }
 
     /**
-     * @method
-     * 
+     * @method lisse les angles de la trajectoire (paramTraj[2]) pour eviter l'effet
+     *         "crenelage". Transforme un changement brutal entre les angles en une
+     *         rotation progressive
      */
-    private void smoothen() {
-        double change0 = (Double) paramTraj[2].get(0);
-        double change1 = 0;
-        int index = 0;
-        int space = 0;
+    public void smoothen() {
+
+        double change0 = (Double) paramTraj[2].get(0); // angle temporaire du point le plus proche du point 0 ayant un
+                                                       // angle different
+        double change1 = 0; // angle temporaire le plus proche du point precedent enregistre par change0
+                            // ayant un angle differrent de change0
+        int index = 0; // position consideree
+        int space = 0; // espacement en nombre de points entre le point change0 et change1
+
+        // enregistrement des positions x de cassure d'angle
         ArrayList<Integer> changes = new ArrayList<Integer>();
         for (Object angle : paramTraj[2]) {
             change1 = (Double) angle;
-
             if (change1 != change0) {
                 for (int i = index; i < index + space; i++) {
                     changes.add(index);
@@ -137,13 +148,15 @@ public class Trajectoire {
             space++;
             index++;
         }
+
+        // lissage des angles
         int temp = 0;
         for (Integer indexChanges : changes) {
             space = indexChanges - temp;
             for (int i = temp; i < temp + space; i++) {
                 change1 = (double) paramTraj[2].get(indexChanges);
                 change0 = (double) paramTraj[2].get(temp);
-                paramTraj[2].set(i, change0 + (change1 - change0) * (i - temp) / space);
+                paramTraj[2].set(i, change0 + (change1 - change0) * (i - temp) / space); // formule de lissage
             }
 
             temp = indexChanges;
@@ -152,8 +165,8 @@ public class Trajectoire {
 
     }
 
+    // renvoie sous forme de string les positions y separees d'un espace
     public String toString() {
-        // System.out.println("EXCEL VERSION : nValues = " + paramTraj[0].size());
         String Stringed = "";
         for (int i = 0; i < paramTraj[0].size() - 1; i++) {
 
