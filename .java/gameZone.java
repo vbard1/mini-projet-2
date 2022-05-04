@@ -17,25 +17,26 @@ public class GameZone extends JPanel implements ActionListener {
     int roundNb;
     UI associatedUI;
 
-    public GameZone(UI ui) {
-        associatedUI = ui;
-        target = new Target(
-                (int) (Math.random() * -100 + (associatedUI.getWidth() - 100)),
-                (int) (Math.random() * -75 + (associatedUI.getHeight() * (0.85))),
-                (int) (Math.random() * (50) + 10));
+    public GameZone() {
+        //associatedUI = ui;
+        target = new Target(0,0,100
+                /*(int) (Math.random()* (associatedUI.getWidth() - 100)),
+                (int) (Math.random() * (associatedUI.getHeight() * (0.85))),
+                (int) (Math.random() * (50) + 10)*/);
+                
         roundNb = 0;
     }
 
-    public GameZone(int w, int h, UI ui) {
-        associatedUI = ui;
+    public GameZone(int w, int h) {
+        //associatedUI = ui;
         width = w;
         height = h;
         // arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
-        target = target = new Target((int) (-100 * Math.random() + (associatedUI.getWidth() - 100)),
-                (int) (Math.random() * -75 + (associatedUI.getHeight() - 100)),
-                (int) (Math.random() * (50) + 10));
+        target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),
+                (int) (-Math.random() * (height-100) + (height - 100)),
+                (int) (Math.random() * (90) + 10));
         setVisible(true);
         roundNb = 0;
 
@@ -163,9 +164,9 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
             player.score++;
-            this.target = new Target((int) (-100 * Math.random() + (associatedUI.getWidth() - 100)),
-                    (int) (Math.random() * -75 + (associatedUI.getHeight() - 100)),
-                    (int) (Math.random() * (50) + 10));
+            this.target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),
+            (int) (-Math.random() * (height-100) + (height - 100)),
+            (int) (Math.random() * (90) + 10));
             drawingType = -1;
             repaint();
 
