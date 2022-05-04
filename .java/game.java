@@ -49,7 +49,7 @@ public class Game implements ActionListener {
             String scoreText = "Score : " + player.score;
             if (window.score != null) {
                 window.score.setText(scoreText);
-                if (window.gameZone.roundNb > maxRound && !window.gameZone.shooting) {
+                if (window.gameZone.roundNb >= maxRound && !window.gameZone.shooting) {
                     gameEnd();
                 }
             }
@@ -61,7 +61,7 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.shoot && !window.gameZone.shooting) {
 
-            if (window.gameZone.roundNb <= maxRound) {
+            if (window.gameZone.roundNb < maxRound) {
                 // décompte du nombre de tours restants
 
                 double angleInit = window.angle.getValue();
@@ -84,7 +84,7 @@ public class Game implements ActionListener {
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
-                window.gameZone.shoot(arrow, player);
+                window.gameZone.shoot(arrow, player,maxRound);
             }
         } else if (e.getSource() == window.preview && !window.gameZone.shooting) { // bouton preview appuyé
             double angleInit = window.angle.getValue();
@@ -109,11 +109,14 @@ public class Game implements ActionListener {
             Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); //
             window.gameZone.preview(arrow, player);
 
-        } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création
-                                                      // d'un
+        } else if (e.getSource() == window.restart) {// bouton restart sélectionné à la fin d'une partie : création
+            window.setVisible(false);
+            window.dispose();               
+            window = new UI('g');                                       
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des
+                
                                                     // paramètres
         } else if (e.getSource() == window.quit) { // bouton quitter le jeu : ferme la
             // fenêtre, arrête le programme

@@ -18,6 +18,7 @@ public class GameZone extends JPanel implements ActionListener {
     UI associatedUI;
     Timer playerAnimation;
     long animationStart;
+    int maxRound;
 
     public GameZone() {
         //associatedUI = ui;
@@ -115,7 +116,8 @@ public class GameZone extends JPanel implements ActionListener {
         // g.drawLine(x1, y1, x2, y2);
         // Cible
         g.fillRect(target.posX, height - target.posY, target.side, target.side);
-        g.drawString("Nombre de tir: " + roundNb, width - 100, 10); 
+        g.drawString("Nombre de tir: " + roundNb +"/"+maxRound, 10, 20); 
+        
         if(drawingType==-1){
             g.drawString("Bravo! Tu as touché la cible",100,200);
         }
@@ -132,15 +134,15 @@ public class GameZone extends JPanel implements ActionListener {
 
         } 
         else if (drawingType == 3) {
-
+            g.drawString("Vitesse de la flèche: " + (int)(double)arrow.traj.paramTraj[3].get(arrow.positionNumber)+ " m/s", 10, 30); 
             g.setColor(arrow.arrowColor);
             g2.rotate(-arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
             g.drawLine(arrow.posX - arrow.length / 2, this.height - arrow.posY, arrow.posX + arrow.length / 2,
                     this.height - arrow.posY);
             g2.rotate(arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
-            g.drawString("" + arrow.positionNumber, 10, 10);
-            g.drawString("" + arrow.angle, 20, 20);
-            g.drawString("" + arrow.traj.paramTraj[0].get(0) + " " + arrow.traj.paramTraj[1].get(0), 10, 50);
+            //g.drawString("" + arrow.positionNumber, 10, 10);
+            //g.drawString("" + arrow.angle, 20, 20);
+            //g.drawString("" + arrow.traj.paramTraj[0].get(0) + " " + arrow.traj.paramTraj[1].get(0), 10, 50);
 
         }
 
@@ -154,7 +156,7 @@ public class GameZone extends JPanel implements ActionListener {
         repaint();
     }
 
-    public void shoot(Arrow a, Player p) {
+    public void shoot(Arrow a, Player p,int m) {
         roundNb++;
         drawingType = 2;
         arrow = a;
@@ -162,6 +164,7 @@ public class GameZone extends JPanel implements ActionListener {
         shooting = true;
         playerAnimation.start();
         animationStart=System.currentTimeMillis();
+        maxRound=m;
 
     }
 
