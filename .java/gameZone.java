@@ -26,14 +26,15 @@ public class GameZone extends JPanel implements ActionListener {
         roundNb = 0;
     }
 
-    public GameZone (int w, int h, UI ui) {
+    public GameZone(int w, int h, UI ui) {
         associatedUI = ui;
         width = w;
         height = h;
         // arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
-        target = new Target((int) (Math.random() * (associatedUI.getWidth() - 100)), (int) (Math.random() * (100)),
+        target = target = new Target((int) (-100 * Math.random() + (associatedUI.getWidth() - 100)),
+                (int) (Math.random() * -75 + (associatedUI.getHeight() - 100)),
                 (int) (Math.random() * (50) + 10));
         setVisible(true);
         roundNb = 0;

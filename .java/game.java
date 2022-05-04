@@ -42,7 +42,6 @@ public class Game implements ActionListener {
         } else if (e.getSource() == updateScore) {
             String scoreText = "Score : " + player.score;
             window.score.setText(scoreText);
-            System.out.println(scoreText);
             if (roundNb > 4 && !window.gameZone.shooting) {
                 gameEnd();
             }
@@ -75,7 +74,7 @@ public class Game implements ActionListener {
                 windSpeed = difficulty;
 
                 int x = (int) (40 + (20) * Math.cos((double) Math.toRadians(angleInit)));
-                int y = (int) (130 + (20) * Math.sin((double)  Math.toRadians(angleInit)));
+                int y = (int) (130 + (20) * Math.sin((double) Math.toRadians(angleInit)));
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
@@ -98,7 +97,7 @@ public class Game implements ActionListener {
             windSpeed = difficulty;
 
             int x = (int) (40 + (20) * Math.cos((double) Math.toRadians(angleInit)));
-            int y = (int) (130 + (20) * Math.sin((double)  Math.toRadians(angleInit)));
+            int y = (int) (130 + (20) * Math.sin((double) Math.toRadians(angleInit)));
 
             // création d'uneflèche
             Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); //
@@ -133,7 +132,7 @@ public class Game implements ActionListener {
         } else {
             window.gameEnd('d');
         }
-        System.out.println("aaaaaa");
+
         // stockage du score
         window.toMemory += " " + player.score;
         window.storeScore();
