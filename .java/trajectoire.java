@@ -98,12 +98,12 @@ public class Trajectoire {
         double nextAngle = 0;
         angleRad = angleInitDeg * degToRad;
         paramTraj[2].add(angleRad);
-        for (int x = 0; x < paramTraj[0].size() - 4; x++) {
+        for (int x = 3; x < paramTraj[0].size() - 3; x++) {
 
-            X1 = (double) (int) (paramTraj[0].get(x));
-            X2 = (double) (int) (paramTraj[0].get(x + 4));
-            Y1 = (double) (int) (paramTraj[1].get(x));
-            Y2 = (double) (int) (paramTraj[1].get(x + 4));
+            X1 = (double) (int) (paramTraj[0].get(x - 3));
+            X2 = (double) (int) (paramTraj[0].get(x + 3));
+            Y1 = (double) (int) (paramTraj[1].get(x - 3));
+            Y2 = (double) (int) (paramTraj[1].get(x + 3));
 
             nextAngle = Math.atan((Y2 - Y1) / (X2 - X1));
 
@@ -139,9 +139,9 @@ public class Trajectoire {
         for (Object angle : paramTraj[2]) {
             change1 = (Double) angle;
             if (change1 != change0) {
-                for (int i = index; i < index + space; i++) {
-                    changes.add(index);
-                }
+
+                changes.add(index);
+
                 change0 = change1;
                 space = 0;
             }
@@ -153,10 +153,12 @@ public class Trajectoire {
         int temp = 0;
         for (Integer indexChanges : changes) {
             space = indexChanges - temp;
+            double point1;
+            double point0;
             for (int i = temp; i < temp + space; i++) {
-                change1 = (double) paramTraj[2].get(indexChanges);
-                change0 = (double) paramTraj[2].get(temp);
-                paramTraj[2].set(i, change0 + (change1 - change0) * (i - temp) / space); // formule de lissage
+                point1 = (double) paramTraj[2].get(indexChanges);
+                point0 = (double) paramTraj[2].get(temp);
+                paramTraj[2].set(i, point0 + (point1 - point0) * (i - temp) / space); // formule de lissage
             }
 
             temp = indexChanges;
