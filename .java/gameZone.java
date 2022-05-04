@@ -6,10 +6,10 @@ import java.awt.geom.*;
 
 public class GameZone extends JPanel implements ActionListener {
 
-    int width; // largeur de la fenetre
-    int height; // hauteur de la fenetre
-    Graphics graph; // objet graphic utilise pour la methode paint()
-    int drawingType; //
+    int width;
+    int height;
+    Graphics graph;
+    int drawingType;
     Arrow arrow;
     Target target;
     Timer arrowTimer;

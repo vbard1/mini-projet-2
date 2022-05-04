@@ -5,6 +5,7 @@ public class MainGame extends JFrame {
         launch();
     }
 
+    // lance la partie en creant la fenetre associee
     public static void launch() {
         Game newGame = new Game(new UI('m'));
     }

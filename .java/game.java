@@ -150,7 +150,10 @@ public class Game implements ActionListener {
     }
 
     /**
-     * @method gameEnd est un constructeur  qui lance la fenêtre de fin de jeu et détermine la victoire du joueur et stoocke le score
+     * @method methode de fin de partie, prepare la partie suivante en affichant le
+     *         score et en appelant les methodes de fin de partie de la fenetre
+     *         associee
+     * 
      */
     public void gameEnd() {
         updateScore.stop();
