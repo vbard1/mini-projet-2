@@ -32,6 +32,9 @@ public class Game implements ActionListener {
             // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus
             // compliqué)
             difficulty = window.difficulty.getSelectedIndex(); // récupère le niveau de difficulté choisi
+            window.toMemory = "";
+            window.toMemory += (window.username.getText() + ",");
+            System.out.println("Playing : " + window.toMemory);
             window.setVisible(false);
             window.dispose();
             window = new UI('g'); // crée une fenètre "jeu"
@@ -105,6 +108,7 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création
                                                       // d'un
+
             window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
         } // else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
           // fenêtre, arrête le programme
@@ -134,7 +138,7 @@ public class Game implements ActionListener {
         }
 
         // stockage du score
-        window.toMemory += " " + player.score;
+        window.toMemory = player.name + ";" + player.score + ";";
         window.storeScore();
     }
 
