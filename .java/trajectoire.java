@@ -146,9 +146,9 @@ public class Trajectoire {
         for (Integer indexChanges : changes) {
             space = indexChanges - temp;
             for (int i = temp; i < temp + space; i++) {
-                double angle2 = (double) paramTraj[2].get(indexChanges);
-                double angle1 = (double) paramTraj[2].get(temp);
-                paramTraj[2].set(i, angle1 + (angle2 - angle1) * (i - temp) / space);
+                change1 = (double) paramTraj[2].get(indexChanges);
+                change0 = (double) paramTraj[2].get(temp);
+                paramTraj[2].set(i, change0 + (change1 - change0) * (i - temp) / space);
             }
 
             temp = indexChanges;
