@@ -116,10 +116,31 @@ public class Trajectoire {
             paramTraj[2].add(angleRad);
 
         }
+        smoothen();
         executionTime = System.currentTimeMillis() - executionTime;
         System.out.println("[recalculation complete] : execution time = "
                 + (executionTime) + " ms");
 
+    }
+
+    private void smoothen() {
+        double change0 = (Double) paramTraj[2].get(0);
+        double change1 = -1;
+        int index = 0;
+        int space = 0;
+        for (Object angle : paramTraj[2]) {
+            change1 = (Double) angle;
+            if (change1 != change0) {
+                for (int i = index; i < space; i++) {
+                    paramTraj[2].set(i, (change1 - change0) * i / space);
+                }
+                change0 = change1;
+                space = 0;
+            }
+            space++;
+            index++;
+
+        }
     }
 
     public String toString() {

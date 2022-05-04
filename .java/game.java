@@ -21,8 +21,8 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         updateScore = new Timer(100, this);
-        maxRound=1;
-        victoryMinScore=1;
+        maxRound = 1;
+        victoryMinScore = 1;
 
     }
 
@@ -47,7 +47,7 @@ public class Game implements ActionListener {
             updateScore.start();
         } else if (e.getSource() == updateScore) {
             String scoreText = "Score : " + player.score;
-            if(window.score!=null){
+            if (window.score != null) {
                 window.score.setText(scoreText);
                 if (window.gameZone.roundNb > maxRound && !window.gameZone.shooting) {
                     gameEnd();
@@ -61,8 +61,8 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.shoot && !window.gameZone.shooting) {
 
-            if (window.gameZone.roundNb <= maxRound ) {
-                 // décompte du nombre de tours restants
+            if (window.gameZone.roundNb <= maxRound) {
+                // décompte du nombre de tours restants
 
                 double angleInit = window.angle.getValue();
                 double speedInit = 0;
@@ -113,18 +113,18 @@ public class Game implements ActionListener {
                                                       // d'un
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
-            window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
-        } else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
+            window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des
+                                                    // paramètres
+        } else if (e.getSource() == window.quit) { // bouton quitter le jeu : ferme la
             // fenêtre, arrête le programme
             window.setVisible(false);
-            window.dispose();  
+            window.dispose();
             System.exit(0);
-        }
-        else if(e.getSource() == window.menuEndGame){
+        } else if (e.getSource() == window.menuEndGame) {
             window.setVisible(false);
             window.dispose();
             window = new UI('m');
-        
+
         }
     }
 
@@ -136,9 +136,9 @@ public class Game implements ActionListener {
     public void gameEnd() {
         updateScore.stop();
         if (player.score >= victoryMinScore) {
-            window.gameEnd('v',player,maxRound);
+            window.gameEnd('v', player, maxRound);
         } else {
-            window.gameEnd('d',player,maxRound);
+            window.gameEnd('d', player, maxRound);
         }
         window.restart.addActionListener(this);
         window.menuEndGame.addActionListener(this);
