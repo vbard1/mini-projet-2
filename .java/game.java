@@ -132,7 +132,6 @@ public class Game implements ActionListener {
     // récupérer infos et créer flèche quand "shoot" cliqué (fait)
     // Ajouter au score du joueur si la cible est touchée (fait)
     // remettre la fenètre à zéro à chaque tour
-
     public void gameEnd() {
         updateScore.stop();
         if (player.score >= victoryMinScore) {
