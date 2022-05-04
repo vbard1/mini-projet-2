@@ -15,6 +15,13 @@ public class Game implements ActionListener {
     int maxRound;
     int victoryMinScore;
 
+    /**
+     * @method Game, constructeur de Game, initialise la fenêtre du menu du jeu et active les différents actionEvent 
+     * comme le bouton de début de de jeu et des paramètres de nombre de manche et de seuil de victoire
+     * 
+     * @param fenetre 
+     */
+
     public Game(UI fenetre) {
         window = fenetre;
         player = new Player();
@@ -24,28 +31,36 @@ public class Game implements ActionListener {
         victoryMinScore = 1;
 
     }
-
+    /**
+     * @method actionPerformed fait le lien entre les différentes fenêtres (menu, jeu et fenêtre de fin de jeu) et active les listeners liés au bouton de chaque fenêtre.
+     * Lors du jeu elle fait appel au méthodes de gameZone pour afficher la preview et la flèche en mouvement tout en vérifiant la valeur du score et si la fait de partie n'a pas été atteinte 
+     */
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == window.startGame) { // l'utilisateur appuie sur le bouton Jouer
             window.resizeTimer.stop();
             // Affecte à player le nom mis dans la case username du menu
             player = new Player(window.username.getText());
-            // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus
-            // compliqué)
-            difficulty = window.difficulty.getSelectedIndex(); // récupère le niveau de difficulté choisi
+            // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus compliqué)
+            difficulty = window.difficulty.getSelectedIndex(); 
             window.toMemory = "";
             window.toMemory += (window.username.getText() + ",");
             System.out.println("Playing : " + window.toMemory);
+
+            //Supprime la fenêtre menu
             window.setVisible(false);
             window.dispose();
-            window = new UI('g'); // crée une fenètre "jeu"
-            window.gameZone.randomTarget=(difficulty==2);
+
+            // crée une fenètre "jeu"
+            window = new UI('g'); 
+            window.gameZone.randomTarget=(difficulty==2 || difficulty==1);  //Défini si la cible doit être déplacé
+
+            //Actuive les actionListenr des différents boutons
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this);
             updateScore.start();
-        } else if (e.getSource() == updateScore) {
+        } else if (e.getSource() == updateScore) {//Met à jour la valeur du score et vérifie si le manches sont finis et dans ce cas lance gameEnd
             String scoreText = "Score : " + player.score;
             if (window.score != null) {
                 window.score.setText(scoreText);
@@ -55,11 +70,11 @@ public class Game implements ActionListener {
             }
         } else if (e.getSource() == window.menu) { // l'utilisateur appuie sur le bouton menu
             window.setVisible(false);
-            window.dispose();
+            window.dispose();   //Suppression de la fenêtre jeu
             window = new UI('m'); // crée une fenêtre "menu"
             window.startGame.addActionListener(this);
 
-        } else if (e.getSource() == window.shoot && !window.gameZone.shooting) {
+        } else if (e.getSource() == window.shoot && !window.gameZone.shooting) {//l'utilisateur appuie sur le bouton shoot
 
             if (window.gameZone.roundNb < maxRound) {
                 // décompte du nombre de tours restants
@@ -79,11 +94,12 @@ public class Game implements ActionListener {
 
                 windSpeed = difficulty;
 
+                //Définition du point initial de la flèche selon l'angle initial
+
                 int x = (int) (40 + (20) * Math.cos((double) Math.toRadians(angleInit)));
                 int y = (int) (130 + (20) * Math.sin((double) Math.toRadians(angleInit)));
 
-                Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
-                                                                                                     // flèche
+                Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une flèche
                 window.gameZone.shoot(arrow, player,maxRound);
             }
         } else if (e.getSource() == window.preview && !window.gameZone.shooting) { // bouton preview appuyé
@@ -102,6 +118,8 @@ public class Game implements ActionListener {
 
             windSpeed = difficulty;
 
+            //Définition du point initial de la flèche selon l'angle initial
+
             int x = (int) (40 + (20) * Math.cos((double) Math.toRadians(angleInit)));
             int y = (int) (130 + (20) * Math.sin((double) Math.toRadians(angleInit)));
 
@@ -109,21 +127,18 @@ public class Game implements ActionListener {
             Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); //
             window.gameZone.preview(arrow, player);
 
-        } else if (e.getSource() == window.restart) {// bouton restart sélectionné à la fin d'une partie : création
+        } else if (e.getSource() == window.restart) {// bouton restart sélectionné à la fin d'une partie : création d'une fenêtre jeu
             window.setVisible(false);
             window.dispose();               
             window = new UI('g');                                       
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
-            window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des
-                
-                                                    // paramètres
-        } else if (e.getSource() == window.quit) { // bouton quitter le jeu : ferme la
-            // fenêtre, arrête le programme
+            window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
+        } else if (e.getSource() == window.quit) { // bouton quitter le jeu : ferme la fenêtre, arrête le programme
             window.setVisible(false);
             window.dispose();
             System.exit(0);
-        } else if (e.getSource() == window.menuEndGame) {
+        } else if (e.getSource() == window.menuEndGame) {//bouton de fin de partie ramenant au menu
             window.setVisible(false);
             window.dispose();
             window = new UI('m');
@@ -131,10 +146,9 @@ public class Game implements ActionListener {
         }
     }
 
-    // TODO fin de partie
-    // récupérer infos et créer flèche quand "shoot" cliqué (fait)
-    // Ajouter au score du joueur si la cible est touchée (fait)
-    // remettre la fenètre à zéro à chaque tour
+    /**
+     * @method gameEnd est un constructeur  qui lance la fenêtre de fin de jeu et détermine la victoire du joueur et stoocke le score
+     */
     public void gameEnd() {
         updateScore.stop();
         if (player.score >= victoryMinScore) {
