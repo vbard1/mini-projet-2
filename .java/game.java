@@ -99,14 +99,8 @@ public class Game implements ActionListener {
                 int x = (int) (40 + (20) * Math.cos((double) Math.toRadians(angleInit)));
                 int y = (int) (130 + (20) * Math.sin((double) Math.toRadians(angleInit)));
 
-<<<<<<< HEAD
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une flèche
                 window.gameZone.shoot(arrow, player,maxRound);
-=======
-                Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
-                                                                                                     // flèche
-                window.gameZone.shoot(arrow, player, maxRound);
->>>>>>> 83234718e27d7e97bec3d116e88595589a04df17
             }
         } else if (e.getSource() == window.preview && !window.gameZone.shooting) { // bouton preview appuyé
             double angleInit = window.angle.getValue();
@@ -139,16 +133,11 @@ public class Game implements ActionListener {
             window = new UI('g');
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
-<<<<<<< HEAD
-            window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
-        } else if (e.getSource() == window.quit) { // bouton quitter le jeu : ferme la fenêtre, arrête le programme
-=======
             window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des
 
             // paramètres
         } else if (e.getSource() == window.quit) { // bouton quitter le jeu : ferme la
             // fenêtre, arrête le programme
->>>>>>> 83234718e27d7e97bec3d116e88595589a04df17
             window.setVisible(false);
             window.dispose();
             System.exit(0);
