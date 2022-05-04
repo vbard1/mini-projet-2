@@ -21,11 +21,21 @@ public class GameZone extends JPanel implements ActionListener {
     int maxRound;
     boolean randomTarget;
 
+    /**
+     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche et la cible
+     */
+
     public GameZone() {
 
         target = new Target(width-100,100,50); 
         roundNb = 0;
     }
+    /**
+     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche et la cible selon la difficulté défini par randomTarget 
+     * 
+     * @param w     largeur de la 
+     * @param h     longueur 
+     */
 
     public GameZone(int w, int h) {
         width = w;
@@ -33,7 +43,6 @@ public class GameZone extends JPanel implements ActionListener {
         repaint();
         arrowTimer = new Timer(10, this);
         playerAnimation= new Timer(50,this);
-        System.out.println(randomTarget);
         if (randomTarget){
             target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),(int) (-Math.random() * (height-100) + (height - 100)),(int) (Math.random() * (90) + 10));
         }else{
@@ -71,16 +80,21 @@ public class GameZone extends JPanel implements ActionListener {
         g.fillPolygon(xLegR, yLegR, xLegR.length);
         // Torse
         g.fillRect(20, height - 130, 20, 40);
-        // Tete
+        
         // g.fillOval(20, height - 155, 25, 25);
-        // Bras
-        // g.fillRect(20, height-130, 20,10 );
 
         if (arrow == null) {
+            //Bras gauche à l'initial
             g.fillRect(40, height - 130, 40, 10);
+            //Bras droit à l'initial
             g.fillRect(0, height - 130, 20, 10);
+            //Arc à l'initial
             Shape bow = new Arc2D.Double(80 - 50, height - 125 - 100 / 2, 50, 100, 100, -190, Arc2D.CHORD);
             g2.draw(bow);
+            // Cou et tête à l'initial
+            g.fillRect(26, height - 140, 8, 10);
+            Shape head = new Ellipse2D.Float(20, height - 160, 25, 30);
+            g2.fill(head);
         } else {
 
             g.fillRect(26, height - 140, 8, 10);
