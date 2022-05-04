@@ -21,7 +21,7 @@ public class Game implements ActionListener {
         player = new Player();
         window.startGame.addActionListener(this);
         updateScore = new Timer(100, this);
-        maxRound = 1;
+        maxRound = 2;
         victoryMinScore = 1;
 
     }
@@ -41,6 +41,7 @@ public class Game implements ActionListener {
             window.setVisible(false);
             window.dispose();
             window = new UI('g'); // crée une fenètre "jeu"
+            window.gameZone.randomTarget=(difficulty==2);
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this);
