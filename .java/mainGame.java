@@ -1,6 +1,4 @@
-import javax.swing.JFrame;
-
-public class MainGame extends JFrame {
+public class MainGame {
     public static void main(String[] args) {
         launch();
     }
