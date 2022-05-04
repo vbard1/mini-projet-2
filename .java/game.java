@@ -40,7 +40,7 @@ public class Game implements ActionListener {
             window.setVisible(false);
             window.dispose();
             window = new UI('g'); // crée une fenètre "jeu"
-            window.gameZone.randomTarget=(difficulty==2);
+            window.gameZone.randomTarget = (difficulty == 2);
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this);
@@ -131,10 +131,12 @@ public class Game implements ActionListener {
         }
     }
 
-    // TODO fin de partie
-    // récupérer infos et créer flèche quand "shoot" cliqué (fait)
-    // Ajouter au score du joueur si la cible est touchée (fait)
-    // remettre la fenètre à zéro à chaque tour
+    /**
+     * @method methode de fin de partie, prepare la partie suivante en affichant le
+     *         score et en appelant les methodes de fin de partie de la fenetre
+     *         associee
+     * 
+     */
     public void gameEnd() {
         updateScore.stop();
         if (player.score >= victoryMinScore) {
