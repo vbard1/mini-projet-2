@@ -115,10 +115,12 @@ public class Game implements ActionListener {
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
-        } // else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
+        } else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
           // fenêtre, arrête le programme
-
-        // }
+          window.setVisible(false);
+          window.dispose();  
+          System.exit(0);
+        }
         else if(e.getSource() == window.menuEndGame){
             window.setVisible(false);
             window.dispose();
@@ -140,6 +142,7 @@ public class Game implements ActionListener {
         }
         window.restart.addActionListener(this);
         window.menuEndGame.addActionListener(this);
+        window.quit.addActionListener(this);
 
         // stockage du score
         window.toMemory += " " + player.score;
