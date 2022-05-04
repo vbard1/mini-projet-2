@@ -237,9 +237,7 @@ public class UI extends JFrame implements ActionListener {
                         background.add(settings);
                         background.add(gameZone);
 
-                } else if ((type == 'v') || (type == 'd')) {
-
-                }
+                } 
                 // Ajout à la fenêtre
                 this.add(background);
 
