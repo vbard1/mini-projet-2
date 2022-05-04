@@ -23,7 +23,8 @@ public class GameZone extends JPanel implements ActionListener {
     boolean randomTarget;
 
     /**
-     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche et la cible
+     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche
+     *         et la cible
      */
 
     public GameZone() {
@@ -31,11 +32,13 @@ public class GameZone extends JPanel implements ActionListener {
         target = new Target(width - 100, 100, 50);
         roundNb = 0;
     }
+
     /**
-     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche et la cible selon la difficulté défini par randomTarget 
+     * @method GameZone, constructeur de GameZone, intitialise le nombre de manche
+     *         et la cible selon la difficulté défini par randomTarget
      * 
-     * @param w     largeur de la 
-     * @param h     longueur 
+     * @param w largeur de la
+     * @param h longueur
      */
 
     public GameZone(int w,int h){
@@ -85,11 +88,11 @@ public class GameZone extends JPanel implements ActionListener {
         g.fillRect(20, height - 130, 20, 40);
 
         if (arrow == null) {
-            //Bras gauche à l'initial
+            // Bras gauche à l'initial
             g.fillRect(40, height - 130, 40, 10);
-            //Bras droit à l'initial
+            // Bras droit à l'initial
             g.fillRect(0, height - 130, 20, 10);
-            //Arc à l'initial
+            // Arc à l'initial
             Shape bow = new Arc2D.Double(80 - 50, height - 125 - 100 / 2, 50, 100, 100, -190, Arc2D.CHORD);
             g2.draw(bow);
             // Cou et tête à l'initial
