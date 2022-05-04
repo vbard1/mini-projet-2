@@ -85,21 +85,24 @@ public class GameZone extends JPanel implements ActionListener {
         } else {
 
             g.fillRect(26, height - 140, 8, 10);
+        
             Shape armL = new Rectangle.Double(40, height - 130, 40, 10);
             Shape bow = new Arc2D.Double(80 - 50, height - 125 - 100 / 2, 50, 100, 100, -190, Arc2D.CHORD);
-            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0), 40, height - 130);
-            g2.setPaint(Color.YELLOW);
+            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0)*player.i/10, 40, height - 130);
+            g2.setPaint(Color.black);
             g2.fill(armL);
             g2.draw(bow);
-            g2.rotate((double) arrow.traj.paramTraj[2].get(0), 40, height - 130);
+            g2.rotate((double) arrow.traj.paramTraj[2].get(0)*player.i/10, 40, height - 130);
+            
             Shape armR = new Rectangle.Double(0, height - 130, 20, 10);
-            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0), 20, height - 130);
+            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0)*player.i/10, 20, height - 130);
             g2.fill(armR);
-            g2.rotate((double) arrow.traj.paramTraj[2].get(0), 20, height - 130);
+            g2.rotate((double) arrow.traj.paramTraj[2].get(0)*player.i/10, 20, height - 130);
+            
             Shape head = new Ellipse2D.Float(20, height - 160, 25, 30);
-            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0), 20 + 25 / 2, height - 160 + (30 / 2));
+            g2.rotate(-(double) arrow.traj.paramTraj[2].get(0)*player.i/10, 20 + 25 / 2, height - 160 + (30 / 2));
             g2.fill(head);
-            g2.rotate((double) arrow.traj.paramTraj[2].get(0), 20 + 25 / 2, height - 155 + 25 / 2);
+            g2.rotate((double) arrow.traj.paramTraj[2].get(0)*player.i/10, 20 + 25 / 2, height - 155 + 25 / 2);
 
             // g2.rotate((double)arrow.traj.paramTraj[2].get(0),20+25/2, height-155+25/ 2);
 
@@ -164,6 +167,8 @@ public class GameZone extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==playerAnimation){
+            repaint();
+            player.i++;
             if ((System.currentTimeMillis()-animationStart)>500){
                 playerAnimation.stop();
                 drawingType = 3;
@@ -177,6 +182,7 @@ public class GameZone extends JPanel implements ActionListener {
             arrow.positionNumber = 0;
             shooting = false;
             arrow.reachedTarget = false;
+            player.i=0;
             player.score++;
             this.target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),
             (int) (-Math.random() * (height-100) + (height - 100)),
@@ -187,8 +193,10 @@ public class GameZone extends JPanel implements ActionListener {
         } else if (e.getSource() == arrowTimer) {
             arrowTimer.stop();
             arrow.positionNumber = 0;
+            player.i=0;
             shooting = false;
             arrow.reachedTarget = false;
+            repaint();
         }
         
     }
