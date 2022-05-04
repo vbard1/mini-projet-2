@@ -6,7 +6,7 @@ public class Game implements ActionListener {
 
     Player player;
     int weight;
-    int difficulty; // distance de la cible et et force du vent // de 1 à 3
+    int difficulty; // "force du vent" de 1 à 3
     UI window;
     Arrow arrow;
     int arrowType;
@@ -84,7 +84,7 @@ public class Game implements ActionListener {
 
                 Arrow arrow = new Arrow(weight, x, y, angleInit, speedInit, windSpeed, Color.BLACK); // création d'une
                                                                                                      // flèche
-                window.gameZone.shoot(arrow, player,maxRound);
+                window.gameZone.shoot(arrow, player, maxRound);
             }
         } else if (e.getSource() == window.preview && !window.gameZone.shooting) { // bouton preview appuyé
             double angleInit = window.angle.getValue();
@@ -111,13 +111,13 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.restart) {// bouton restart sélectionné à la fin d'une partie : création
             window.setVisible(false);
-            window.dispose();               
-            window = new UI('g');                                       
+            window.dispose();
+            window = new UI('g');
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des
-                
-                                                    // paramètres
+
+            // paramètres
         } else if (e.getSource() == window.quit) { // bouton quitter le jeu : ferme la
             // fenêtre, arrête le programme
             window.setVisible(false);
