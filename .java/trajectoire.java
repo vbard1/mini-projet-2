@@ -59,7 +59,7 @@ public class Trajectoire {
                                 Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2)
                                         + 2 * gravity * yInit))));
 
-        paramTraj[0] = new ArrayList<Integer>(maxX); // param. x // on a x(t)=v°*cos(angleInit)*t dans le vide 
+        paramTraj[0] = new ArrayList<Integer>(maxX); // param. x // on a x(t)=v°*cos(angleInit)*t dans le vide
         paramTraj[1] = new ArrayList<Integer>(maxX); // param. y pour chaque x
         paramTraj[2] = new ArrayList<Double>(maxX); // param. angle pour chaque x
         paramTraj[3] = new ArrayList<Double>(maxX); // param. vitesse pour chaque x
