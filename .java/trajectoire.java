@@ -24,6 +24,7 @@ public class Trajectoire {
      * @param windSpeed    vitesse du vent
      */
     public Trajectoire(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
+
         gravity = 9.81;
         this.angleRad = angleInitDeg * degToRad;
         this.speed = speedInit;
@@ -36,37 +37,37 @@ public class Trajectoire {
     }
 
     public void recalculate(double angleInitDeg, double speedInit, int windSpeed, int yInit, int xInit) {
-        long executionTime = System.currentTimeMillis();
-        // System.out.println("\narray of ArrayList DONE\n");
 
+        long executionTime = System.currentTimeMillis(); // test de performance
+
+        // calcul de l'abscisse maximale pour anticiper l'augmentation de taille des
+        // ArrayList (optimisation) : taille de tableaux = distance horizontale max
         maxX = (int) ((speedInit / (gravity)) * Math.cos(angleInitDeg * degToRad) *
                 (speedInit * Math.sin(angleInitDeg * degToRad)
                         * +(Math.sqrt(
-                                Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2) + 2 * gravity * yInit))));
-        // System.out.print(" [max X = " + maxX + "]");
+                                Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2)
+                                        + 2 * gravity * yInit))));
 
-        // taille de tableaux = distance horizontale max DANS LE VIDE
-        // il va falloir le timer en fonction de t pour avoir une vitesse
-        // réelle
-        paramTraj[0] = new ArrayList<Integer>(maxX); // param x // on a x(t)=v°*cos(angleInit)*t dans le vide
-        paramTraj[1] = new ArrayList<Integer>(maxX); // param y pour chaque x
-        paramTraj[2] = new ArrayList<Double>(maxX); // param angle pour chaque x
-        paramTraj[3] = new ArrayList<Double>(maxX); // vitesse pour chaque x
+        paramTraj[0] = new ArrayList<Integer>(maxX); // param. x // on a x(t)=v°*cos(angleInit)*t dans le vide //TODO
+        paramTraj[1] = new ArrayList<Integer>(maxX); // param. y pour chaque x
+        paramTraj[2] = new ArrayList<Double>(maxX); // param. angle pour chaque x
+        paramTraj[3] = new ArrayList<Double>(maxX); // param. vitesse pour chaque x
 
-        // base de temps de 0.1 sec?
         int y = 0;
-        double vitesse;
+        double speed;
         int absciss = 0;
-        speedInit /= (windSpeed / 2 + 1);
+        speedInit /= (windSpeed / 2 + 1); // prise en compte de la vitesse du vent
         while (absciss < maxX) {
-            // Trajectoire de y en fonction de x dans le vide
-            vitesse = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
+
+            // vitesse en fonction de x
+            speed = Math.sqrt(speedInit * speedInit - 2 * gravity * absciss * Math.tan(angleInitDeg * degToRad)
                     + Math.pow((absciss * gravity / (Math.cos(angleInitDeg * degToRad) * speedInit)), 2));
 
+            // Trajectoire de y en fonction de x (equation cartesienne
+            // spatiale)
             y = (int) (-0.5 * gravity / (speedInit * speedInit) * absciss * absciss *
                     (1 + Math.pow(Math.tan(angleInitDeg * degToRad), 2))
                     + absciss * Math.tan(angleInitDeg * degToRad) + yInit);
-            // System.out.print(y + ";");
 
             if (y > -1) {
                 // System.out.print( "\n Windspeed : " + windSpeed + " => I retrieve to y " +
@@ -76,7 +77,7 @@ public class Trajectoire {
                 paramTraj[0].add(absciss + xInit);
                 // remplissage de y en fonction de x
                 paramTraj[1].add(y);
-                paramTraj[3].add(vitesse);
+                paramTraj[3].add(speed);
 
             }
             absciss++;
