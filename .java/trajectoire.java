@@ -67,7 +67,7 @@ public class Trajectoire {
         int y = 0;
         double speed;
         int absciss = 0;
-        speedInit /= (windSpeed / 2 + 1); // prise en compte de la vitesse du vent
+        speedInit /= (windSpeed / 3 + 1); // prise en compte de la vitesse du vent
         while (absciss < maxX) {
 
             // vitesse en fonction de x

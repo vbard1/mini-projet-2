@@ -47,8 +47,9 @@ public class UI extends JFrame implements ActionListener {
 
         String toMemory;
 
-        // attributs-parametres du menu
-        //
+        /**
+         * @param type le type de menu a affiche
+         */
         public UI(char type) {
                 // initialisation du timer
 
@@ -111,7 +112,8 @@ public class UI extends JFrame implements ActionListener {
 
                         // contour du bouton
                         startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15));
-                        
+
+                        // polices des textes
                         title.setFont(new Font("Comic sans MS", Font.BOLD,
                                         (int) ((background.getHeight() + background.getWidth()) / 40)));
                         title.setSize((int) background.getWidth(), (int) background.getHeight() / 8);
@@ -234,16 +236,14 @@ public class UI extends JFrame implements ActionListener {
                         settings.add(shoot);
                         // background.add(menu);
                         settings.add(score);
-
+                        // ajout à background
                         background.add(settings);
                         background.add(gameZone);
 
-                } else if ((type == 'v') || (type == 'd')) {
-
                 }
+
                 // Ajout à la fenêtre
                 this.add(background);
-
                 this.setVisible(true);
 
         }
@@ -256,6 +256,11 @@ public class UI extends JFrame implements ActionListener {
 
         }
 
+        /**
+         * @method permet de redimensionner en temps reel la fenetre aux dimensions
+         *         choisies par l'utilisateur, ne fonctionne que pour le type 'm' :
+         *         menu.
+         */
         public void resize() {
                 background.setSize(this.getWidth() - this.getInsets().right - this.getInsets().left,
                                 this.getHeight() - this.getInsets().top - this.getInsets().bottom);
@@ -291,6 +296,13 @@ public class UI extends JFrame implements ActionListener {
 
         }
 
+        /**
+         * @method Met fin a la partie et prepare la suivante en nettoyant l'espace de
+         *         jeu et en affichant les messages de fin.
+         * @param type     victoire ou defaite, 'v' ou 'd'
+         * @param p        joueur associe a la partie
+         * @param maxRound nombre de manches de la partie
+         */
         public void gameEnd(char type, Player p, int maxRound) {
                 // Création du JPanel contenant le résustat/choix de fin de partie, style popup
                 // (relatif), au centre de la fenêtre de jeu
@@ -343,6 +355,10 @@ public class UI extends JFrame implements ActionListener {
                 this.setVisible(true);
         }
 
+        /**
+         * @method stocke le dernier score dans un fichier texte
+         *         peut evoluer en leaderboard (tableau des meilleurs scores)
+         */
         public void storeScore() {
                 System.out.println("Storing data...");
                 try {
