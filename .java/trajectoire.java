@@ -53,7 +53,7 @@ public class Trajectoire {
                 (speedInit * Math.sin(angleInitDeg * degToRad)
                         * +(Math.sqrt(
                                 Math.pow(speedInit * Math.sin(angleInitDeg * degToRad), 2) + 2 * gravity * yInit))));
-        //System.out.print(" [max X = " + maxX + "]");
+        // System.out.print(" [max X = " + maxX + "]");
 
         // taille de tableaux = distance horizontale max DANS LE VIDE
         // il va falloir le timer en fonction de t pour avoir une vitesse
@@ -117,7 +117,7 @@ public class Trajectoire {
 
         }
         executionTime = System.currentTimeMillis() - executionTime;
-        System.out.println("\nall DONE \n[recalculation complete] : execution time = "
+        System.out.println("[recalculation complete] : execution time = "
                 + (executionTime) + " ms");
 
     }

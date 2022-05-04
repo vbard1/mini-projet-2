@@ -8,21 +8,19 @@ public class Game implements ActionListener {
     int weight;
     int difficulty; // distance de la cible et et force du vent // de 1 à 3
     UI window;
+    int roundNb;
     Arrow arrow;
     int arrowType;
     int windSpeed;
     boolean victory;
     Timer updateScore;
-    int maxRound;
-    int victoryMinScore;
 
     public Game(UI fenetre) {
         window = fenetre;
         player = new Player();
         window.startGame.addActionListener(this);
+        roundNb = 0;
         updateScore = new Timer(100, this);
-        maxRound=1;
-        victoryMinScore=1;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -34,22 +32,21 @@ public class Game implements ActionListener {
             // Affecte à difficulty le numéro de la case chosi(De 0 à 2, 2 étant le plus
             // compliqué)
             difficulty = window.difficulty.getSelectedIndex(); // récupère le niveau de difficulté choisi
+            window.toMemory = "";
+            window.toMemory += (window.username.getText() + ",");
+            System.out.println("Playing : " + window.toMemory);
             window.setVisible(false);
             window.dispose();
             window = new UI('g'); // crée une fenètre "jeu"
             window.menu.addActionListener(this);
             window.shoot.addActionListener(this);
             window.preview.addActionListener(this);
-            
-
             updateScore.start();
         } else if (e.getSource() == updateScore) {
             String scoreText = "Score : " + player.score;
-            if(window.score!=null){
-                window.score.setText(scoreText);
-                if (window.gameZone.roundNb > maxRound && !window.gameZone.shooting) {
-                    gameEnd();
-                }
+            window.score.setText(scoreText);
+            if (roundNb > 4 && !window.gameZone.shooting) {
+                gameEnd();
             }
 
         } else if (e.getSource() == window.menu) { // l'utilisateur appuie sur le bouton menu
@@ -60,8 +57,9 @@ public class Game implements ActionListener {
 
         } else if (e.getSource() == window.shoot && !window.gameZone.shooting) {
 
-            if (window.gameZone.roundNb <= maxRound ) {
-             // décompte du nombre de tours restants
+            if (roundNb < 5) {
+
+                roundNb++; // décompte du nombre de tours restants
 
                 double angleInit = window.angle.getValue();
                 double speedInit = 0;
@@ -109,23 +107,13 @@ public class Game implements ActionListener {
             window.gameZone.preview(arrow, player);
 
         } else if (e.getSource() == window.restart) { // bouton restart sélectionné à la fin d'une partie : création
-            window.setVisible(false);
-            window.dispose();                                         // d'un
-            window = new UI('g');
-            window.menu.addActionListener(this);
-            window.shoot.addActionListener(this);
-            window.preview.addActionListener(this); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
-        } else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
+                                                      // d'un
+
+            window = new UI('g'); // création d'une nouvelle fenêtre de jeu sans modification des paramètres
+        } // else if (e.getSource() == window.quit){ // bouton quitter le jeu : ferme la
           // fenêtre, arrête le programme
-          window.setVisible(false);
-          window.dispose();  
-          System.exit(0);
-        }
-        else if(e.getSource() == window.menuEndGame){
-            window.setVisible(false);
-            window.dispose();
-            window = new UI('m');
-        }
+
+        // }
     }
 
     // TODO fin de partie
@@ -133,19 +121,24 @@ public class Game implements ActionListener {
     // Ajouter au score du joueur si la cible est touchée (fait)
     // remettre la fenètre à zéro à chaque tour
 
+    public void onGoingGame() {
+        while (roundNb > 0) {
+            if (arrow.reachedTarget) {
+                player.score++;
+            }
+        }
+    }
+
     public void gameEnd() {
         updateScore.stop();
-        if (player.score >= victoryMinScore) {
-            window.gameEnd('v',player,maxRound);
+        if (player.score > 2) {
+            window.gameEnd('v');
         } else {
-            window.gameEnd('d',player,maxRound);
+            window.gameEnd('d');
         }
-        window.restart.addActionListener(this);
-        window.menuEndGame.addActionListener(this);
-        window.quit.addActionListener(this);
 
         // stockage du score
-        window.toMemory += " " + player.score;
+        window.toMemory = player.name + ";" + player.score + ";";
         window.storeScore();
     }
 

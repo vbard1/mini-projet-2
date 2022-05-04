@@ -2,7 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -212,9 +215,6 @@ public class UI extends JFrame implements ActionListener {
                         // scrollbar angle
                         angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 1, 90);
                         angle.setPreferredSize(new Dimension(200, 40));
-                        // angle.setLocation(10, 10);m
-                        // angle.setLayout(null); //non sinon ça empêche l'affichage automatique géré
-                        // par le layout
 
                         // Affichage angle
                         angleText = new JLabel("Angle : " + angle.getValue() + "°");
@@ -222,8 +222,6 @@ public class UI extends JFrame implements ActionListener {
                                 @Override
                                 public void adjustmentValueChanged(AdjustmentEvent e) {
                                         angleText.setText("Angle : " + e.getValue() + "°");
-
-                                        // TODO repaint!
                                 }
                         });
                         // addAdjustmentListener(new AdjustmentListener())
@@ -307,9 +305,7 @@ public class UI extends JFrame implements ActionListener {
                 if (e.getSource() == resizeTimer && type == 'm') {
                         resize();
                 }
-                if (e.getSource() == resizeTimer) {
-                        toMemory += username.getText();
-                }
+
         }
 
         public void resize() {
@@ -410,6 +406,26 @@ public class UI extends JFrame implements ActionListener {
         }
 
         public void storeScore() {
-                System.out.println(toMemory);
+                System.out.println("Storing data...");
+                try {
+                        File leaderboard = new File("Leaderboard.txt");
+                        BufferedReader eye = new BufferedReader(new FileReader("Leaderboard.txt"));
+                        FileWriter pen = new FileWriter("Leaderboard.txt");
+                        ArrayList<String> lb = new ArrayList<String>();
+
+                        while (eye.readLine() != null) {
+                                eye.readLine();
+                                lb.add(eye.readLine());
+                        }
+                        lb.add(toMemory);
+                        for (String line : lb)
+                                pen.write(line);
+
+                        pen.close();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+
+                System.out.print("...done.");
         }
 }
