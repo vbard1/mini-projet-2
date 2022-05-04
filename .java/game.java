@@ -11,7 +11,6 @@ public class Game implements ActionListener {
     Arrow arrow;
     int arrowType;
     int windSpeed;
-    boolean victory;
     Timer updateScore;
     int maxRound;
     int victoryMinScore;
