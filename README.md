@@ -1,2 +1,0 @@
-# mini projet 2
-
