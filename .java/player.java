@@ -1,6 +1,5 @@
 public class Player {
 
-    // TODO highscore;
     public String name;
     public int score;
     int playerPosition;

@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
@@ -59,7 +58,7 @@ public class UI extends JFrame implements ActionListener {
 
                 // Définition de la fenêtre du menu
                 this.setLocation(0, 0);
-                this.setSize((int)screenSize.getWidth(), (int)screenSize.getHeight());
+                this.setSize((int) screenSize.getWidth(), (int) screenSize.getHeight());
                 this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Défini la taille de la fenêtre à celle de l'écran
                 this.setResizable(true);
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,12 +105,13 @@ public class UI extends JFrame implements ActionListener {
                         startGame.setBackground(new Color(51, 204, 102));
                         startGame.setForeground(Color.WHITE);
 
+                        // arriere plan du menu
                         image_cible = new JLabel(new ImageIcon("./Images/archery_menu.png"), JLabel.LEFT);
                         image_cible.setSize(800, 800);
 
-
+                        // contour du bouton
                         startGame.setBorder(BorderFactory.createLineBorder(Color.WHITE, 15));
-
+                        
                         title.setFont(new Font("Comic sans MS", Font.BOLD,
                                         (int) ((background.getHeight() + background.getWidth()) / 40)));
                         title.setSize((int) background.getWidth(), (int) background.getHeight() / 8);
@@ -170,7 +170,7 @@ public class UI extends JFrame implements ActionListener {
                         score = new JLabel("Score");
                         score.setSize(100, 40);
                         score.setLayout(null);
-                        
+
                         // scrollbar angle
                         angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 1, 90);
                         angle.setPreferredSize(new Dimension(200, 40));
@@ -217,7 +217,8 @@ public class UI extends JFrame implements ActionListener {
                         textType.setLayout(null);
 
                         // Définition type de flèche
-                        String[] arrowType1 = { "Carbone", "Aluminium", "Bois" }; // Tableau contenant les différents// type de flèche
+                        String[] arrowType1 = { "Carbone", "Aluminium", "Bois" }; // Tableau contenant les différents//
+                                                                                  // type de flèche
                         arrowType = new JComboBox<String>(arrowType1);
                         arrowType.setSelectedIndex(0);
                         arrowType.setLayout(null);
@@ -290,12 +291,12 @@ public class UI extends JFrame implements ActionListener {
 
         }
 
-        public void gameEnd(char type,Player p, int maxRound) {
+        public void gameEnd(char type, Player p, int maxRound) {
                 // Création du JPanel contenant le résustat/choix de fin de partie, style popup
                 // (relatif), au centre de la fenêtre de jeu
                 gameEnd = new JPanel();
-                gameEnd.setPreferredSize( new Dimension((int) (this.getWidth() / 2), (int) (this.getHeight() / 2)));
-                SpringLayout layout=new SpringLayout();
+                gameEnd.setPreferredSize(new Dimension((int) (this.getWidth() / 2), (int) (this.getHeight() / 2)));
+                SpringLayout layout = new SpringLayout();
                 gameEnd.setLocation((int) (this.getWidth() / 4), (int) (this.getHeight() / 4));
 
                 gameEnd.setBackground(new Color(250, 255, 224));
@@ -303,37 +304,41 @@ public class UI extends JFrame implements ActionListener {
                 // JPanel announcement : annonce la victoire ou la défaite du joueur
                 announcement = new JLabel();
                 if (type == 'v') {
-                        announcement.setText("Victoire! Vous avez touché la cible "+p.score+" fois sur "+maxRound+".");
+                        announcement.setText("Victoire! Vous avez touché la cible " + p.score + " fois sur " + maxRound
+                                        + ".");
                 } else if (type == 'd') {
-                        announcement.setText("Défaite! Vous avez touché la cible "+p.score+" fois sur "+maxRound+".");
+                        announcement.setText("Défaite! Vous avez touché la cible " + p.score + " fois sur " + maxRound
+                                        + ".");
                 }
                 announcement.setFont(new Font("Comic sans MS", Font.BOLD, (int) background.getWidth() / 60));
-                
+
                 // JButton menu : retour au menu de création de partie
                 menuEndGame = new JButton("Menu");
-                menuEndGame.setPreferredSize( new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
-                menuEndGame.setLocation(gameEnd.getWidth() / 2 - (menuEndGame.getWidth()/2 ),announcement.getLocation().y +50);
+                menuEndGame.setPreferredSize(new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
+                menuEndGame.setLocation(gameEnd.getWidth() / 2 - (menuEndGame.getWidth() / 2),
+                                announcement.getLocation().y + 50);
 
                 // JButton restart : recommencer une partie avec les mêmes réglages
                 restart = new JButton("Rejouer");
-                restart.setPreferredSize( new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
-                restart.setLocation(gameEnd.getWidth() / 2 - (restart.getWidth()/2 ),menuEndGame.getLocation().y +menuEndGame.getWidth()+10);
-                
+                restart.setPreferredSize(new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
+                restart.setLocation(gameEnd.getWidth() / 2 - (restart.getWidth() / 2),
+                                menuEndGame.getLocation().y + menuEndGame.getWidth() + 10);
+
                 // Jbutton quit : quitte le jeu (fermeture fenêtre at arrêt programme)
                 quit = new JButton("Quiter");
-                quit.setPreferredSize( new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
-                quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth()/2 ),restart.getLocation().y +restart.getWidth()+10);
-                
-                // AJout des éléments au Jpanel de fin de partie
+                quit.setPreferredSize(new Dimension((int) (this.getWidth() / 8), (int) (this.getHeight() / 8)));
+                quit.setLocation(gameEnd.getWidth() / 2 - (quit.getWidth() / 2),
+                                restart.getLocation().y + restart.getWidth() + 10);
 
+                // AJout des éléments au Jpanel de fin de partie
                 gameEnd.add(announcement);
-                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
+                gameEnd.add(Box.createRigidArea(new Dimension(5, 5)));
                 gameEnd.add(menu);
-                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
+                gameEnd.add(Box.createRigidArea(new Dimension(5, 5)));
                 gameEnd.add(restart);
-                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
+                gameEnd.add(Box.createRigidArea(new Dimension(5, 5)));
                 gameEnd.add(quit);
-                gameEnd.add(Box.createRigidArea(new Dimension(5,5)));
+                gameEnd.add(Box.createRigidArea(new Dimension(5, 5)));
                 gameZone.add(gameEnd);
                 this.setVisible(true);
         }
