@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class GameZone extends JPanel implements ActionListener {
     int width;
@@ -17,28 +16,30 @@ public class GameZone extends JPanel implements ActionListener {
     boolean shooting;
     int roundNb;
     UI associatedUI;
+    Timer playerAnimation;
+    long animationStart;
 
-    public GameZone(UI ui) {
-        associatedUI = ui;
-        target = new Target(
-                (int) ((associatedUI.getWidth() - 100) - Math.random() * 400),
-                (int) (200),
-                (int) (Math.random() * (50) + 10));
-
+    public GameZone() {
+        //associatedUI = ui;
+        target = new Target(0,0,100
+                /*(int) (Math.random()* (associatedUI.getWidth() - 100)),
+                (int) (Math.random() * (associatedUI.getHeight() * (0.85))),
+                (int) (Math.random() * (50) + 10)*/);
+                
         roundNb = 0;
     }
 
-    public GameZone(int w, int h, UI ui) {
-        associatedUI = ui;
+    public GameZone(int w, int h) {
+        //associatedUI = ui;
         width = w;
         height = h;
         // arrow=new Arrow();
         repaint();
         arrowTimer = new Timer(1, this);
-        target = new Target(
-                (int) ((associatedUI.getWidth() - 100) - Math.random() * 1000),
-                (int) (200),
-                (int) (Math.random() * (50) + 10));
+        playerAnimation= new Timer(50,this);
+        target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),
+                (int) (-Math.random() * (height-100) + (height - 100)),
+                (int) (Math.random() * (90) + 10));
         setVisible(true);
         roundNb = 0;
 
@@ -111,10 +112,11 @@ public class GameZone extends JPanel implements ActionListener {
         // g.drawLine(x1, y1, x2, y2);
         // Cible
         g.fillRect(target.posX, height - target.posY, target.side, target.side);
-        g.drawString("Nombre de tir: " + roundNb, width - 100, 10);
-        if (drawingType == -1) {
-            g.drawString("Bravo! Tu as touché la cible", 100, 200);
-        } else if (drawingType == 1) {
+        g.drawString("Nombre de tir: " + roundNb, width - 100, 10); 
+        if(drawingType==-1){
+            g.drawString("Bravo! Tu as touché la cible",100,200);
+        }
+        else if (drawingType == 1) {
 
             g.setColor(Color.black);
             for (int i = 0; i < arrow.traj.paramTraj[0].size(); i += 2) {
@@ -123,7 +125,10 @@ public class GameZone extends JPanel implements ActionListener {
 
             }
 
-        } else if (drawingType == 2) {
+        }else if(drawingType == 2){
+
+        } 
+        else if (drawingType == 3) {
 
             g.setColor(arrow.arrowColor);
             g2.rotate(-arrow.angle, (double) arrow.posX, height - (double) arrow.posY);
@@ -152,12 +157,20 @@ public class GameZone extends JPanel implements ActionListener {
         arrow = a;
         player = p;
         shooting = true;
-        arrowTimer.start();
+        playerAnimation.start();
+        animationStart=System.currentTimeMillis();
+
     }
 
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == arrowTimer && arrow.nextPos(target, width, height)) {
+        if(e.getSource()==playerAnimation){
+            if ((System.currentTimeMillis()-animationStart)>500){
+                playerAnimation.stop();
+                drawingType = 3;
+                arrowTimer.start();
+            }
+            
+        }else if (e.getSource() == arrowTimer && arrow.nextPos(target, width, height)) {
             repaint();
         } else if (e.getSource() == arrowTimer && arrow.reachedTarget == true) {
             arrowTimer.stop();
@@ -165,11 +178,9 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
             player.score++;
-
-            this.target = new Target(
-                    (int) ((associatedUI.getWidth() - 100) - Math.random() * 1000),
-                    (int) (200),
-                    (int) (Math.random() * (50) + 10));
+            this.target = new Target((int) ( (width - 100)-((width-100)/2) * Math.random()),
+            (int) (-Math.random() * (height-100) + (height - 100)),
+            (int) (Math.random() * (90) + 10));
             drawingType = -1;
             repaint();
 
@@ -179,5 +190,6 @@ public class GameZone extends JPanel implements ActionListener {
             shooting = false;
             arrow.reachedTarget = false;
         }
+        
     }
 }

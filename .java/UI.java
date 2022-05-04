@@ -43,6 +43,7 @@ public class UI extends JFrame implements ActionListener {
 
         JPanel gameEnd;
         JButton restart;
+        JButton menuEndGame;
         JButton quit;
         JLabel announcement;
 
@@ -194,7 +195,7 @@ public class UI extends JFrame implements ActionListener {
                 } else if (type == 'g') {
 
                         // Panel contenant l'affichage du jeu
-                        gameZone = new GameZone(background.getWidth(), (int) (background.getHeight() * 0.85), this);
+                        gameZone = new GameZone(background.getWidth(), (int) (background.getHeight() * 0.85));
                         gameZone.setSize(gameZone.width, gameZone.height);
                         gameZone.setLocation(0, 0);
 
@@ -205,6 +206,12 @@ public class UI extends JFrame implements ActionListener {
                         settings.setLocation(0, (int) (background.getHeight() - settings.getHeight()));
                         settings.setLayout(new FlowLayout()); // Layout qui permet de mettre les éléments à la suite
 
+                        // jlabel score
+                        score = new JLabel("Score");
+                        score.setSize(100, 40);
+                        // score.setLocation(shoot.getLocation().x + shoot.getWidth() + 10, 10);
+                        score.setLayout(null);
+                        
                         // scrollbar angle
                         angle = new JScrollBar(JScrollBar.HORIZONTAL, 45, 1, 1, 90);
                         angle.setPreferredSize(new Dimension(200, 40));
@@ -220,7 +227,7 @@ public class UI extends JFrame implements ActionListener {
                         // addAdjustmentListener(new AdjustmentListener())
 
                         // scrollbar vitesse
-                        speed = new JScrollBar(JScrollBar.HORIZONTAL, 50, 1, 0, 101);
+                        speed = new JScrollBar(JScrollBar.HORIZONTAL, 50, 1, 1, 101);
                         speed.setPreferredSize(new Dimension(200, 40));
                         // speed.setLocation(angle.getLocation().x + angle.getWidth() + 10, 10);
                         // speed.setLayout(null); ////non sinon ça empêche l'affichage automatique géré
@@ -246,11 +253,7 @@ public class UI extends JFrame implements ActionListener {
                         // menu.setLocation(20, 20);
                         // menu.setLayout(null);
 
-                        // jlabel score
-                        score = new JLabel("Score");
-                        score.setSize(100, 40);
-                        // score.setLocation(shoot.getLocation().x + shoot.getWidth() + 10, 10);
-                        score.setLayout(null);
+                        
 
                         // JButton Preview
                         preview = new JButton("Preview");
@@ -360,7 +363,7 @@ public class UI extends JFrame implements ActionListener {
 
         }
 
-        public void gameEnd(char type) {
+        public void gameEnd(char type,Player p, int maxRound) {
                 // Création du JPanel contenant le résustat/choix de fin de partie, style popup
                 // (relatif), au centre de la fenêtre de jeu
                 // this.setLocation((int) (this.getWidth() / 4),(int) (this.getHeight() / 4) );
@@ -372,14 +375,14 @@ public class UI extends JFrame implements ActionListener {
                 // JPanel announcement : annonce la victoire ou la défaite du joueur
                 announcement = new JLabel();
                 if (type == 'v') {
-                        announcement.setText("Victory !");
+                        announcement.setText("Victory !"+ "Vous avez touché la cible "+p.score+" fois sur "+maxRound);
                 } else if (type == 'd') {
-                        announcement.setText("Defeat");
+                        announcement.setText("Defeat !"+ "Vous avez touché la cible "+p.score+" fois sur "+maxRound);
                 }
                 // JButton menu : retour au menu de création de partie
-                menu = new JButton("Menu");
-                menu.setSize(10, 10);
-                menu.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),
+                menuEndGame = new JButton("Menu");
+                menuEndGame.setSize(10, 10);
+                menuEndGame.setLocation(gameEnd.getWidth() / 2 - (menu.getWidth() + 10),
                                 gameEnd.getHeight() / 2 + (menu.getHeight() + 10));
 
                 // JButton restart : recommencer une partie avec les mêmes réglages
