@@ -125,22 +125,36 @@ public class Trajectoire {
 
     private void smoothen() {
         double change0 = (Double) paramTraj[2].get(0);
-        double change1 = -1;
+        double change1 = 0;
         int index = 0;
         int space = 0;
+        ArrayList<Integer> changes = new ArrayList<Integer>();
         for (Object angle : paramTraj[2]) {
             change1 = (Double) angle;
+
             if (change1 != change0) {
-                for (int i = index; i < space; i++) {
-                    paramTraj[2].set(i, (change1 - change0) * i / space);
+                for (int i = index; i < index + space; i++) {
+                    changes.add(index);
                 }
                 change0 = change1;
                 space = 0;
             }
             space++;
             index++;
+        }
+        int temp = 0;
+        for (Integer indexChanges : changes) {
+            space = indexChanges - temp;
+            for (int i = temp; i < temp + space; i++) {
+                double angle2 = (double) paramTraj[2].get(indexChanges);
+                double angle1 = (double) paramTraj[2].get(temp);
+                paramTraj[2].set(i, angle1 + (angle2 - angle1) * (i - temp) / space);
+            }
+
+            temp = indexChanges;
 
         }
+
     }
 
     public String toString() {
